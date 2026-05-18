@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shadow Profile</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<nav>
+
+    <div class="logo">
+        SHADOW ANIME
+    </div>
+
+    <ul id="menu">
+
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Anime.html">Anime</a></li>
+        <li><a href="movies.html">Movies</a></li>
+        <li><a href="popular.html">Popular</a></li>
+        <li><a href="manga.html">Manga</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="watchlist.html">Watchlist</a></li>
+
+    </ul>
+
+</nav>
+
+<section class="profile-page">
+
+    <!-- PROFILE LEFT -->
+
+    <div class="profile-left">
+
+        <div class="profile-banner"></div>
+
+        <div class="profile-avatar-box">
+
+            <img src="image/default-user.png"
+            id="profileAvatar">
+
+            <label for="avatarInput"
+            class="change-avatar-btn">
+
+                Change Photo
+
+            </label>
+
+            <input type="file"
+            id="avatarInput"
+            hidden>
+
+        </div>
+
+        <div class="profile-user-info">
+
+            <input type="text"
+            id="profileName"
+            value="Shadow User">
+
+            <p id="profileEmail">
+                user@gmail.com
+            </p>
+
+            <textarea id="profileBio"
+            placeholder="Write your bio..."></textarea>
+
+            <button id="saveProfileBtn">
+                Save Profile
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- PROFILE RIGHT -->
+
+    <div class="profile-right">
+
+        <div class="profile-card-box">
+
+            <h2>Statistics</h2>
+
+            <div class="profile-stats">
+
+                <div class="profile-stat">
+                    <h1 id="watchlistCount">0</h1>
+                    <p>Watchlist</p>
+                </div>
+
+                <div class="profile-stat">
+                    <h1 id="animeCount">0</h1>
+                    <p>Anime</p>
+                </div>
+
+                <div class="profile-stat">
+                    <h1 id="movieCount">0</h1>
+                    <p>Movies</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="profile-card-box">
+
+            <h2>Account Settings</h2>
+
+            <button class="profile-setting-btn">
+                Change Password
+            </button>
+
+            <button class="profile-setting-btn">
+                Notification Settings
+            </button>
+
+            <button class="profile-setting-btn">
+                Appearance Settings
+            </button>
+
+            <button class="logout-btn"
+            id="logoutBtn">
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    © 2026 Shadow Anime
+</footer>
+
+<script type="module" src="profile.js"></script>
+<script type="module" src="protect.js"></script>
+
+</body>
+</html>

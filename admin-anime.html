@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Anime Manager</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>SHADOW</h2>
+    <a href="admin-dashboard.html">Dashboard</a>
+    <a class="active" href="admin-anime.html">Anime Manager</a>
+    <a href="admin-movies.html">Movies</a>
+    <a href="admin-users.html">Users</a>
+    <a href="admin-settings.html">Settings</a>
+    <a href="admin-manga.html">Manga</a>
+    <a href="admin-community.html">Community</a>
+</div>
+
+<div class="main">
+    <h1>Anime Manager</h1>
+
+    <div class="panel">
+
+        <h2>Smart Anime Paste</h2>
+
+        <textarea id="smartAnimeInput"
+            placeholder="Paste anime details here like:
+anime: Dragon Ball
+genre: Action
+rating: 8.8
+episodes: 131
+studio: Toei Animation
+year: 2015
+poster: image/dragonball.jpg
+banner: image/dragonball-banner.jpg
+trailer: https://youtube.com/watch?v=...
+watch: videos/dragonball-ep
+description: Anime description here
+featured: yes
+trending: yes
+popular: yes"></textarea>
+
+        <button onclick="fillAnimeFromText()" class="save-btn">
+            Auto Fill Details
+        </button>
+
+    </div>
+
+    <div class="panel">
+        <h2>Add Anime</h2>
+
+    <input id="animeName" placeholder="Anime Name">
+
+    <input id="animeCategory" placeholder="Genre">
+
+    <input id="animeImage" placeholder="Poster Image Path">
+
+    <input id="animeBanner" placeholder="Banner Image Path">
+
+    <input id="animeRating" placeholder="Rating">
+
+    <input id="animeEpisodes" placeholder="Episodes">
+
+    <input id="animeStudio" placeholder="Studio Name">
+
+    <input id="animeYear" placeholder="Release Year">
+
+    <input id="animeTrailer" placeholder="Trailer URL">
+
+    <input id="animeWatch" placeholder="Watch URL">
+
+    <textarea id="animeDesc" placeholder="Description"></textarea>
+
+    <div class="extra-options">
+
+        <label>
+            <input type="checkbox" id="animeFeatured">
+            Featured
+        </label>
+
+        <label>
+            <input type="checkbox" id="animeTrending">
+            Trending
+        </label>
+
+        <label>
+            <input type="checkbox" id="animePopular">
+            Popular
+        </label>
+
+    </div>
+
+    <button onclick="saveAnime()" class="save-btn">
+        Save Anime
+    </button>
+
+</div>
+
+    <div class="panel">
+        <h2>Anime List</h2>
+        <div id="animeList"></div>
+    </div>
+</div>
+
+<script src="admin.js"></script>
+<script src="admin-protect.js"></script>
+</body>
+</html>

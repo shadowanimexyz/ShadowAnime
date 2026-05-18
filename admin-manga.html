@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manga Manager</title>
+
+<link rel="stylesheet" href="admin.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>SHADOW</h2>
+
+    <a href="admin-dashboard.html">
+        Dashboard
+    </a>
+
+    <a href="admin-anime.html">
+        Anime Manager
+    </a>
+
+    <a href="admin-movies.html">
+        Movies
+    </a>
+
+    <a class="active" href="admin-manga.html">
+        Manga
+    </a>
+
+    <a href="admin-users.html">
+        Users
+    </a>
+
+    <a href="admin-settings.html">
+        Settings
+    </a>
+
+    <a href="index.html">
+        Back To Website
+    </a>
+    <a href="admin-community.html">Community</a>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+
+        <h1>Manga Manager</h1>
+
+    </div>
+
+    <!-- ADD MANGA -->
+
+    <div class="panel">
+
+        <h2>Add Manga</h2>
+
+        <div class="form-grid">
+
+            <input id="mangaName"
+                   placeholder="Manga Name">
+
+            <input id="mangaGenre"
+                   placeholder="Genre">
+
+            <input id="mangaImage"
+                   placeholder="Poster Image Path">
+
+            <input id="mangaRating"
+                   placeholder="Rating">
+
+            <input id="mangaChapters"
+                   placeholder="Total Chapters">
+
+            <input id="mangaYear"
+                   placeholder="Release Year">
+
+            <input id="mangaRead"
+                   placeholder="Read Manga URL">
+
+            <textarea id="mangaDesc"
+                      placeholder="Manga Description">
+
+            </textarea>
+
+        </div>
+
+        <button onclick="addManga()"
+                class="save-btn">
+
+                Save Manga 📚
+
+        </button>
+
+    </div>
+
+    <!-- MANGA LIST -->
+
+    <div class="panel">
+
+        <h2>Manga Library</h2>
+
+        <div id="mangaList"></div>
+
+    </div>
+
+</div>
+
+<script src="admin.js"></script>
+<script src="admin-protect.js"></script>
+
+</body>
+</html>

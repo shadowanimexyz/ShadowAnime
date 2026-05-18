@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Watchlist - Shadow Anime</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <div class="logo">SHADOW ANIME</div>
+
+    <ul id="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Anime.html">Anime</a></li>
+        <li><a href="movies.html">Movies</a></li>
+        <li><a href="popular.html">Popular</a></li>
+        <li><a href="manga.html">Manga</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="watchlist.html">Watchlist</a></li>
+        <script type="module" src="user-auth.js"></script>
+    </ul>
+
+    <div class="menu-btn" id="menuBtn">☰</div>
+</nav>
+
+<section class="page-hero anime-bg">
+    <div class="overlay"></div>
+
+    <div class="hero-text">
+        <h1>MY WATCHLIST</h1>
+        <p>Your saved anime collection.</p>
+    </div>
+</section>
+
+<section>
+    <h1 class="section-title">Saved Anime</h1>
+
+    <div class="anime-grid" id="watchlistGrid"></div>
+
+    <div class="empty-box" id="watchlistEmpty">
+        <h2>No Anime Saved</h2>
+        <p>Add anime from details page or watch page.</p>
+    </div>
+</section>
+
+<footer>
+    © 2026 Shadow Anime
+</footer>
+
+<script src="script.js"></script>
+<script type="module" src="protect.js"></script>
+
+</body>
+</html>

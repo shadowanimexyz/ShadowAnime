@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shadow Anime</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- LOADER -->
+
+<div class="loader" id="loader">
+
+    <h1>SHADOW ANIME</h1>
+
+</div>
+
+<!-- PAGE TRANSITION -->
+
+<div class="page-transition" id="transition"></div>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        SHADOW ANIME
+    </div>
+
+    <ul id="menu">
+
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Anime.html">Anime</a></li>
+        <li><a href="movies.html">Movies</a></li>
+        <li><a href="popular.html">Popular</a></li>
+        <li><a href="manga.html">Manga</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="watchlist.html">Watchlist</a></li>
+        <li><a href="profile.html">Profile</a></li>
+
+    </ul>
+
+    <div class="nav-right">
+
+        <input type="text"
+       placeholder="Search anime..."
+       class="search-box"
+       id="searchInput">
+
+        <a href="login.html" class="login-btn">
+    Sign In
+</a>
+
+        <div class="menu-btn" id="menuBtn">
+            ☰
+        </div>
+
+    </div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <!-- LIGHTNING -->
+
+    <div class="lightning l1"></div>
+    <div class="lightning l2"></div>
+    <div class="lightning l3"></div>
+
+    <div class="hero-content">
+
+        <h3>ENTER THE SHADOW WORLD</h3>
+
+        <h1>
+            SHADOW<br>
+            ANIME
+        </h1>
+
+        <p>
+            Explore futuristic anime streaming with premium UI and lightning effects.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="Anime.html" class="hero-btn primary-btn">
+                Explore Now
+            </a>
+
+            <a href="movies.html" class="hero-btn secondary-btn">
+                Watch Trailer
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- TRENDING -->
+
+<section>
+
+    <h1 class="section-title">
+        Popular Anime
+    </h1>
+
+    <div class="anime-grid" id="homeAnimeGrid"></div>
+
+    <div style="text-align:center; margin-top:40px;">
+        <a href="Anime.html" class="hero-btn primary-btn">
+            View More Anime
+        </a>
+    </div>
+
+</section>
+<section>
+    <h1 class="section-title">
+        Continue Watching
+    </h1>
+
+    <div class="anime-grid" id="continueWatchingGrid"></div>
+</section>
+
+<!-- LIVE STATS -->
+
+<section>
+
+    <h1 class="section-title">
+        Shadow Statistics
+    </h1>
+
+    <div class="stats">
+
+        <div class="stat-card">
+            <h3 id="homeAnimeCount">0</h3>
+            <p>Total Anime</p>
+        </div>
+
+        <div class="stat-card">
+            <h3 id="homeMovieCount">0</h3>
+            <p>Total Movies</p>
+        </div>
+
+        <div class="stat-card">
+            <h3 id="homeUserCount">0</h3>
+            <p>Total Users</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    © 2026 Shadow Anime
+
+</footer>
+
+<script src="script.js"></script>
+<script type="module" src="user-auth.js"></script>
+
+</body>
+</html>
