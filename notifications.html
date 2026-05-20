@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Notifications - Shadow Anime</title>
+<script src="site-control.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body style="background:#020817; color:white;"></body>
+
+<nav>
+    <div class="logo">SHADOW ANIME</div>
+    <ul id="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="anime.html">Anime</a></li>
+        <li><a href="movies.html">Movies</a></li>
+        <li><a href="popular.html">Popular</a></li>
+        <li><a href="manga.html">Manga</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="policy.html">Policy</a></li>
+        <li><a href="profile.html">Profile</a></li>
+    </ul>
+</nav>
+
+<section class="notifications-page">
+    <h1 class="section-title">Notifications</h1>
+
+    <div class="notify-actions">
+        <button onclick="clearNotifications()">Clear All</button>
+    </div>
+
+    <div id="notificationList"></div>
+</section>
+
+<script src="script.js"></script>
+<script type="module" src="user-auth.js"></script>
+<script type="module" src="protect.js"></script>
+<script src="smart-search.js"></script>
+<script src="security.js"></script>
+<script type="module" src="firebase.js"></script>
+
+</body>
+</html>

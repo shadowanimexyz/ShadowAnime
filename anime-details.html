@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00c8ff">
+<link rel="apple-touch-icon" href="image/icon-192.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anime Details - Shadow Anime</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <div class="logo">SHADOW ANIME</div>
+    <ul id="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="anime.html">Anime</a></li>
+        <li><a href="movies.html">Movies</a></li>
+        <li><a href="popular.html">Popular</a></li>
+        <li><a href="manga.html">Manga</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="policy.html">Policy</a></li>
+    </ul>
+</nav>
+
+<section class="anime-detail-banner" id="detailsHero">
+    <div class="banner-dark"></div>
+
+    <div class="anime-detail-content">
+        <img id="detailsPoster" class="detail-poster" src="">
+
+        <div>
+            <span class="details-tag">SHADOW ANIME</span>
+            <h1 id="detailsTitle">Anime Name</h1>
+
+            <div class="details-meta">
+                <span id="detailsRating">⭐ 0.0</span>
+                <span id="detailsEpisodes">0 Episodes</span>
+                <span id="detailsYear">Year</span>
+                <span id="detailsGenre">Genre</span>
+            </div>
+
+            <p id="detailsDesc">Description...</p>
+
+            <div class="details-buttons">
+                <button class="watch-btn" id="watchNowBtn">Watch Now</button>
+                <button class="trailer-btn" id="trailerBtn">Watch Trailer</button>
+                <button class="trailer-btn" id="watchlistBtn">+ Watchlist</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="episode-header">
+        <h1 class="section-title">Episodes</h1>
+
+        <input type="text" id="episodeSearch" class="episode-search" placeholder="Search episode number...">
+    </div>
+
+    <div class="episode-grid" id="episodeGrid"></div>
+
+    <div class="episode-pagination">
+        <button id="prevEpisodeBtn">Previous</button>
+        <span id="episodePageInfo">Page 1</span>
+        <button id="nextEpisodeBtn">Next</button>
+    </div>
+</section>
+<section class="comments-section">
+
+    <div class="comments-header">
+        <h1 class="section-title">Community Comments</h1>
+
+        <select id="commentSort" class="filter-select">
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="likes">Most Liked</option>
+        </select>
+    </div>
+
+    <div class="comment-form">
+
+        <input id="commentName" placeholder="Your Name">
+
+        <textarea id="commentText" placeholder="Write your comment..."></textarea>
+
+        <label class="spoiler-label">
+            <input type="checkbox" id="spoilerCheck">
+            Mark as spoiler
+        </label>
+
+        <button class="watch-btn" onclick="addAnimeComment()">
+            Post Comment
+        </button>
+
+    </div>
+
+    <input id="commentSearch" class="episode-search" placeholder="Search comments...">
+
+    <div id="commentsList"></div>
+
+</section>
+
+<section>
+    <h1 class="section-title">Recommended Anime</h1>
+    <div class="anime-grid" id="recommendedGrid"></div>
+</section>
+
+<div class="trailer-modal" id="trailerModal">
+    <div class="trailer-box">
+        <span class="close-trailer" onclick="closeTrailer()">×</span>
+        <iframe id="trailerFrame" src="" allowfullscreen></iframe>
+    </div>
+</div>
+
+<footer>© 2026 Shadow Anime</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
