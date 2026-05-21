@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - Shadow Anime</title>
+
+<link rel="stylesheet" href="admin.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+body{
+  background:radial-gradient(circle at top,#08234a,#030712 55%,#01030a);
+  font-family:Poppins,sans-serif;
+  color:#fff;
+}
+
+.sidebar{
+  background:rgba(3,10,24,.92);
+  border-right:1px solid rgba(0,200,255,.25);
+  box-shadow:0 0 35px rgba(0,200,255,.12);
+}
+
+.sidebar h2{
+  font-family:Orbitron,sans-serif;
+  color:#00c8ff;
+  text-shadow:0 0 20px #00c8ff;
+}
+
+.sidebar a{
+  border-radius:14px;
+  margin:7px 12px;
+  transition:.25s;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+  background:linear-gradient(135deg,#00c8ff,#ffffff);
+  color:#00111c;
+  font-weight:900;
+}
+
+.main{
+  position:relative;
+  overflow:hidden;
+}
+
+.main::before{
+  content:"";
+  position:fixed;
+  width:400px;
+  height:400px;
+  border-radius:50%;
+  background:#00c8ff;
+  filter:blur(120px);
+  opacity:.16;
+  right:5%;
+  top:10%;
+  pointer-events:none;
+}
+
+.topbar{
+  background:rgba(7,18,35,.76);
+  border:1px solid rgba(0,200,255,.22);
+  backdrop-filter:blur(18px);
+  border-radius:28px;
+  padding:24px;
+  box-shadow:0 0 35px rgba(0,200,255,.12);
+}
+
+.topbar h1{
+  font-family:Orbitron,sans-serif;
+  font-size:36px;
+}
+
+.admin-subtitle{
+  color:#9fb4c9;
+  margin-top:6px;
+}
+
+.topbar button,
+.quick-actions a,
+.admin-btn{
+  border:none;
+  padding:13px 18px;
+  border-radius:15px;
+  background:linear-gradient(135deg,#00c8ff,#fff);
+  color:#00111c;
+  font-weight:900;
+  cursor:pointer;
+  text-decoration:none;
+  box-shadow:0 0 25px rgba(0,200,255,.35);
+}
+
+.dashboard-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin:28px 0;
+}
+
+.stat-card{
+  position:relative;
+  overflow:hidden;
+  padding:24px;
+  border-radius:26px;
+  background:rgba(7,18,35,.78);
+  border:1px solid rgba(0,200,255,.22);
+  box-shadow:0 0 35px rgba(0,200,255,.1);
+}
+
+.stat-card::before{
+  content:"";
+  position:absolute;
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  background:#00c8ff;
+  filter:blur(70px);
+  opacity:.13;
+  right:-45px;
+  top:-45px;
+}
+
+.stat-card h3{
+  position:relative;
+  z-index:2;
+  color:#00c8ff;
+  font-size:38px;
+}
+
+.stat-card p{
+  position:relative;
+  z-index:2;
+  color:#9fb4c9;
+  margin-top:6px;
+}
+
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+  margin-bottom:24px;
+}
+
+.panel{
+  padding:24px;
+  border-radius:28px;
+  background:rgba(7,18,35,.78);
+  border:1px solid rgba(0,200,255,.22);
+  backdrop-filter:blur(18px);
+  box-shadow:0 0 35px rgba(0,200,255,.1);
+}
+
+.panel h2{
+  font-family:Orbitron,sans-serif;
+  margin-bottom:18px;
+}
+
+.quick-actions{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.status-list p{
+  padding:13px;
+  border-radius:16px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.08);
+  margin-bottom:10px;
+  color:#b8d8ff;
+}
+
+.status-list span{
+  display:inline-block;
+  width:10px;
+  height:10px;
+  background:#00ff9d;
+  border-radius:50%;
+  margin-right:10px;
+  box-shadow:0 0 14px #00ff9d;
+}
+
+.admin-list-item{
+  padding:14px;
+  border-radius:16px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.08);
+  margin-bottom:10px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+}
+
+.admin-list-item b{
+  color:#fff;
+}
+
+.admin-list-item small{
+  color:#9fb4c9;
+}
+
+.progress-box{
+  margin-top:16px;
+}
+
+.progress-label{
+  display:flex;
+  justify-content:space-between;
+  color:#b8d8ff;
+  font-size:14px;
+  margin-bottom:8px;
+}
+
+.progress-bar{
+  height:12px;
+  border-radius:20px;
+  background:rgba(255,255,255,.08);
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#00c8ff,#fff);
+  box-shadow:0 0 20px #00c8ff;
+}
+
+.admin-toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:999;
+  padding:14px 18px;
+  border-radius:16px;
+  background:#07182c;
+  border:1px solid rgba(0,200,255,.3);
+  box-shadow:0 0 25px rgba(0,200,255,.25);
+  transform:translateY(90px);
+  opacity:0;
+  transition:.3s;
+}
+
+.admin-toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+@media(max-width:1000px){
+  .dashboard-stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .dashboard-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:650px){
+  .dashboard-stats,
+  .quick-actions{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+  <h2>SHADOW</h2>
+  <a class="active" href="admin-dashboard.html">Dashboard</a>
+  <a href="admin-anime.html">Anime Manager</a>
+  <a href="admin-movies.html">Movies</a>
+  <a href="admin-manga.html">Manga</a>
+  <a href="admin-community.html">Community</a>
+  <a href="admin-users.html">Users</a>
+  <a href="admin-settings.html">Settings</a>
+  <a href="index.html">Back To Website</a>
+</div>
+
+<div class="main">
+
+  <div class="topbar">
+    <div>
+      <h1>Shadow Dashboard</h1>
+      <p class="admin-subtitle">Professional control center for your anime platform.</p>
+    </div>
+
+    <button onclick="window.location.href='index.html'">
+      View Website
+    </button>
+  </div>
+
+  <div class="stats dashboard-stats">
+
+    <div class="stat-card">
+      <h3 id="totalAnime">0</h3>
+      <p>Total Anime</p>
+    </div>
+
+    <div class="stat-card">
+      <h3 id="totalMovies">0</h3>
+      <p>Total Movies</p>
+    </div>
+
+    <div class="stat-card">
+      <h3 id="totalManga">0</h3>
+      <p>Total Manga</p>
+    </div>
+
+    <div class="stat-card">
+      <h3 id="totalPosts">0</h3>
+      <p>Community Posts</p>
+    </div>
+
+    <div class="stat-card">
+      <h3 id="totalUsers">0</h3>
+      <p>Total Users</p>
+    </div>
+
+    <div class="stat-card">
+      <h3 id="featuredAnime">0</h3>
+      <p>Featured Anime</p>
+    </div>
+
+  </div>
+
+  <div class="dashboard-grid">
+
+    <div class="panel">
+      <h2>Quick Actions</h2>
+
+      <div class="quick-actions">
+        <a href="admin-anime.html">+ Add Anime</a>
+        <a href="admin-movies.html">+ Add Movie</a>
+        <a href="admin-manga.html">+ Add Manga</a>
+        <a href="admin-community.html">Moderate Community</a>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Platform Status</h2>
+
+      <div class="status-list">
+        <p><span></span> Admin Panel Online</p>
+        <p><span></span> JSON Database Connected</p>
+        <p><span></span> Dynamic Cards Enabled</p>
+        <p><span></span> Shadow UI Active</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dashboard-grid">
+
+    <div class="panel">
+      <h2>Library Health</h2>
+
+      <div class="progress-box">
+        <div class="progress-label">
+          <span>Anime Library</span>
+          <span id="animeProgressText">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="animeProgress"></div>
+        </div>
+      </div>
+
+      <div class="progress-box">
+        <div class="progress-label">
+          <span>Movies Library</span>
+          <span id="movieProgressText">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="movieProgress"></div>
+        </div>
+      </div>
+
+      <div class="progress-box">
+        <div class="progress-label">
+          <span>Manga Library</span>
+          <span id="mangaProgressText">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="mangaProgress"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Admin Notes</h2>
+
+      <div class="status-list">
+        <p><span></span> Keep JSON files updated</p>
+        <p><span></span> Check broken images regularly</p>
+        <p><span></span> Moderate community posts</p>
+        <p><span></span> Backup your project folder</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dashboard-grid">
+
+    <div class="panel">
+      <h2>Recent Anime</h2>
+      <div id="recentAnimeList"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Recent Community Posts</h2>
+      <div id="recentCommunityList"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="admin-toast" id="adminToast">Loaded</div>
+
+<script>
+let animeData = [];
+let movieData = [];
+let mangaData = [];
+let communityPosts = JSON.parse(localStorage.getItem("communityPostsUltra")) || [];
+let users = JSON.parse(localStorage.getItem("shadowUsers")) || [];
+
+function showAdminToast(text){
+  adminToast.innerText = text;
+  adminToast.classList.add("show");
+  setTimeout(()=>adminToast.classList.remove("show"),1800);
+}
+
+async function loadJsonFile(file){
+  try{
+    const res = await fetch(file + "?v=" + Date.now());
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  }catch{
+    return [];
+  }
+}
+
+async function loadDashboard(){
+  animeData = await loadJsonFile("anime.json");
+  movieData = await loadJsonFile("movies.json");
+  mangaData = await loadJsonFile("manga.json");
+
+  updateDashboardStats();
+  renderRecentAnime();
+  renderRecentCommunity();
+  updateProgress();
+  showAdminToast("Dashboard loaded");
+}
+
+function updateDashboardStats(){
+  totalAnime.innerText = animeData.length;
+  totalMovies.innerText = movieData.length;
+  totalManga.innerText = mangaData.length;
+  totalPosts.innerText = communityPosts.length;
+  totalUsers.innerText = users.length || localStorage.getItem("totalUsers") || 0;
+
+  featuredAnime.innerText = animeData.filter(a =>
+    a.featured === true ||
+    a.featured === "true" ||
+    a.trending === true ||
+    a.popular === true
+  ).length;
+
+  localStorage.setItem("totalAnime", animeData.length);
+  localStorage.setItem("totalMovies", movieData.length);
+  localStorage.setItem("totalManga", mangaData.length);
+}
+
+function getName(item){
+  return item.title || item.name || "Unknown";
+}
+
+function getInfo(item){
+  return item.episode || item.quality || item.year || item.chapter || "Shadow Item";
+}
+
+function renderRecentAnime(){
+  const recent = animeData.slice(-6).reverse();
+
+  recentAnimeList.innerHTML = recent.length ? recent.map(item => `
+    <div class="admin-list-item">
+      <div>
+        <b>${getName(item)}</b><br>
+        <small>${getInfo(item)}</small>
+      </div>
+      <small>Anime</small>
+    </div>
+  `).join("") : `<div class="admin-list-item"><b>No anime found</b></div>`;
+}
+
+function renderRecentCommunity(){
+  const recent = communityPosts.slice(0,6);
+
+  recentCommunityList.innerHTML = recent.length ? recent.map(post => `
+    <div class="admin-list-item">
+      <div>
+        <b>${post.title || "Community Post"}</b><br>
+        <small>By ${post.name || "User"} · ${post.type || "Post"}</small>
+      </div>
+      <small>${post.likes || 0} likes</small>
+    </div>
+  `).join("") : `<div class="admin-list-item"><b>No posts found</b></div>`;
+}
+
+function setProgress(fill,text,value){
+  fill.style.width = value + "%";
+  text.innerText = value + "%";
+}
+
+function updateProgress(){
+  setProgress(animeProgress, animeProgressText, Math.min(100, animeData.length));
+  setProgress(movieProgress, movieProgressText, Math.min(100, movieData.length * 5));
+  setProgress(mangaProgress, mangaProgressText, Math.min(100, mangaData.length));
+}
+
+loadDashboard();
+</script>
+
+<script src="admin.js"></script>
+<script src="admin-protect.js"></script>
+
+</body>
+</html>
