@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manga - Shadow Anime</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="mobile.css">
+
+<script src="site-control.js"></script>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+.manga-hero-pro{
+  min-height:520px;
+  padding:90px 5% 60px;
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:35px;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.manga-hero-pro::before{
+  content:"";
+  position:absolute;
+  width:380px;
+  height:380px;
+  border-radius:50%;
+  background:#00c8ff;
+  filter:blur(110px);
+  opacity:.22;
+  left:4%;
+  top:18%;
+}
+
+.manga-hero-pro::after{
+  content:"";
+  position:absolute;
+  width:330px;
+  height:330px;
+  border-radius:50%;
+  background:#8a2cff;
+  filter:blur(110px);
+  opacity:.18;
+  right:6%;
+  bottom:6%;
+}
+
+.manga-hero-content,
+.manga-spotlight{
+  position:relative;
+  z-index:2;
+}
+
+.manga-tag{
+  display:inline-block;
+  padding:9px 16px;
+  border-radius:30px;
+  border:1px solid rgba(0,200,255,.45);
+  color:#00c8ff;
+  background:rgba(0,200,255,.08);
+  font-weight:800;
+  font-size:12px;
+  letter-spacing:1px;
+}
+
+.manga-hero-content h1{
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(42px,7vw,88px);
+  line-height:1.05;
+  margin:18px 0;
+  text-transform:uppercase;
+}
+
+.manga-hero-content h1 span{
+  color:#00c8ff;
+  text-shadow:0 0 25px #00c8ff;
+}
+
+.manga-hero-content p{
+  color:#a9c1d8;
+  line-height:1.8;
+  max-width:760px;
+  font-size:17px;
+}
+
+.manga-hero-buttons{
+  display:flex;
+  gap:14px;
+  margin-top:25px;
+  flex-wrap:wrap;
+}
+
+.manga-spotlight{
+  padding:24px;
+  border-radius:30px;
+  background:rgba(7,18,35,.76);
+  border:1px solid rgba(0,200,255,.25);
+  backdrop-filter:blur(18px);
+  box-shadow:0 0 40px rgba(0,200,255,.16);
+}
+
+.manga-spotlight img{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+  border-radius:24px;
+  margin-bottom:18px;
+  border:1px solid rgba(0,200,255,.25);
+}
+
+.manga-spotlight h2{
+  font-family:Orbitron,sans-serif;
+  font-size:28px;
+  margin:10px 0;
+}
+
+.manga-spotlight p{
+  color:#a9c1d8;
+  margin-bottom:18px;
+}
+
+.manga-stats{
+  width:92%;
+  max-width:1450px;
+  margin:-25px auto 35px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  position:relative;
+  z-index:3;
+}
+
+.manga-stat{
+  padding:20px;
+  border-radius:24px;
+  background:rgba(7,18,35,.82);
+  border:1px solid rgba(0,200,255,.22);
+  backdrop-filter:blur(16px);
+  box-shadow:0 0 30px rgba(0,200,255,.1);
+}
+
+.manga-stat h2{
+  color:#00c8ff;
+  font-size:32px;
+}
+
+.manga-stat p{
+  color:#9fb4c9;
+}
+
+.manga-control-panel,
+.manga-section-box{
+  width:92%;
+  max-width:1450px;
+  margin:0 auto 35px;
+  padding:22px;
+  border-radius:28px;
+  background:rgba(7,18,35,.78);
+  border:1px solid rgba(0,200,255,.22);
+  backdrop-filter:blur(16px);
+  box-shadow:0 0 35px rgba(0,200,255,.1);
+}
+
+.manga-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.section-subtitle{
+  color:#9fb4c9;
+  margin-top:6px;
+}
+
+.manga-controls{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.manga-controls select{
+  padding:12px 14px;
+  border-radius:15px;
+  border:1px solid rgba(0,200,255,.25);
+  background:rgba(255,255,255,.07);
+  color:#fff;
+  outline:none;
+}
+
+.manga-controls option{
+  color:#000;
+}
+
+.manga-chips{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.manga-chips button{
+  padding:10px 14px;
+  border-radius:30px;
+  border:1px solid rgba(0,200,255,.25);
+  background:rgba(255,255,255,.05);
+  color:#cceeff;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.manga-chips button:hover,
+.manga-chips button.active{
+  background:#00c8ff;
+  color:#00111c;
+}
+
+.manga-row{
+  width:92%;
+  max-width:1450px;
+  margin:0 auto 40px;
+}
+
+.manga-row-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+  margin-bottom:18px;
+}
+
+.manga-mini-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:18px;
+}
+
+.manga-mini-card{
+  border-radius:22px;
+  overflow:hidden;
+  background:rgba(7,18,35,.78);
+  border:1px solid rgba(0,200,255,.18);
+  box-shadow:0 0 25px rgba(0,200,255,.09);
+  cursor:pointer;
+  transition:.3s;
+}
+
+.manga-mini-card:hover{
+  transform:translateY(-6px);
+  border-color:#00c8ff;
+}
+
+.manga-mini-card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.manga-mini-card h3{
+  padding:12px;
+  font-size:14px;
+}
+
+.manga-grid-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  margin-bottom:20px;
+}
+
+.result-count{
+  color:#9fb4c9;
+  font-size:14px;
+}
+
+.loading-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+}
+
+.skeleton{
+  height:280px;
+  border-radius:20px;
+  background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(0,200,255,.13),rgba(255,255,255,.05));
+  background-size:250% 100%;
+  animation:skeleton 1.4s infinite;
+}
+
+@keyframes skeleton{
+  to{background-position:-250% 0}
+}
+
+.empty-box{
+  display:none;
+  text-align:center;
+  padding:50px 20px;
+  color:#9fb4c9;
+  border:1px dashed rgba(0,200,255,.3);
+  border-radius:25px;
+  margin-top:20px;
+}
+
+.to-top{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:100;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  border:none;
+  background:#00c8ff;
+  color:#00111c;
+  font-size:20px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 0 25px rgba(0,200,255,.5);
+  display:none;
+}
+
+@media(max-width:950px){
+  .manga-hero-pro{
+    grid-template-columns:1fr;
+  }
+
+  .manga-stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+  .manga-controls{
+    flex-direction:column;
+    width:100%;
+  }
+
+  .manga-controls select{
+    width:100%;
+  }
+
+  .manga-grid-head,
+  .manga-row-head{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">SHADOW ANIME</div>
+
+  <ul id="menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="Anime.html">Anime</a></li>
+    <li><a href="movies.html">Movies</a></li>
+    <li><a href="popular.html">Popular</a></li>
+    <li><a class="active" href="manga.html">Manga</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="watchlist.html">Watchlist</a></li>
+    <li><a href="policy.html">Policy</a></li>
+    <li><a href="profile.html">Profile</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <input type="text" id="mangaSearch" placeholder="Search manga..." class="search-box">
+    <div class="menu-btn" id="menuBtn">☰</div>
+  </div>
+</nav>
+
+<section class="manga-hero-pro">
+  <div class="manga-hero-content">
+    <span class="manga-tag">📚 SHADOW MANGA LIBRARY</span>
+    <h1>Manga <span>World</span></h1>
+    <p>
+      Explore a premium manga library with automatic JSON loading, smart search,
+      genre chips, sorting, featured manga, latest manga, live stats and Shadow Anime cards.
+    </p>
+
+    <div class="manga-hero-buttons">
+      <a href="#allMangaSection" class="hero-btn primary-btn">All Manga</a>
+      <button class="hero-btn secondary-btn" onclick="randomManga()">Random Manga</button>
+      <button class="hero-btn secondary-btn" onclick="shuffleManga()">Shuffle</button>
+    </div>
+  </div>
+
+  <div class="manga-spotlight">
+    <img id="mangaSpotlightImg" src="">
+    <span class="manga-tag">🔥 Auto Spotlight</span>
+    <h2 id="mangaSpotlightTitle">Loading...</h2>
+    <p id="mangaSpotlightInfo">Choosing manga from your library...</p>
+    <a id="mangaSpotlightLink" href="#" target="_blank" class="hero-btn primary-btn">Read Manga</a>
+  </div>
+</section>
+
+<section class="manga-stats">
+  <div class="manga-stat"><h2 id="totalMangaCount">0</h2><p>Total Manga</p></div>
+  <div class="manga-stat"><h2 id="currentMangaCount">0</h2><p>Showing Now</p></div>
+  <div class="manga-stat"><h2 id="mangaPageCount">0</h2><p>Total Pages</p></div>
+  <div class="manga-stat"><h2 id="mangaTagCount">0</h2><p>Auto Tags</p></div>
+</section>
+
+<section class="manga-control-panel">
+  <div class="manga-top">
+    <div>
+      <h1 class="section-title">Smart Manga Explorer</h1>
+      <p class="section-subtitle">Search, filter and sort manga automatically from manga.json.</p>
+    </div>
+
+    <div class="manga-controls">
+      <select id="mangaFilter">
+        <option value="all">All Manga</option>
+        <option value="action">Action</option>
+        <option value="fantasy">Fantasy</option>
+        <option value="romance">Romance</option>
+        <option value="dark">Dark</option>
+        <option value="chapter">Chapter</option>
+      </select>
+
+      <select id="mangaSort">
+        <option value="default">Default</option>
+        <option value="az">A - Z</option>
+        <option value="za">Z - A</option>
+        <option value="random">Random Order</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="manga-chips" id="mangaChips">
+    <button class="active" onclick="mangaTagSearch('',this)">All</button>
+  </div>
+</section>
+
+<section class="manga-row" id="mangaFeaturedRow" style="display:none;">
+  <div class="manga-row-head">
+    <h1 class="section-title">Featured Manga</h1>
+    <button class="hero-btn secondary-btn" onclick="renderFeaturedManga()">Refresh</button>
+  </div>
+  <div class="manga-mini-grid" id="mangaFeaturedGrid"></div>
+</section>
+
+<section class="manga-row" id="mangaLatestRow" style="display:none;">
+  <div class="manga-row-head">
+    <h1 class="section-title">Latest Manga</h1>
+    <a href="#allMangaSection" class="hero-btn secondary-btn">View All</a>
+  </div>
+  <div class="manga-mini-grid" id="mangaLatestGrid"></div>
+</section>
+
+<section id="allMangaSection" class="manga-section-box">
+  <div class="manga-grid-head">
+    <div>
+      <h1 class="section-title">All Manga</h1>
+      <p class="section-subtitle">All manga cards use your same Shadow Anime card design.</p>
+    </div>
+    <span class="result-count" id="mangaResultCount">Loading...</span>
+  </div>
+
+  <div id="mangaLoadingGrid" class="loading-grid">
+    <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+    <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+  </div>
+
+  <div class="anime-grid" id="mangaGrid"></div>
+  <div id="mangaPagination" class="pagination"></div>
+
+  <div class="empty-box" id="mangaEmpty">
+    <h2>No Manga Found</h2>
+    <p>Try another manga name, chapter or genre.</p>
+  </div>
+</section>
+
+<button class="to-top" id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  © 2026 Shadow Anime
+</footer>
+
+<script>
+const perPage = 30;
+let page = 1;
+let allManga = [];
+let currentManga = [];
+
+fetch("manga.json?v=" + Date.now())
+  .then(res => res.json())
+  .then(data => {
+    allManga = Array.isArray(data) ? data : [];
+    currentManga = [...allManga];
+
+    mangaLoadingGrid.style.display = "none";
+
+    buildMangaChips();
+    renderMangaSpotlight();
+    renderFeaturedManga();
+    renderLatestManga();
+    applyMangaFilters();
+
+    setInterval(renderMangaSpotlight, 8000);
+  })
+  .catch(() => {
+    mangaLoadingGrid.style.display = "none";
+    mangaEmpty.style.display = "block";
+    mangaResultCount.innerText = "manga.json not found";
+  });
+
+function getMangaName(manga){
+  return manga.title || manga.name || "Unknown Manga";
+}
+
+function getMangaInfo(manga){
+  return manga.chapter || manga.genre || manga.category || manga.type || "Manga";
+}
+
+function getMangaText(manga){
+  return `
+    ${manga.title || ""}
+    ${manga.name || ""}
+    ${manga.chapter || ""}
+    ${manga.genre || ""}
+    ${manga.category || ""}
+    ${manga.type || ""}
+  `.toLowerCase();
+}
+
+function applyMangaFilters(){
+  const keyword = mangaSearch.value.toLowerCase().trim();
+  const filter = mangaFilter.value;
+  const sort = mangaSort.value;
+
+  let list = allManga.filter(manga => {
+    const text = getMangaText(manga);
+    return text.includes(keyword) && (filter === "all" || text.includes(filter));
+  });
+
+  if(sort === "az"){
+    list.sort((a,b)=>getMangaName(a).localeCompare(getMangaName(b)));
+  }
+
+  if(sort === "za"){
+    list.sort((a,b)=>getMangaName(b).localeCompare(getMangaName(a)));
+  }
+
+  if(sort === "random"){
+    list.sort(()=>Math.random() - 0.5);
+  }
+
+  currentManga = list;
+  page = 1;
+
+  renderManga();
+  createMangaPagination();
+  updateMangaStats();
+}
+
+function renderManga(){
+  const start = (page - 1) * perPage;
+  const end = start + perPage;
+  const pageItems = currentManga.slice(start,end);
+
+  mangaGrid.innerHTML = pageItems.map(manga => `
+    <div class="shadow-card">
+      <img src="${manga.image || ""}" alt="${getMangaName(manga)}">
+      <div class="shadow-info">
+        <h3>${getMangaName(manga)}</h3>
+        <p>${getMangaInfo(manga)}</p>
+        <a href="${manga.link || "#"}" target="_blank">Read Manga</a>
+      </div>
+    </div>
+  `).join("");
+
+  mangaEmpty.style.display = pageItems.length ? "none" : "block";
+  mangaResultCount.innerText = `${currentManga.length} manga found`;
+  currentMangaCount.innerText = pageItems.length;
+}
+
+function createMangaPagination(){
+  const totalPages = Math.ceil(currentManga.length / perPage);
+  mangaPagination.innerHTML = "";
+
+  if(totalPages <= 1){
+    mangaPageCount.innerText = totalPages || 0;
+    return;
+  }
+
+  for(let i=1;i<=totalPages;i++){
+    mangaPagination.innerHTML += `
+      <a href="javascript:void(0)"
+         onclick="goMangaPage(${i})"
+         class="${i === page ? "active-page" : ""}">
+         ${i}
+      </a>
+    `;
+  }
+
+  mangaPageCount.innerText = totalPages;
+}
+
+function goMangaPage(num){
+  page = num;
+  renderManga();
+  createMangaPagination();
+  allMangaSection.scrollIntoView({behavior:"smooth"});
+}
+
+function updateMangaStats(){
+  totalMangaCount.innerText = allManga.length;
+  mangaPageCount.innerText = Math.ceil(currentManga.length / perPage) || 0;
+  mangaTagCount.innerText = document.querySelectorAll("#mangaChips button").length - 1;
+}
+
+function buildMangaChips(){
+  const tags = new Set();
+  const defaults = ["action","fantasy","romance","dark","chapter","manga"];
+
+  allManga.forEach(manga => {
+    const text = `${manga.genre || ""} ${manga.category || ""} ${manga.chapter || ""} ${manga.type || ""}`.toLowerCase();
+    text.split(/[,/| ]+/).forEach(word => {
+      if(word.length > 3 && tags.size < 12) tags.add(word);
+    });
+  });
+
+  defaults.forEach(tag => tags.add(tag));
+
+  tags.forEach(tag => {
+    mangaChips.innerHTML += `
+      <button onclick="mangaTagSearch('${tag}',this)">
+        ${tag}
+      </button>
+    `;
+  });
+}
+
+function mangaTagSearch(text,btn){
+  mangaSearch.value = text;
+
+  document.querySelectorAll("#mangaChips button").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+
+  applyMangaFilters();
+}
+
+function renderMangaSpotlight(){
+  if(!allManga.length) return;
+
+  const manga = allManga[Math.floor(Math.random() * allManga.length)];
+
+  mangaSpotlightImg.src = manga.image || "";
+  mangaSpotlightTitle.innerText = getMangaName(manga);
+  mangaSpotlightInfo.innerText = getMangaInfo(manga);
+  mangaSpotlightLink.href = manga.link || "#";
+}
+
+function randomManga(){
+  renderMangaSpotlight();
+  document.querySelector(".manga-spotlight").scrollIntoView({behavior:"smooth"});
+}
+
+function shuffleManga(){
+  mangaSort.value = "random";
+  applyMangaFilters();
+}
+
+function renderFeaturedManga(){
+  if(!allManga.length) return;
+
+  mangaFeaturedRow.style.display = "block";
+
+  const picks = [...allManga].sort(()=>Math.random() - 0.5).slice(0,6);
+
+  mangaFeaturedGrid.innerHTML = picks.map(manga => `
+    <div class="manga-mini-card" onclick="openManga('${manga.link || "#"}')">
+      <img src="${manga.image || ""}" alt="${getMangaName(manga)}">
+      <h3>${getMangaName(manga)}</h3>
+    </div>
+  `).join("");
+}
+
+function renderLatestManga(){
+  if(!allManga.length) return;
+
+  mangaLatestRow.style.display = "block";
+
+  const latest = [...allManga].slice(-6).reverse();
+
+  mangaLatestGrid.innerHTML = latest.map(manga => `
+    <div class="manga-mini-card" onclick="openManga('${manga.link || "#"}')">
+      <img src="${manga.image || ""}" alt="${getMangaName(manga)}">
+      <h3>${getMangaName(manga)}</h3>
+    </div>
+  `).join("");
+}
+
+function openManga(link){
+  if(link && link !== "#"){
+    window.open(link,"_blank");
+  }
+}
+
+mangaSearch.addEventListener("input",applyMangaFilters);
+mangaFilter.addEventListener("change",applyMangaFilters);
+mangaSort.addEventListener("change",applyMangaFilters);
+
+if(menuBtn){
+  menuBtn.addEventListener("click",()=>{
+    menu.classList.toggle("show");
+  });
+}
+
+window.addEventListener("scroll",()=>{
+  toTop.style.display = window.scrollY > 500 ? "block" : "none";
+});
+</script>
+
+<script src="script.js"></script>
+<script type="module" src="user-auth.js"></script>
+<script type="module" src="protect.js"></script>
+<script src="smart-search.js"></script>
+<script src="security.js"></script>
+<script type="module" src="firebase.js"></script>
+
+</body>
+</html>

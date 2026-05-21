@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Policy & Rules - Shadow Anime</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="mobile.css">
+
+<script src="site-control.js"></script>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+.policy-hero-pro{
+  min-height:500px;
+  padding:90px 5% 60px;
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:35px;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.policy-hero-pro::before{
+  content:"";
+  position:absolute;
+  width:380px;
+  height:380px;
+  border-radius:50%;
+  background:#00c8ff;
+  filter:blur(110px);
+  opacity:.22;
+  left:4%;
+  top:18%;
+}
+
+.policy-hero-pro::after{
+  content:"";
+  position:absolute;
+  width:330px;
+  height:330px;
+  border-radius:50%;
+  background:#8a2cff;
+  filter:blur(110px);
+  opacity:.18;
+  right:6%;
+  bottom:6%;
+}
+
+.policy-hero-content,
+.policy-status-card{
+  position:relative;
+  z-index:2;
+}
+
+.policy-tag{
+  display:inline-block;
+  padding:9px 16px;
+  border-radius:30px;
+  border:1px solid rgba(0,200,255,.45);
+  color:#00c8ff;
+  background:rgba(0,200,255,.08);
+  font-weight:800;
+  font-size:12px;
+  letter-spacing:1px;
+}
+
+.policy-hero-content h1{
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(42px,7vw,88px);
+  line-height:1.05;
+  margin:18px 0;
+  text-transform:uppercase;
+}
+
+.policy-hero-content h1 span{
+  color:#00c8ff;
+  text-shadow:0 0 25px #00c8ff;
+}
+
+.policy-hero-content p{
+  color:#a9c1d8;
+  line-height:1.8;
+  max-width:760px;
+  font-size:17px;
+}
+
+.policy-actions{
+  display:flex;
+  gap:14px;
+  margin-top:25px;
+  flex-wrap:wrap;
+}
+
+.policy-status-card{
+  padding:26px;
+  border-radius:30px;
+  background:rgba(7,18,35,.76);
+  border:1px solid rgba(0,200,255,.25);
+  backdrop-filter:blur(18px);
+  box-shadow:0 0 40px rgba(0,200,255,.16);
+}
+
+.policy-status-card h2{
+  font-family:Orbitron,sans-serif;
+  margin:14px 0;
+}
+
+.policy-status-card p{
+  color:#a9c1d8;
+  line-height:1.7;
+}
+
+.policy-score{
+  margin-top:22px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.policy-score-box{
+  padding:17px;
+  border-radius:20px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.policy-score-box h3{
+  color:#00c8ff;
+  font-size:28px;
+}
+
+.policy-score-box p{
+  font-size:13px;
+  color:#9fb4c9;
+}
+
+.policy-shell{
+  width:92%;
+  max-width:1450px;
+  margin:0 auto 65px;
+  display:grid;
+  grid-template-columns:300px 1fr;
+  gap:24px;
+  align-items:start;
+}
+
+.policy-sidebar{
+  position:sticky;
+  top:90px;
+  padding:20px;
+  border-radius:28px;
+  background:rgba(7,18,35,.78);
+  border:1px solid rgba(0,200,255,.22);
+  box-shadow:0 0 35px rgba(0,200,255,.1);
+}
+
+.policy-sidebar h3{
+  font-family:Orbitron,sans-serif;
+  margin-bottom:15px;
+}
+
+.policy-sidebar a{
+  display:block;
+  text-decoration:none;
+  color:#b8d8ff;
+  padding:12px 13px;
+  border-radius:14px;
+  margin-bottom:8px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.06);
+  transition:.25s;
+}
+
+.policy-sidebar a:hover{
+  color:#00111c;
+  background:#00c8ff;
+  transform:translateX(5px);
+}
+
+.policy-content{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+
+.policy-card-pro{
+  padding:26px;
+  border-radius:28px;
+  background:rgba(7,18,35,.78);
+  border:1px solid rgba(0,200,255,.22);
+  box-shadow:0 0 35px rgba(0,200,255,.1);
+  position:relative;
+  overflow:hidden;
+}
+
+.policy-card-pro::before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background:#00c8ff;
+  filter:blur(80px);
+  opacity:.08;
+  right:-60px;
+  top:-60px;
+}
+
+.policy-card-pro h2{
+  font-family:Orbitron,sans-serif;
+  margin-bottom:12px;
+  position:relative;
+  z-index:2;
+}
+
+.policy-card-pro p,
+.policy-card-pro li{
+  color:#a9c1d8;
+  line-height:1.8;
+  position:relative;
+  z-index:2;
+}
+
+.policy-card-pro ul{
+  padding-left:20px;
+}
+
+.policy-grid-pro{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:22px;
+}
+
+.policy-mini-card{
+  padding:24px;
+  border-radius:25px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(0,200,255,.16);
+  transition:.3s;
+}
+
+.policy-mini-card:hover{
+  transform:translateY(-6px);
+  border-color:#00c8ff;
+  box-shadow:0 0 30px rgba(0,200,255,.18);
+}
+
+.policy-mini-card h3{
+  margin-bottom:10px;
+  color:#fff;
+}
+
+.policy-warning{
+  border-color:rgba(255,211,105,.35);
+  background:rgba(255,211,105,.06);
+}
+
+.policy-safe{
+  border-color:rgba(0,255,180,.35);
+  background:rgba(0,255,180,.055);
+}
+
+.policy-contact-box{
+  text-align:center;
+  padding:42px 25px;
+  border-radius:32px;
+  background:linear-gradient(135deg,rgba(0,200,255,.15),rgba(7,18,35,.86));
+  border:1px solid rgba(0,200,255,.25);
+  box-shadow:0 0 40px rgba(0,200,255,.15);
+}
+
+.policy-contact-box h2{
+  font-family:Orbitron,sans-serif;
+  font-size:34px;
+  margin-bottom:12px;
+}
+
+.policy-contact-box p{
+  color:#a9c1d8;
+  max-width:760px;
+  margin:0 auto 22px;
+  line-height:1.8;
+}
+
+.to-top{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:100;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  border:none;
+  background:#00c8ff;
+  color:#00111c;
+  font-size:20px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 0 25px rgba(0,200,255,.5);
+  display:none;
+}
+
+@media(max-width:1000px){
+  .policy-hero-pro{
+    grid-template-columns:1fr;
+  }
+
+  .policy-shell{
+    grid-template-columns:1fr;
+  }
+
+  .policy-sidebar{
+    position:static;
+  }
+}
+
+@media(max-width:700px){
+  .policy-grid-pro,
+  .policy-score{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">SHADOW ANIME</div>
+
+  <ul id="menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="Anime.html">Anime</a></li>
+    <li><a href="movies.html">Movies</a></li>
+    <li><a href="popular.html">Popular</a></li>
+    <li><a href="manga.html">Manga</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="watchlist.html">Watchlist</a></li>
+    <li><a class="active" href="policy.html">Policy</a></li>
+    <li><a href="profile.html">Profile</a></li>
+  </ul>
+
+  <div class="menu-btn" id="menuBtn">☰</div>
+</nav>
+
+<section class="policy-hero-pro">
+  <div class="policy-hero-content">
+    <span class="policy-tag">🛡 SHADOW TRUST CENTER</span>
+    <h1>Policy & <span>Rules</span></h1>
+    <p>
+      Official rules, privacy information, content policy, community safety,
+      user responsibilities, and platform disclaimer for Shadow Anime.
+    </p>
+
+    <div class="policy-actions">
+      <a href="#privacy" class="hero-btn primary-btn">Privacy Policy</a>
+      <a href="#rules" class="hero-btn secondary-btn">User Rules</a>
+      <a href="#disclaimer" class="hero-btn secondary-btn">Disclaimer</a>
+    </div>
+  </div>
+
+  <div class="policy-status-card">
+    <span class="policy-tag">STATUS</span>
+    <h2>Safe Fan Platform</h2>
+    <p>
+      Shadow Anime is designed as a fan-made anime discovery hub focused on clean UI,
+      respectful community behavior, watchlist tools, metadata, and source links.
+    </p>
+
+    <div class="policy-score">
+      <div class="policy-score-box">
+        <h3>2026</h3>
+        <p>Policy Version</p>
+      </div>
+
+      <div class="policy-score-box">
+        <h3>24/7</h3>
+        <p>Rules Active</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="policy-shell">
+
+  <aside class="policy-sidebar">
+    <h3>Quick Navigation</h3>
+    <a href="#about">About Us</a>
+    <a href="#purpose">Our Purpose</a>
+    <a href="#content">Content Policy</a>
+    <a href="#rules">User Rules</a>
+    <a href="#community">Community Rules</a>
+    <a href="#privacy">Privacy Policy</a>
+    <a href="#disclaimer">Disclaimer</a>
+  </aside>
+
+  <section class="policy-content">
+
+    <div class="policy-card-pro" id="about">
+      <span class="policy-tag">ABOUT US</span>
+      <h2>What is Shadow Anime?</h2>
+      <p>
+        Shadow Anime is an anime discovery and entertainment hub where users can explore anime,
+        movies, manga, trailers, watchlists, community posts, and anime updates in a clean futuristic UI.
+      </p>
+    </div>
+
+    <div class="policy-grid-pro">
+
+      <div class="policy-mini-card policy-safe" id="purpose">
+        <h3>Our Purpose</h3>
+        <p>
+          We help anime fans discover titles, view details, explore trailers,
+          save watchlists, and find official/source links.
+        </p>
+      </div>
+
+      <div class="policy-mini-card" id="content">
+        <h3>Content Policy</h3>
+        <p>
+          Shadow Anime may show anime metadata, posters, public details,
+          trailers, and source links for discovery purposes.
+        </p>
+      </div>
+
+      <div class="policy-mini-card" id="rules">
+        <h3>User Rules</h3>
+        <ul>
+          <li>Respect all users.</li>
+          <li>No hate speech or harassment.</li>
+          <li>No spam, fake posts, or harmful links.</li>
+          <li>No attempts to hack, damage, or abuse the website.</li>
+        </ul>
+      </div>
+
+      <div class="policy-mini-card" id="community">
+        <h3>Community Rules</h3>
+        <ul>
+          <li>Keep discussions anime-related.</li>
+          <li>Mark spoilers clearly.</li>
+          <li>Do not post abusive or illegal content.</li>
+          <li>Use respectful language.</li>
+        </ul>
+      </div>
+
+      <div class="policy-mini-card" id="privacy">
+        <h3>Privacy Policy</h3>
+        <p>
+          Shadow Anime may use local storage for watchlists, continue watching,
+          comments, polls, community posts, and preferences. We do not sell personal data.
+        </p>
+      </div>
+
+      <div class="policy-mini-card policy-warning" id="disclaimer">
+        <h3>Disclaimer</h3>
+        <p>
+          Shadow Anime is an independent fan-made platform. All anime names,
+          posters, characters, and trademarks belong to their respective owners.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="policy-card-pro">
+      <span class="policy-tag">IMPORTANT</span>
+      <h2>Copyright & Source Links</h2>
+      <p>
+        Shadow Anime should be used for anime discovery, metadata, public information,
+        trailers, watchlists, and community discussions. Any external links should follow
+        the rules of their original platforms and content owners.
+      </p>
+    </div>
+
+    <div class="policy-card-pro">
+      <span class="policy-tag">LOCAL STORAGE</span>
+      <h2>How Shadow Anime Stores Data</h2>
+      <p>
+        Some features may save data inside your browser using localStorage, such as watchlist,
+        continue watching, saved posts, poll votes, and user preferences. Clearing browser data
+        may remove these saved items.
+      </p>
+    </div>
+
+    <div class="policy-contact-box">
+      <h2>Need Help?</h2>
+      <p>
+        If you find broken links, wrong details, harmful posts, or policy issues,
+        contact the Shadow Anime admin or report it through the community page.
+      </p>
+      <a href="community.html" class="hero-btn primary-btn">Go To Community</a>
+    </div>
+
+  </section>
+
+</main>
+
+<button class="to-top" id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  © 2026 Shadow Anime. All rights reserved.
+</footer>
+
+<script>
+if(menuBtn){
+  menuBtn.addEventListener("click",()=>{
+    menu.classList.toggle("show");
+  });
+}
+
+window.addEventListener("scroll",()=>{
+  toTop.style.display = window.scrollY > 500 ? "block" : "none";
+});
+</script>
+
+<script src="script.js"></script>
+<script type="module" src="user-auth.js"></script>
+<script type="module" src="protect.js"></script>
+<script src="smart-search.js"></script>
+<script src="security.js"></script>
+<script type="module" src="firebase.js"></script>
+
+</body>
+</html>
