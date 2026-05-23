@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Anime - Shadow Anime</title>
+
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+body{
+  background:#020711;
+  color:#fff;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 15% 10%,rgba(0,200,255,.25),transparent 28%),
+    radial-gradient(circle at 90% 15%,rgba(100,0,255,.18),transparent 30%),
+    radial-gradient(circle at 50% 100%,rgba(0,120,255,.16),transparent 35%),
+    #020711;
+  z-index:-3;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:45px 45px;
+  z-index:-2;
+}
+
+.anime-hero{
+  min-height:520px;
+  padding:95px 5% 60px;
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:35px;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.orb{
+  position:absolute;
+  width:330px;
+  height:330px;
+  border-radius:50%;
+  filter:blur(90px);
+  opacity:.28;
+  animation:floatOrb 7s infinite alternate ease-in-out;
+}
+
+.orb.one{background:#00c8ff;left:4%;top:15%}
+.orb.two{background:#8a2cff;right:8%;bottom:5%;animation-delay:1.5s}
+
+@keyframes floatOrb{
+  to{transform:translateY(35px) scale(1.15)}
+}
+
+.hero-content,.hero-panel{
+  position:relative;
+  z-index:2;
+}
+
+.badge{
+  display:inline-block;
+  padding:9px 16px;
+  border-radius:30px;
+  border:1px solid rgba(0,200,255,.45);
+  color:#00c8ff;
+  background:rgba(0,200,255,.08);
+  font-weight:800;
+  font-size:12px;
+  letter-spacing:1px;
+}
+
+.anime-hero h1{
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(42px,7vw,90px);
+  line-height:1.05;
+  margin:18px 0;
+  text-transform:uppercase;
+}
+
+.anime-hero h1 span{
+  color:#00c8ff;
+  text-shadow:0 0 25px #00c8ff;
+}
+
+.anime-hero p{
+  color:#a9c1d8;
+  line-height:1.8;
+  font-size:17px;
+  max-width:760px;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:14px;
+  margin-top:25px;
+  flex-wrap:wrap;
+}
+
+.hero-btn{
+  border:none;
+  border-radius:16px;
+  padding:13px 20px;
+  background:linear-gradient(135deg,#00c8ff,#fff);
+  color:#00111c;
+  font-weight:900;
+  cursor:pointer;
+  text-decoration:none;
+  box-shadow:0 0 25px rgba(0,200,255,.35);
+}
+
+.hero-btn.dark{
+  background:rgba(255,255,255,.07);
+  color:#fff;
+  border:1px solid rgba(0,200,255,.25);
+}
+
+.hero-panel{
+  padding:25px;
+  border-radius:30px;
+  background:rgba(7,18,35,.75);
+  border:1px solid rgba(0,200,255,.25);
+  backdrop-filter:blur(18px);
+  box-shadow:0 0 40px rgba(0,200,255,.15);
+}
+
+.spotlight-img{
+  width:100%;
+  height:300px;
+  object-fit:cover;
+  border-radius:24px;
+  margin-bottom:18px;
+  border:1px solid rgba(0,200,255,.25);
+}
+
+.hero-panel h2{
+  font-family:Orbitron,sans-serif;
+  font-size:27px;
+}
+
+.hero-panel p{
+  font-size:14px;
+  margin:8px 0 15px;
+}
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  width:92%;
+  max-width:1450px;
+  margin:-25px auto 35px;
+  position:relative;
+  z-index:5;
+}
+
+.stat-box{
+  padding:20px;
+  border-radius:22px;
+  background:rgba(7,18,35,.82);
+  border:1px solid rgba(0,200,255,.22);
+  backdrop-filter:blur(16px);
+  box-shadow:0 0 30px rgba(0,200,255,.1);
+}
+
+.stat-box h2{
+  color:#00c8ff;
+  font-size:32px;
+}
+
+.stat-box p{
+  color:#9fb4c9;
+  font-size:13px;
+}
+
+.control-panel{
+  width:92%;
+  max-width:1450px;
+  margin:0 auto 30px;
+  padding:22px;
+  border-radius:28px;
+  background:rgba(7,18,35,.78);
+  border:1px solid rgba(0,200,255,.22);
+  backdrop-filter:blur(16px);
+  box-shadow:0 0 35px rgba(0,200,255,.1);
+}
+
+.control-top{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  flex-wrap:wrap;
+  align-items:end;
+}
+
+.section-title{
+  font-family:Orbitron,sans-serif;
+  font-size:32px;
+  text-shadow:0 0 18px rgba(0,200,255,.45);
+}
+
+.section-subtitle{
+  color:#9fb4c9;
+  margin-top:5px;
+}
+
+.controls{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.controls select{
+  padding:12px 14px;
+  border-radius:15px;
+  border:1px solid rgba(0,200,255,.25);
+  background:rgba(255,255,255,.07);
+  color:#fff;
+  outline:none;
+}
+
+.controls option{
+  color:#000;
+}
+
+.genre-chips{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.genre-chips button{
+  padding:10px 14px;
+  border-radius:30px;
+  border:1px solid rgba(0,200,255,.25);
+  background:rgba(255,255,255,.05);
+  color:#cceeff;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.genre-chips button:hover,
+.genre-chips button.active{
+  background:#00c8ff;
+  color:#00111c;
+}
+
+.auto-row{
+  width:92%;
+  max-width:1450px;
+  margin:0 auto 35px;
+}
+
+.auto-row-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.mini-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:18px;
+}
+
+.mini-card{
+  border-radius:22px;
+  overflow:hidden;
+  background:rgba(7,18,35,.78);
+  border:1px solid rgba(0,200,255,.18);
+  box-shadow:0 0 25px rgba(0,200,255,.09);
+  cursor:pointer;
+  transition:.3s;
+}
+
+.mini-card:hover{
+  transform:translateY(-6px);
+  border-color:#00c8ff;
+}
+
+.mini-card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.mini-card h3{
+  padding:12px;
+  font-size:14px;
+}
+
+.shadow-section{
+  width:92%;
+  max-width:1450px;
+  margin:auto;
+}
+
+.shadow-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.result-count{
+  font-size:14px;
+  color:#9fb4c9;
+  font-family:Poppins,sans-serif;
+}
+
+.loading-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+}
+
+.skeleton{
+  height:280px;
+  border-radius:20px;
+  background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(0,200,255,.13),rgba(255,255,255,.05));
+  background-size:250% 100%;
+  animation:skeleton 1.4s infinite;
+}
+
+@keyframes skeleton{
+  to{background-position:-250% 0}
+}
+
+.empty-state{
+  display:none;
+  text-align:center;
+  padding:50px 20px;
+  color:#9fb4c9;
+  border:1px dashed rgba(0,200,255,.3);
+  border-radius:25px;
+  margin-top:20px;
+}
+
+.to-top{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:100;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  border:none;
+  background:#00c8ff;
+  color:#00111c;
+  font-size:20px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 0 25px rgba(0,200,255,.5);
+  display:none;
+}
+
+@media(max-width:950px){
+  .anime-hero{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:700px){
+  .controls{flex-direction:column;width:100%}
+  .controls select{width:100%}
+  .stats-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">SHADOW ANIME</div>
+
+  <ul id="menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a class="active" href="Anime.html">Anime</a></li>
+    <li><a href="movies.html">Movies</a></li>
+    <li><a href="popular.html">Popular</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="watchlist.html">Watchlist</a></li>
+    <li><a href="policy.html">Policy</a></li>
+    <li><a href="notifications.html">Notifications</a></li>
+    <li><a href="profile.html">Profile</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <input type="text" id="animeSearch" placeholder="Search anime..." class="search-box">
+    <div class="menu-btn" id="menuBtn">☰</div>
+  </div>
+</nav>
+
+<section class="anime-hero">
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+
+  <div class="hero-content">
+    <span class="badge">⚡ SHADOW ANIME AUTO LIBRARY</span>
+    <h1>Explore <span>Anime Universe</span></h1>
+    <p>
+     Enter the ultimate anime universe where legends awaken, battles explode, and emotions hit harder than ever. 
+Shadow Anime brings you a premium anime experience with trending series, epic movies, powerful community features, 
+and a futuristic neon interface built for true anime fans.
+    </p>
+
+    <div class="hero-buttons">
+      <button class="hero-btn" onclick="scrollToAnime()">Explore Anime</button>
+      <button class="hero-btn dark" onclick="randomAnime()">Random Anime</button>
+      <button class="hero-btn dark" onclick="shuffleAnime()">Shuffle Library</button>
+    </div>
+  </div>
+
+  <div class="hero-panel">
+    <img id="spotlightImg" class="spotlight-img" src="">
+    <span class="badge">🔥 Auto Spotlight</span>
+    <h2 id="spotlightTitle">Loading...</h2>
+    <p id="spotlightInfo">Choosing best anime from your library...</p>
+    <a id="spotlightLink" class="hero-btn" href="#" target="_blank">Watch Now</a>
+  </div>
+</section>
+
+<section class="stats-grid">
+  <div class="stat-box"><h2 id="totalAnimeCount">0</h2><p>Total Anime</p></div>
+  <div class="stat-box"><h2 id="currentPageCount">0</h2><p>Showing Now</p></div>
+  <div class="stat-box"><h2 id="totalPagesCount">0</h2><p>Total Pages</p></div>
+  <div class="stat-box"><h2 id="genreCount">0</h2><p>Auto Tags</p></div>
+</section>
+
+<section class="control-panel">
+  <div class="control-top">
+    <div>
+      <h2 class="section-title">Smart Anime Explorer</h2>
+      <p class="section-subtitle">Everything updates automatically and click on laod more to load more anime </p>
+    </div>
+
+    <div class="controls">
+      <select id="sortAnime">
+        <option value="default">Default</option>
+        <option value="az">A - Z</option>
+        <option value="za">Z - A</option>
+        <option value="random">Random Order</option>
+      </select>
+
+      <select id="quickFilter">
+        <option value="all">All</option>
+        <option value="hd">HD</option>
+        <option value="sub">Sub</option>
+        <option value="dub">Dub</option>
+        <option value="movie">Movie</option>
+        <option value="episode">Episode</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="genre-chips" id="genreChips">
+    <button class="active" onclick="tagSearch('',this)">All</button>
+  </div>
+</section>
+
+<section class="auto-row" id="featuredRow" style="display:none;">
+  <div class="auto-row-header">
+    <h2 class="section-title">Featured Picks</h2>
+    <button class="hero-btn dark" onclick="renderFeatured()">Refresh</button>
+  </div>
+  <div class="mini-row" id="featuredGrid"></div>
+</section>
+
+<section class="auto-row" id="latestRow" style="display:none;">
+  <div class="auto-row-header">
+    <h2 class="section-title">Recently Added</h2>
+  </div>
+  <div class="mini-row" id="latestGrid"></div>
+</section>
+
+<section class="shadow-section" id="animeSection">
+  <h2 class="shadow-title">
+    Latest Anime
+    <span class="result-count" id="resultCount">Loading...</span>
+  </h2>
+
+  <div id="loadingGrid" class="loading-grid">
+    <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+    <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+  </div>
+
+  <div id="animeGrid" class="anime-grid"></div>
+
+  <div id="emptyState" class="empty-state">
+    <h2>No Anime Found</h2>
+    <p>Try another search, tag or filter.</p>
+  </div>
+  <div id="pagination" class="pagination"></div>
+
+</section>
+
+<button class="to-top" id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  © 2026 Shadow Anime
+</footer>
+
+<div class="trailer-modal" id="trailerModal">
+  <div class="trailer-box">
+    <span class="close-trailer" onclick="closeTrailer()">×</span>
+    <iframe id="trailerFrame" src="" allowfullscreen></iframe>
+  </div>
+</div>
+
+
+
+<script>
+const perPage = 30;
+let page = 1;
+let allAnime = [];
+let currentList = [];
+let spotlightTimer;
+let keywordIndex = 0;
+
+const API = "https://anikoto-api-nine.vercel.app";
+
+async function loadApiCount(){
+  try{
+    const res = await fetch(`${API}/api/library-count`);
+    const json = await res.json();
+
+    totalAnimeCount.innerText = json.estimatedTotal || allAnime.length;
+  }catch(err){
+    totalAnimeCount.innerText = allAnime.length;
+  }
+}   
+
+function mapAnime(anime){
+  return {
+    id: anime.id,
+    title: anime.title || "Unknown Anime",
+    image: anime.image || "image/default.jpg",
+    banner: anime.image || "image/default.jpg",
+    rating: "N/A",
+    episode: anime.episodes || anime.sub || "Unknown Episodes",
+    quality: anime.type || "HD",
+    genre: anime.type || "Anime",
+    category: anime.type || "Anime",
+    type: anime.type || "anime",
+    link: `anime-details.html?id=${anime.id}`
+  };
+}
+
+async function fetchAnime(){
+  const res = await fetch(`${API}/api/all-anime?page=1`);
+  const json = await res.json();
+  return (json.data || []).map(mapAnime);
+}
+
+fetchAnime().then(data => {
+  allAnime = data;
+  currentList = [...allAnime];
+  loadingGrid.style.display = "none";
+
+  buildGenreChips();
+  renderSpotlight();
+  renderFeatured();
+  renderLatest();
+  applyFilters();
+  loadApiCount();
+
+  spotlightTimer = setInterval(renderSpotlight, 7000);
+}).catch(error => {
+  console.error("API Error:", error);
+  loadingGrid.style.display = "none";
+  emptyState.style.display = "block";
+  resultCount.innerText = "API failed";
+});
+
+async function autoLoadApiPages(){
+  for(let i = 2; i <= 20; i++){
+    try{
+      const res = await fetch(`${API}/api/all-anime?page=${i}`);
+      const json = await res.json();
+
+      const mapped = (json.data || []).map(mapAnime);
+
+      allAnime = Array.from(
+        new Map([...allAnime, ...mapped].map(a => [a.id, a])).values()
+      );
+
+      currentList = [...allAnime];
+      applyFilters();
+
+    }catch(err){
+      console.log("Auto page failed:", i);
+    }
+  }
+}
+
+function getAnimeName(anime){
+  return anime.title || anime.name || "Unknown Anime";
+}
+
+function getAnimeText(anime){
+  return `${anime.title || ""} ${anime.episode || ""} ${anime.quality || ""} ${anime.category || ""} ${anime.genre || ""} ${anime.type || ""}`.toLowerCase();
+}
+
+function getAnimeInfo(anime){
+  return anime.episode || anime.quality || anime.genre || anime.category || "Shadow Anime Library";
+}
+
+function applyFilters(){
+  const keyword = animeSearch.value.toLowerCase().trim();
+  const filter = quickFilter.value;
+  const sort = sortAnime.value;
+
+  let list = allAnime.filter(anime => {
+    const text = getAnimeText(anime);
+    return text.includes(keyword) && (filter === "all" || text.includes(filter));
+  });
+
+  if(sort === "az") list.sort((a,b)=>getAnimeName(a).localeCompare(getAnimeName(b)));
+  if(sort === "za") list.sort((a,b)=>getAnimeName(b).localeCompare(getAnimeName(a)));
+  if(sort === "random") list.sort(()=>Math.random() - 0.5);
+
+  currentList = list;
+  page = 1;
+
+  renderAnime();
+  createPagination();
+  updateStats();
+}
+
+function renderAnime(){
+  const start = (page - 1) * perPage;
+  const pageItems = currentList.slice(start, start + perPage);
+
+  animeGrid.innerHTML = pageItems.map(anime => `
+    <div class="shadow-card" onclick="openDetails('${anime.id}')">
+      <img loading="lazy" src="${anime.image}" alt="${getAnimeName(anime)}">
+      <div class="shadow-info">
+        <h3>${getAnimeName(anime)}</h3>
+        <p>${anime.episode || anime.quality || ""}</p>
+        <a href="anime-details.html?id=${anime.id}" onclick="event.stopPropagation()">View Details</a>
+      </div>
+    </div>
+  `).join("");
+
+  emptyState.style.display = pageItems.length ? "none" : "block";
+  resultCount.innerText = `${currentList.length} anime found`;
+  currentPageCount.innerText = pageItems.length;
+}
+
+function openDetails(id){
+  if(id) window.location.href = `anime-details.html?id=${id}`;
+}
+
+function createPagination(){
+  const totalPages = Math.ceil(currentList.length / perPage);
+  pagination.innerHTML = "";
+
+  if(totalPages <= 1){
+    totalPagesCount.innerText = totalPages || 0;
+    pagination.innerHTML = `<a href="javascript:void(0)" onclick="loadMoreAnime()">Load More</a>`;
+    return;
+  }
+
+  const group = Math.floor((page - 1) / 3);
+  const startPage = group * 3 + 1;
+  const endPage = Math.min(startPage + 2, totalPages);
+
+  if(page > 1){
+    pagination.innerHTML += `<a href="javascript:void(0)" onclick="goPage(${page - 1})">Prev</a>`;
+  }
+
+  for(let i = startPage; i <= endPage; i++){
+    pagination.innerHTML += `
+      <a href="javascript:void(0)" onclick="goPage(${i})" class="${i === page ? "active-page" : ""}">
+        ${i}
+      </a>
+    `;
+  }
+
+  if(page < totalPages){
+    pagination.innerHTML += `<a href="javascript:void(0)" onclick="goPage(${page + 1})">Next</a>`;
+  }
+
+  pagination.innerHTML += `<a href="javascript:void(0)" onclick="loadMoreAnime()">Load More</a>`;
+  totalPagesCount.innerText = totalPages;
+}
+
+function goPage(num){
+  page = num;
+  renderAnime();
+  createPagination();
+  animeSection.scrollIntoView({behavior:"smooth"});
+}
+
+function updateStats(){
+  totalAnimeCount.innerText = allAnime.length;
+  totalPagesCount.innerText = Math.ceil(currentList.length / perPage) || 0;
+  genreCount.innerText = document.querySelectorAll("#genreChips button").length - 1;
+}
+
+function buildGenreChips(){
+  genreChips.innerHTML = `<button class="active" onclick="tagSearch('',this)">All</button>`;
+  const words = new Set();
+
+  allAnime.forEach(anime=>{
+    const text = `${anime.genre || ""} ${anime.category || ""} ${anime.type || ""}`.toLowerCase();
+    text.split(/[,/| ]+/).forEach(word=>{
+      if(word.length > 3 && words.size < 12) words.add(word);
+    });
+  });
+
+  ["action","adventure","fantasy","romance","comedy","drama"].forEach(tag=>words.add(tag));
+
+  words.forEach(word=>{
+    genreChips.innerHTML += `<button onclick="tagSearch('${word}',this)">${word}</button>`;
+  });
+}
+
+function tagSearch(text,btn){
+  animeSearch.value = text;
+  document.querySelectorAll("#genreChips button").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  applyFilters();
+}
+
+function renderSpotlight(){
+  if(!allAnime.length) return;
+  const anime = allAnime[Math.floor(Math.random() * allAnime.length)];
+  spotlightImg.src = anime.banner || anime.image;
+  spotlightTitle.innerText = getAnimeName(anime);
+  spotlightInfo.innerText = getAnimeInfo(anime);
+  spotlightLink.href = anime.link || "#";
+}
+
+function randomAnime(){
+  renderSpotlight();
+  document.querySelector(".hero-panel").scrollIntoView({behavior:"smooth"});
+}
+
+function shuffleAnime(){
+  sortAnime.value = "random";
+  applyFilters();
+}
+
+function renderFeatured(){
+  if(!allAnime.length) return;
+  featuredRow.style.display = "block";
+
+  featuredGrid.innerHTML = [...allAnime].sort(()=>Math.random() - 0.5).slice(0,6).map(anime=>`
+    <div class="mini-card" onclick="openAnime('${anime.link}')">
+      <img loading="lazy" src="${anime.image}" alt="${getAnimeName(anime)}">
+      <h3>${getAnimeName(anime)}</h3>
+    </div>
+  `).join("");
+}
+
+function renderLatest(){
+  if(!allAnime.length) return;
+  latestRow.style.display = "block";
+
+  latestGrid.innerHTML = [...allAnime].slice(-6).reverse().map(anime=>`
+    <div class="mini-card" onclick="openAnime('${anime.link}')">
+      <img loading="lazy" src="${anime.image}" alt="${getAnimeName(anime)}">
+      <h3>${getAnimeName(anime)}</h3>
+    </div>
+  `).join("");
+}
+
+function openAnime(link){
+  if(link) window.location.href = link;
+}
+
+function scrollToAnime(){
+  animeSection.scrollIntoView({behavior:"smooth"});
+}
+
+const moreKeywords = [
+  "d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",
+  "movie","season","hero","demon","king","girl","boy","action","romance","fantasy","adventure",
+  "isekai","comedy","dark","magic","world","life","battle","school","god","hunter","anime"
+];
+
+async function loadMoreAnime(){
+  const batch = moreKeywords.slice(keywordIndex, keywordIndex + 10);
+  keywordIndex += 10;
+  if(keywordIndex >= moreKeywords.length) keywordIndex = 0;
+
+  const requests = batch.map(keyword =>
+    fetch(`${API}/api/search?keyword=${encodeURIComponent(keyword)}`)
+      .then(res => res.json())
+      .catch(() => ({ data: [] }))
+  );
+
+  const responses = await Promise.all(requests);
+  let newAnime = [];
+
+  responses.forEach(json => newAnime.push(...(json.data || [])));
+
+  const mapped = newAnime.map(mapAnime);
+
+  allAnime = Array.from(
+    new Map([...allAnime, ...mapped].map(a => [a.id, a])).values()
+  );
+
+  currentList = [...allAnime];
+  applyFilters();
+}
+
+let searchTimer;
+
+animeSearch.addEventListener("input", () => {
+  clearTimeout(searchTimer);
+
+  searchTimer = setTimeout(async () => {
+
+    const q = animeSearch.value.trim();
+
+    if(q.length < 2){
+      applyFilters();
+      return;
+    }
+
+    animeGrid.innerHTML = `
+      <div style="padding:30px;color:#9fb4c9;">
+        Searching ${q}...
+      </div>
+    `;
+
+    emptyState.style.display = "none";
+
+    try{
+
+      const res = await fetch(
+        `${API}/api/search?keyword=${encodeURIComponent(q)}`
+      );
+
+      const json = await res.json();
+
+      console.log("SEARCH API RESPONSE:", json);
+
+      const raw =
+        json.data ||
+        json.results ||
+        json.anime ||
+        json.items ||
+        json.data?.results ||
+        [];
+
+      const mapped = raw.map(mapAnime);
+
+      currentList = mapped;
+
+      page = 1;
+
+      renderAnime();
+
+      createPagination();
+
+      resultCount.innerText =
+        `${mapped.length} anime found from API`;
+
+    }catch(err){
+
+      console.log("SEARCH ERROR:", err);
+
+      animeGrid.innerHTML = "";
+
+      emptyState.style.display = "block";
+
+      resultCount.innerText = "Search failed";
+    }
+
+  }, 500);
+
+});
+
+quickFilter.addEventListener("change", applyFilters);
+sortAnime.addEventListener("change", applyFilters);
+
+if(menuBtn){
+  menuBtn.addEventListener("click",()=>{
+    menu.classList.toggle("show");
+  });
+}
+
+window.addEventListener("scroll",()=>{
+  toTop.style.display = window.scrollY > 500 ? "block" : "none";
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shadow Profile</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="mobile.css">
+<script src="site-control.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  background:#020711;
+  color:#fff;
+  font-family:Poppins,sans-serif;
+  overflow-x:hidden;
+}
+
+.profile-hero{
+  min-height:430px;
+  padding:95px 5% 60px;
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:35px;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.profile-hero::before{
+  content:"";
+  position:absolute;
+  width:390px;
+  height:390px;
+  border-radius:50%;
+  background:#00c8ff;
+  filter:blur(110px);
+  opacity:.22;
+  left:4%;
+  top:18%;
+}
+
+.profile-hero::after{
+  content:"";
+  position:absolute;
+  width:330px;
+  height:330px;
+  border-radius:50%;
+  background:#8a2cff;
+  filter:blur(110px);
+  opacity:.18;
+  right:6%;
+  bottom:6%;
+}
+
+.profile-hero-content,
+.profile-level-card{
+  position:relative;
+  z-index:2;
+}
+
+.profile-tag{
+  display:inline-block;
+  padding:9px 16px;
+  border-radius:30px;
+  border:1px solid rgba(0,200,255,.45);
+  color:#00c8ff;
+  background:rgba(0,200,255,.08);
+  font-weight:800;
+  font-size:12px;
+  letter-spacing:1px;
+}
+
+.profile-hero h1{
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(42px,7vw,88px);
+  line-height:1.05;
+  margin:18px 0;
+  text-transform:uppercase;
+}
+
+.profile-hero h1 span{
+  color:#00c8ff;
+  text-shadow:0 0 25px #00c8ff;
+}
+
+.profile-hero p{
+  color:#a9c1d8;
+  line-height:1.8;
+  max-width:760px;
+  font-size:17px;
+}
+
+.profile-actions{
+  margin-top:25px;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.profile-level-card{
+  padding:26px;
+  border-radius:30px;
+  background:rgba(7,18,35,.76);
+  border:1px solid rgba(0,200,255,.25);
+  backdrop-filter:blur(18px);
+  box-shadow:0 0 40px rgba(0,200,255,.16);
+}
+
+.profile-level-card h2{
+  font-family:Orbitron,sans-serif;
+  margin:13px 0;
+}
+
+.level-bar{
+  width:100%;
+  height:12px;
+  border-radius:20px;
+  background:rgba(255,255,255,.08);
+  overflow:hidden;
+  margin:18px 0;
+}
+
+.level-fill{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,#00c8ff,#fff);
+  box-shadow:0 0 18px #00c8ff;
+  transition:.5s;
+}
+
+.profile-page{
+  width:92%;
+  max-width:1450px;
+  margin:0 auto 70px;
+  display:grid;
+  grid-template-columns:420px 1fr;
+  gap:26px;
+  align-items:start;
+}
+
+.profile-left,
+.profile-card-box{
+  background:rgba(7,18,35,.76);
+  border:1px solid rgba(0,200,255,.22);
+  backdrop-filter:blur(18px);
+  box-shadow:0 0 35px rgba(0,200,255,.12);
+  border-radius:30px;
+  overflow:hidden;
+}
+
+.profile-banner{
+  height:165px;
+  background:
+    linear-gradient(135deg,rgba(0,200,255,.2),rgba(138,44,255,.16)),
+    url("image/bg.jpg");
+  background-size:cover;
+  background-position:center;
+  position:relative;
+}
+
+.profile-banner::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom,transparent,rgba(3,7,18,.9));
+}
+
+.profile-avatar-box{
+  text-align:center;
+  margin-top:-65px;
+  position:relative;
+  z-index:2;
+}
+
+.profile-avatar-box img{
+  width:135px;
+  height:135px;
+  object-fit:cover;
+  border-radius:50%;
+  border:4px solid #00c8ff;
+  box-shadow:0 0 30px rgba(0,200,255,.45);
+  background:#07182c;
+}
+
+.change-avatar-btn{
+  display:inline-block;
+  margin-top:12px;
+  padding:10px 16px;
+  border-radius:30px;
+  background:rgba(0,200,255,.12);
+  border:1px solid rgba(0,200,255,.35);
+  color:#00c8ff;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.profile-user-info{
+  padding:24px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.profile-user-info input,
+.profile-user-info textarea{
+  width:100%;
+  padding:14px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  outline:none;
+  font-family:Poppins,sans-serif;
+}
+
+.profile-user-info textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+#profileEmail{
+  color:#9fb4c9;
+  text-align:center;
+}
+
+.profile-right{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+
+.profile-card-box{
+  padding:26px;
+}
+
+.profile-card-box h2{
+  font-family:Orbitron,sans-serif;
+  margin-bottom:18px;
+}
+
+.profile-stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+
+.profile-stat{
+  padding:20px;
+  border-radius:22px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.08);
+  text-align:center;
+}
+
+.profile-stat h1{
+  color:#00c8ff;
+  font-size:32px;
+}
+
+.profile-stat p{
+  color:#9fb4c9;
+}
+
+.profile-setting-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.profile-setting-btn,
+.logout-btn,
+#saveProfileBtn{
+  border:none;
+  border-radius:15px;
+  padding:14px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#fff;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(0,200,255,.22);
+  transition:.25s;
+}
+
+.profile-setting-btn:hover,
+#saveProfileBtn:hover{
+  background:#00c8ff;
+  color:#00111c;
+  box-shadow:0 0 24px rgba(0,200,255,.35);
+}
+
+.logout-btn{
+  background:rgba(255,76,106,.15);
+  border-color:rgba(255,76,106,.35);
+}
+
+.logout-btn:hover{
+  background:#ff4c6a;
+}
+
+.activity-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.activity-item{
+  padding:14px;
+  border-radius:16px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  color:#b8d8ff;
+}
+
+.badge-row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.profile-badge{
+  padding:10px 14px;
+  border-radius:30px;
+  background:rgba(0,200,255,.1);
+  border:1px solid rgba(0,200,255,.25);
+  color:#00c8ff;
+  font-weight:800;
+  font-size:13px;
+}
+
+.profile-badge.locked{
+  opacity:.45;
+  filter:grayscale(1);
+}
+
+.preference-row{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.preference-row select{
+  padding:14px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  outline:none;
+}
+
+.preference-row option{
+  color:#000;
+}
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:999;
+  padding:13px 18px;
+  border-radius:14px;
+  background:#07182c;
+  border:1px solid rgba(0,200,255,.3);
+  box-shadow:0 0 25px rgba(0,200,255,.25);
+  transform:translateY(90px);
+  opacity:0;
+  transition:.3s;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.light-mode{
+  background:#f4fbff;
+  color:#07182c;
+}
+
+.light-mode .profile-left,
+.light-mode .profile-card-box,
+.light-mode .profile-level-card{
+  background:rgba(255,255,255,.88);
+  color:#07182c;
+}
+
+@media(max-width:1050px){
+  .profile-hero,
+  .profile-page{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:760px){
+  .profile-stats,
+  .profile-setting-grid,
+  .preference-row{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">SHADOW ANIME</div>
+
+  <ul id="menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="Anime.html">Anime</a></li>
+    <li><a href="movies.html">Movies</a></li>
+    <li><a href="popular.html">Popular</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="policy.html">Policy</a></li>
+    <li><a href="watchlist.html">Watchlist</a></li>
+    <li><a class="active" href="profile.html">Profile</a></li>
+  </ul>
+
+  <div class="menu-btn" id="menuBtn">☰</div>
+</nav>
+
+<section class="profile-hero">
+  <div class="profile-hero-content">
+    <span class="profile-tag">👤 SHADOW USER CENTER</span>
+    <h1>Your <span>Profile</span></h1>
+    <p>
+      Manage your Shadow Anime identity, avatar, bio, watchlist stats,
+      continue-watching progress, community activity, badges and personal anime preferences.
+    </p>
+
+    <div class="profile-actions">
+      <a href="Anime.html" class="hero-btn primary-btn">Explore Anime</a>
+      <a href="watchlist.html" class="hero-btn secondary-btn">My Watchlist</a>
+    </div>
+  </div>
+
+  <div class="profile-level-card">
+    <span class="profile-tag">LEVEL SYSTEM</span>
+    <h2>Shadow Fan Level</h2>
+    <p style="color:#a9c1d8;line-height:1.7;">
+      Your level grows with watchlist saves, community posts and anime progress.
+    </p>
+
+    <div class="level-bar">
+      <div class="level-fill" id="levelFill"></div>
+    </div>
+
+    <p id="levelText" style="color:#9fb4c9;">Level 1 Shadow Fan</p>
+  </div>
+</section>
+
+<section class="profile-page">
+
+  <div class="profile-left">
+    <div class="profile-banner"></div>
+
+    <div class="profile-avatar-box">
+      <img src="image/default-user.png" id="profileAvatar" onerror="this.src='image/default.jpg'">
+
+      <label for="avatarInput" class="change-avatar-btn">Change Photo</label>
+      <input type="file" id="avatarInput" accept="image/*" hidden>
+    </div>
+
+    <div class="profile-user-info">
+      <input type="text" id="profileName" value="Shadow User">
+      <input type="text" id="profileEmailInput" placeholder="Email optional">
+      <p id="profileEmail">Local Profile Mode</p>
+      <textarea id="profileBio" placeholder="Write your anime bio..."></textarea>
+
+      <button id="saveProfileBtn">Save Profile</button>
+    </div>
+  </div>
+
+  <div class="profile-right">
+
+    <div class="profile-card-box">
+      <h2>Statistics</h2>
+
+      <div class="profile-stats">
+        <div class="profile-stat">
+          <h1 id="watchlistCount">0</h1>
+          <p>Watchlist</p>
+        </div>
+
+        <div class="profile-stat">
+          <h1 id="continueCount">0</h1>
+          <p>Continue</p>
+        </div>
+
+        <div class="profile-stat">
+          <h1 id="postCount">0</h1>
+          <p>Posts</p>
+        </div>
+
+        <div class="profile-stat">
+          <h1 id="replyCount">0</h1>
+          <p>Replies</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-card-box">
+      <h2>Badges</h2>
+
+      <div class="badge-row" id="badgeRow"></div>
+    </div>
+
+    <div class="profile-card-box">
+      <h2>Preferences</h2>
+
+      <div class="preference-row">
+        <select id="favGenre">
+          <option value="">Favorite Genre</option>
+          <option>Action</option>
+          <option>Adventure</option>
+          <option>Romance</option>
+          <option>Comedy</option>
+          <option>Fantasy</option>
+          <option>Dark Fantasy</option>
+        </select>
+
+        <select id="watchMode">
+          <option value="">Preferred Mode</option>
+          <option>Sub</option>
+          <option>Dub</option>
+          <option>Both</option>
+        </select>
+
+        <select id="themePref">
+          <option value="dark">Dark Shadow</option>
+          <option value="light">Light Mode</option>
+        </select>
+
+        <select id="cardPref">
+          <option value="premium">Premium Cards</option>
+          <option value="compact">Compact Cards</option>
+          <option value="large">Large Cards</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="profile-card-box">
+      <h2>Recent Activity</h2>
+      <div class="activity-list" id="activityList">
+        <div class="activity-item">No activity yet.</div>
+      </div>
+    </div>
+
+    <div class="profile-card-box">
+      <h2>Account Settings</h2>
+
+      <div class="profile-setting-grid">
+        <button class="profile-setting-btn" onclick="exportProfile()">Export Profile</button>
+        <button class="profile-setting-btn" onclick="avatarInput.click()">Change Avatar</button>
+        <button class="profile-setting-btn" onclick="toggleTheme()">Toggle Theme</button>
+        <button class="profile-setting-btn" onclick="clearContinueWatching()">Clear Continue</button>
+        <button class="profile-setting-btn" onclick="clearProfileData()">Clear Profile Data</button>
+        <button class="logout-btn" id="logoutBtn">Logout Local</button>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<div class="toast" id="toast">Saved</div>
+
+<footer>© 2026 Shadow Anime</footer>
+
+<script>
+const profileAvatar = document.getElementById("profileAvatar");
+const avatarInput = document.getElementById("avatarInput");
+const profileName = document.getElementById("profileName");
+const profileEmailInput = document.getElementById("profileEmailInput");
+const profileEmail = document.getElementById("profileEmail");
+const profileBio = document.getElementById("profileBio");
+
+function showToast(text){
+  toast.innerText = text;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 1800);
+}
+
+function getJSON(key, fallback = []){
+  try{
+    return JSON.parse(localStorage.getItem(key)) || fallback;
+  }catch{
+    return fallback;
+  }
+}
+
+function loadProfile(){
+  const savedProfile = getJSON("shadowProfile", {});
+
+  profileName.value = savedProfile.name || "Shadow User";
+  profileEmailInput.value = savedProfile.email || "";
+  profileEmail.innerText = savedProfile.email || "Local Profile Mode";
+  profileBio.value = savedProfile.bio || "";
+  if(savedProfile.avatar) profileAvatar.src = savedProfile.avatar;
+
+  favGenre.value = savedProfile.favGenre || "";
+  watchMode.value = savedProfile.watchMode || "";
+  themePref.value = savedProfile.themePref || "dark";
+  cardPref.value = savedProfile.cardPref || "premium";
+
+  if(themePref.value === "light"){
+    document.body.classList.add("light-mode");
+  }
+
+  updateStats();
+  updateBadges();
+  updateActivity();
+}
+
+function saveProfile(){
+  const profile = {
+    name: profileName.value.trim() || "Shadow User",
+    email: profileEmailInput.value.trim(),
+    bio: profileBio.value.trim(),
+    avatar: profileAvatar.src,
+    favGenre: favGenre.value,
+    watchMode: watchMode.value,
+    themePref: themePref.value,
+    cardPref: cardPref.value,
+    updatedAt: new Date().toLocaleString()
+  };
+
+  localStorage.setItem("shadowProfile", JSON.stringify(profile));
+  profileEmail.innerText = profile.email || "Local Profile Mode";
+  showToast("Profile saved");
+  updateStats();
+  updateBadges();
+  updateActivity();
+}
+
+avatarInput.addEventListener("change", () => {
+  const file = avatarInput.files[0];
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    profileAvatar.src = reader.result;
+    saveProfile();
+  };
+
+  reader.readAsDataURL(file);
+});
+
+saveProfileBtn.addEventListener("click", saveProfile);
+
+[favGenre, watchMode, themePref, cardPref].forEach(el => {
+  el.addEventListener("change", () => {
+    if(themePref.value === "light"){
+      document.body.classList.add("light-mode");
+    }else{
+      document.body.classList.remove("light-mode");
+    }
+    saveProfile();
+  });
+});
+
+function getContinueItems(){
+  const items = [];
+
+  Object.keys(localStorage).forEach(key => {
+    if(key.startsWith("continueWatching_")){
+      try{
+        items.push(JSON.parse(localStorage.getItem(key)));
+      }catch{}
+    }
+  });
+
+  return items;
+}
+
+function updateStats(){
+  const watchlist = getJSON("watchlist", getJSON("shadowWatchlist", []));
+  const continueItems = getContinueItems();
+  const posts = getJSON("communityPostsUltra", []);
+
+  const profile = getJSON("shadowProfile", {});
+  const name = profile.name || profileName.value || "Shadow User";
+
+  const ownPosts = posts.filter(p => String(p.name || "").toLowerCase() === String(name).toLowerCase());
+  const replies = posts.reduce((sum,p) => sum + (p.replies || []).filter(r => String(r.name || "").toLowerCase() === String(name).toLowerCase()).length,0);
+
+  watchlistCount.innerText = watchlist.length;
+  continueCount.innerText = continueItems.length;
+  postCount.innerText = ownPosts.length;
+  replyCount.innerText = replies;
+
+  const points = watchlist.length * 3 + continueItems.length * 2 + ownPosts.length * 5 + replies;
+  const level = Math.max(1, Math.floor(points / 10) + 1);
+
+  levelText.innerText = `Level ${level} Shadow Fan · ${points} XP`;
+  levelFill.style.width = Math.min(100, level * 12) + "%";
+}
+
+function updateBadges(){
+  const watchlist = getJSON("watchlist", getJSON("shadowWatchlist", []));
+  const continueItems = getContinueItems();
+  const posts = getJSON("communityPostsUltra", []);
+  const profile = getJSON("shadowProfile", {});
+  const name = profile.name || profileName.value || "Shadow User";
+  const ownPosts = posts.filter(p => String(p.name || "").toLowerCase() === String(name).toLowerCase());
+
+  const badges = [
+    {text:"⚡ New Fan", on:true},
+    {text:"💙 Watchlist User", on:watchlist.length >= 1},
+    {text:"🔥 Anime Collector", on:watchlist.length >= 5},
+    {text:"🎬 Continue Watcher", on:continueItems.length >= 1},
+    {text:"🌀 Community Member", on:ownPosts.length >= 1},
+    {text:"👑 Shadow Elite", on:watchlist.length >= 10 || ownPosts.length >= 5}
+  ];
+
+  badgeRow.innerHTML = badges.map(b => `
+    <span class="profile-badge ${b.on ? "" : "locked"}">${b.text}</span>
+  `).join("");
+}
+
+function updateActivity(){
+  const watchlist = getJSON("watchlist", getJSON("shadowWatchlist", []));
+  const continueItems = getContinueItems();
+
+  const activity = [];
+
+  watchlist.slice(-5).reverse().forEach(item => {
+    activity.push(`Added <b>${item.title || item.name || "Anime"}</b> to watchlist.`);
+  });
+
+  continueItems.slice(-5).reverse().forEach(item => {
+    activity.push(`Watched <b>${item.title || "Anime"}</b> Episode ${item.episode || "?"}.`);
+  });
+
+  activityList.innerHTML = activity.length
+    ? activity.slice(0,8).map(text => `<div class="activity-item">${text}</div>`).join("")
+    : `<div class="activity-item">No activity yet. Add anime to your watchlist.</div>`;
+}
+
+function toggleTheme(){
+  document.body.classList.toggle("light-mode");
+  themePref.value = document.body.classList.contains("light-mode") ? "light" : "dark";
+  saveProfile();
+  showToast("Theme updated");
+}
+
+function clearProfileData(){
+  if(confirm("Clear profile data?")){
+    localStorage.removeItem("shadowProfile");
+    showToast("Profile data cleared");
+    setTimeout(() => location.reload(), 800);
+  }
+}
+
+function clearContinueWatching(){
+  if(confirm("Clear continue watching progress?")){
+    Object.keys(localStorage).forEach(key => {
+      if(key.startsWith("continueWatching_")){
+        localStorage.removeItem(key);
+      }
+    });
+
+    updateStats();
+    updateBadges();
+    updateActivity();
+    showToast("Continue watching cleared");
+  }
+}
+
+function exportProfile(){
+  const data = {
+    profile:getJSON("shadowProfile", {}),
+    watchlist:getJSON("watchlist", []),
+    continueWatching:getContinueItems(),
+    exportedAt:new Date().toLocaleString()
+  };
+
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "shadow-profile.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+
+  showToast("Profile exported");
+}
+
+logoutBtn.addEventListener("click", () => {
+  showToast("Local profile has no login session");
+});
+
+const menuBtn = document.getElementById("menuBtn");
+const menu = document.getElementById("menu");
+
+if(menuBtn && menu){
+  menuBtn.addEventListener("click", () => {
+    menu.classList.toggle("show");
+  });
+}
+
+loadProfile();
+</script>
+
+<script src="script.js"></script>
+<script src="smart-search.js"></script>
+
+</body>
+</html>

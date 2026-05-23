@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Watch - Shadow Anime</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<style>
+body{
+  margin:0;
+  background:#020711;
+  color:#fff;
+  font-family:Poppins,sans-serif;
+}
+
+.watch-page{
+  padding:105px 5% 45px;
+  min-height:100vh;
+}
+
+.watch-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  margin-bottom:25px;
+}
+
+.details-tag{
+  color:#00c8ff;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.watch-header h1{
+  margin:8px 0;
+  font-size:clamp(26px,4vw,48px);
+}
+
+#watchMeta{
+  color:#9fb4c9;
+}
+
+.watch-layout{
+  display:grid;
+  grid-template-columns:1fr 360px;
+  gap:25px;
+}
+
+.player-card{
+  background:rgba(7,18,35,.8);
+  border:1px solid rgba(0,200,255,.25);
+  border-radius:26px;
+  overflow:hidden;
+  box-shadow:0 0 35px rgba(0,200,255,.15);
+}
+
+.video-box{
+  background:#000;
+  min-height:520px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+#videoPlayer{
+  width:100%;
+  height:520px;
+  background:#000;
+}
+
+.player-status{
+  text-align:center;
+  color:#9fb4c9;
+  padding:30px;
+}
+
+.now-badge{
+  position:absolute;
+  top:15px;
+  left:15px;
+  z-index:20;
+  padding:8px 13px;
+  border-radius:30px;
+  background:rgba(0,0,0,.55);
+  border:1px solid rgba(0,200,255,.35);
+  color:#00c8ff;
+  font-weight:900;
+  font-size:12px;
+}
+
+.server-row,
+.advanced-player-bar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  padding:15px;
+  border-top:1px solid rgba(0,200,255,.15);
+}
+
+.server-btn,
+.watch-controls button,
+.back-btn,
+.player-extra-buttons button{
+  border:none;
+  padding:11px 15px;
+  border-radius:14px;
+  background:rgba(255,255,255,.08);
+  color:white;
+  cursor:pointer;
+  font-weight:800;
+  border:1px solid rgba(0,200,255,.22);
+}
+
+.server-btn.active,
+.server-btn:hover,
+.watch-controls button:hover,
+.back-btn:hover,
+.player-extra-buttons button:hover{
+  background:#00c8ff;
+  color:#00111c;
+}
+
+.advanced-player-bar{
+  justify-content:space-between;
+  background:rgba(255,255,255,.03);
+}
+
+.player-selects,
+.player-extra-buttons{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.player-selects select{
+  background:#07182c;
+  color:#fff;
+  border:1px solid rgba(0,200,255,.25);
+  border-radius:12px;
+  padding:11px 14px;
+  outline:none;
+  font-weight:800;
+}
+
+.episode-side{
+  background:rgba(7,18,35,.82);
+  border:1px solid rgba(0,200,255,.25);
+  border-radius:26px;
+  padding:18px;
+  box-shadow:0 0 35px rgba(0,200,255,.12);
+}
+
+.episode-search{
+  width:100%;
+  padding:12px;
+  border-radius:14px;
+  border:1px solid rgba(0,200,255,.28);
+  background:#07182c;
+  color:white;
+  outline:none;
+  margin-bottom:14px;
+}
+
+#watchEpisodeList{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  max-height:510px;
+  overflow:auto;
+}
+
+.episode-btn{
+  padding:10px;
+  border-radius:13px;
+  background:rgba(255,255,255,.06);
+  color:white;
+  border:1px solid rgba(0,200,255,.18);
+  cursor:pointer;
+  font-weight:700;
+}
+
+.episode-btn.active,
+.episode-btn:hover{
+  background:#00c8ff;
+  color:#00111c;
+}
+
+.watch-controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:18px;
+}
+
+.info-panel{
+  margin-top:25px;
+  padding:22px;
+  border-radius:24px;
+  background:rgba(7,18,35,.75);
+  border:1px solid rgba(0,200,255,.2);
+}
+
+.info-panel p{
+  color:#b7c7d8;
+  line-height:1.7;
+}
+
+.theater-mode nav,
+.theater-mode footer,
+.theater-mode .episode-side,
+.theater-mode .info-panel{
+  display:none;
+}
+
+.theater-mode .watch-layout{
+  grid-template-columns:1fr;
+}
+
+.theater-mode .watch-page{
+  padding:20px;
+}
+
+.theater-mode #videoPlayer,
+.theater-mode .video-box{
+  height:82vh!important;
+}
+
+@media(max-width:950px){
+  .watch-layout{grid-template-columns:1fr}
+  .video-box,#videoPlayer{height:310px!important;min-height:310px}
+  #watchEpisodeList{grid-template-columns:repeat(4,1fr)}
+}
+
+@media(max-width:520px){
+  #watchEpisodeList{grid-template-columns:repeat(3,1fr)}
+  .watch-header{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">SHADOW ANIME</div>
+
+  <ul id="menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="Anime.html">Anime</a></li>
+     <li><a href="movies.html">Movies</a></li>
+    <li><a href="popular.html">Popular</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="watchlist.html">Watchlist</a></li>
+  </ul>
+
+  <div class="menu-btn" id="menuBtn">☰</div>
+</nav>
+
+<section class="watch-page">
+
+  <div class="watch-header">
+    <div>
+      <span class="details-tag">NOW WATCHING</span>
+      <h1 id="watchTitle">Loading Anime...</h1>
+      <p id="watchMeta">Loading episode...</p>
+    </div>
+
+    <button class="back-btn" onclick="goBackDetails()">Back To Details</button>
+  </div>
+
+  <div class="watch-layout">
+
+    <div>
+      <div class="player-card">
+
+        <div class="video-box" id="playerBox">
+          <div class="player-status">Loading player...</div>
+        </div>
+
+        <div class="server-row" id="serverRow"></div>
+
+        <div class="advanced-player-bar">
+
+          <div class="player-selects">
+            <select id="qualitySelect">
+              <option value="auto">Auto Quality</option>
+            </select>
+
+            <select id="speedControl">
+              <option value="0.5">0.5x</option>
+              <option value="1" selected>1x</option>
+              <option value="1.25">1.25x</option>
+              <option value="1.5">1.5x</option>
+              <option value="2">2x</option>
+            </select>
+          </div>
+
+          <div class="player-extra-buttons">
+            <button onclick="toggleFullscreen()">Fullscreen</button>
+            <button onclick="togglePIP()">Mini Player</button>
+            <button onclick="saveContinueWatching(true)">Save Progress</button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="watch-controls">
+        <button id="prevWatchBtn">Previous Episode</button>
+        <button id="nextWatchBtn">Next Episode</button>
+        <button onclick="skipIntro()">Skip Intro</button>
+        <button onclick="toggleTheater()">Theater Mode</button>
+        <button onclick="addWatchlist()">Add Watchlist</button>
+      </div>
+
+      <div class="info-panel">
+        <h2>Anime Info</h2>
+        <p id="animeDescription">Loading anime description...</p>
+      </div>
+    </div>
+
+    <div class="episode-side">
+      <h2>Episodes</h2>
+      <input id="watchEpisodeSearch" class="episode-search" placeholder="Search episode...">
+      <div id="watchEpisodeList"></div>
+    </div>
+
+  </div>
+
+</section>
+
+<footer>© 2026 Shadow Anime</footer>
+
+<script>
+const API = "https://anikoto-api-nine.vercel.app";
+const PROXY = "https://nameless-dust-3ee3.shadowanimexyz.workers.dev/proxy?url=";
+
+const urlParams = new URLSearchParams(location.search);
+const animeId = urlParams.get("id");
+const startEpisode = urlParams.get("ep");
+
+let animeInfo = {};
+let episodes = [];
+let currentIndex = 0;
+let currentType = "dub";
+let currentServer = "hd-1";
+let hlsInstance = null;
+let currentLevels = [];
+
+async function apiGet(url){
+  const res = await fetch(url);
+  if(!res.ok) throw new Error("API Error: " + res.status);
+  return await res.json();
+}
+
+function cleanText(text){
+  return String(text || "").replace(/<[^>]*>/g,"").replace(/\s+/g," ").trim();
+}
+
+function getEpisodeNumber(ep, fallbackIndex){
+  return Number(
+    ep?.num ??
+    ep?.number ??
+    ep?.episode ??
+    ep?.episodeNumber ??
+    ep?.ep ??
+    ep?.id ??
+    fallbackIndex + 1
+  );
+}
+
+function normalizeEpisodes(rawEpisodes){
+  if(!Array.isArray(rawEpisodes)) return [];
+
+  return rawEpisodes.map((ep, index) => {
+    const num = getEpisodeNumber(ep, index);
+
+    return {
+      ...ep,
+      num,
+      slug: ep?.slug || ep?.id || num,
+      title: ep?.title || ep?.name || `Episode ${num}`
+    };
+  }).filter(ep => ep.num);
+}
+
+async function loadWatchPage(){
+  try{
+    if(!animeId){
+      playerBox.innerHTML = `<div class="player-status">Anime ID not found. Open like: watch.html?id=anime-id</div>`;
+      watchTitle.innerText = "Anime not found";
+      return;
+    }
+
+    animeInfo = { title: animeId };
+    watchTitle.innerText = animeId;
+    animeDescription.innerText = "Loading anime episodes...";
+    watchMeta.innerText = "Loading episodes...";
+
+    try{
+      const infoJson = await apiGet(`${API}/api/info?id=${encodeURIComponent(animeId)}`);
+      animeInfo = infoJson.data || infoJson || animeInfo;
+
+      watchTitle.innerText = animeInfo.title || animeInfo.name || animeId;
+      animeDescription.innerText = cleanText(animeInfo.description || animeInfo.desc) || "No description available.";
+    }catch(infoError){
+      console.warn("INFO API FAILED:", infoError);
+      animeDescription.innerText = "Anime info not available, but player can still work.";
+    }
+
+    const epJson = await apiGet(`${API}/api/episodes/${encodeURIComponent(animeId)}`);
+    episodes = normalizeEpisodes(epJson.data || epJson.episodes || epJson.results || []);
+
+    if(!episodes.length){
+      playerBox.innerHTML = `<div class="player-status">No episodes found for this anime ID.</div>`;
+      watchMeta.innerText = "No episodes available.";
+      watchEpisodeList.innerHTML = "";
+      return;
+    }
+
+    renderEpisodes();
+
+    let startIndex = 0;
+
+    if(startEpisode){
+      const found = episodes.findIndex(ep =>
+        String(ep.num) === String(startEpisode) ||
+        String(ep.slug) === String(startEpisode)
+      );
+
+      if(found !== -1) startIndex = found;
+    }
+
+    await loadEpisode(startIndex);
+
+  }catch(error){
+    console.error("WATCH PAGE ERROR:", error);
+    playerBox.innerHTML = `<div class="player-status">Failed to load episodes. Check anime id or API.</div>`;
+    watchMeta.innerText = "Something went wrong.";
+  }
+}
+
+function renderEpisodes(list = episodes){
+  if(!list.length){
+    watchEpisodeList.innerHTML = `<div class="player-status">No episodes</div>`;
+    return;
+  }
+
+  watchEpisodeList.innerHTML = list.map(ep => {
+    const realIndex = episodes.findIndex(x => String(x.num) === String(ep.num));
+
+    return `
+      <button class="episode-btn ${realIndex === currentIndex ? "active" : ""}"
+        onclick="loadEpisode(${realIndex})"
+        title="${ep.title || "Episode " + ep.num}">
+        EP ${ep.num}
+      </button>
+    `;
+  }).join("");
+}
+
+async function loadEpisode(index){
+  if(index < 0 || index >= episodes.length) return;
+
+  currentIndex = index;
+
+  const ep = episodes[index];
+
+  watchTitle.innerText = animeInfo.title || animeInfo.name || animeId;
+  watchMeta.innerText = `Episode ${ep.num}${ep.title ? " • " + ep.title : ""}`;
+
+  history.replaceState(null, "", `watch.html?id=${encodeURIComponent(animeId)}&ep=${ep.num}`);
+  renderEpisodes();
+
+  serverRow.innerHTML = `
+    <button class="server-btn ${currentType === "dub" ? "active" : ""}" onclick="playStream('hd-1','dub', this)">
+      DUB • HD-1
+    </button>
+
+    <button class="server-btn ${currentType === "sub" ? "active" : ""}" onclick="playStream('hd-1','sub', this)">
+      SUB • HD-1
+    </button>
+
+    <button class="server-btn" onclick="playStream('hd-2','dub', this)">
+      DUB • HD-2
+    </button>
+
+    <button class="server-btn" onclick="playStream('hd-2','sub', this)">
+      SUB • HD-2
+    </button>
+  `;
+
+  await playStream(currentServer, currentType, document.querySelector(".server-btn.active"));
+}
+
+function extractVideoUrl(streamJson){
+  return (
+    streamJson?.data?.m3u8 ||
+    streamJson?.data?.url ||
+    streamJson?.data?.stream ||
+    streamJson?.data?.link ||
+    streamJson?.m3u8 ||
+    streamJson?.url ||
+    streamJson?.stream ||
+    streamJson?.link ||
+    null
+  );
+}
+
+async function playStream(serverName = "hd-1", type = "dub", btn = null){
+  try{
+    currentServer = serverName;
+    currentType = type;
+
+    document.querySelectorAll(".server-btn").forEach(b => b.classList.remove("active"));
+    if(btn) btn.classList.add("active");
+
+    const ep = episodes[currentIndex];
+    const episodeNumber = ep?.num || 1;
+
+    playerBox.innerHTML = `<div class="player-status">Loading Episode ${episodeNumber}...</div>`;
+    qualitySelect.innerHTML = `<option value="auto">Auto Quality</option>`;
+
+    const streamUrl = `${API}/api/stream?id=${encodeURIComponent(animeId)}&ep=${encodeURIComponent(episodeNumber)}&server=${encodeURIComponent(serverName)}&type=${encodeURIComponent(type)}`;
+    const streamJson = await apiGet(streamUrl);
+
+    console.log("STREAM API URL:", streamUrl);
+    console.log("STREAM RESPONSE:", streamJson);
+
+    const videoUrl = extractVideoUrl(streamJson);
+
+    if(!videoUrl){
+      playerBox.innerHTML = `<div class="player-status">Video link not found for EP ${episodeNumber}. Try SUB/DUB or another server.</div>`;
+      return;
+    }
+
+    if(hlsInstance){
+      hlsInstance.destroy();
+      hlsInstance = null;
+    }
+
+    playerBox.innerHTML = `
+      <span class="now-badge">${type.toUpperCase()} • EP ${episodeNumber}</span>
+      <video id="videoPlayer" controls autoplay playsinline muted></video>
+    `;
+
+    const video = document.getElementById("videoPlayer");
+    const proxyUrl = `${PROXY}${encodeURIComponent(videoUrl)}`;
+
+    speedControl.onchange = () => {
+      video.playbackRate = Number(speedControl.value);
+    };
+
+    video.playbackRate = Number(speedControl.value || 1);
+
+    setupProgressSave(video, episodeNumber);
+    setupAutoNext(video);
+    setupKeyboardShortcuts(video);
+
+    const saved = getSavedProgress();
+
+    if(saved && String(saved.episode) === String(episodeNumber)){
+      video.addEventListener("loadedmetadata", () => {
+        if(saved.time > 30 && saved.time < video.duration - 20){
+          video.currentTime = saved.time;
+        }
+      });
+    }
+
+    if(window.Hls && Hls.isSupported()){
+      hlsInstance = new Hls({
+        enableWorker:true,
+        lowLatencyMode:true
+      });
+
+      hlsInstance.loadSource(proxyUrl);
+      hlsInstance.attachMedia(video);
+
+      hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
+        setupQualitySelector();
+        video.play().catch(()=>{});
+      });
+
+      hlsInstance.on(Hls.Events.ERROR, (event, data) => {
+        console.log("HLS ERROR:", data);
+
+        if(data.fatal){
+          playerBox.insertAdjacentHTML(
+            "beforeend",
+            `<div class="player-status">Playback error. Try another episode, server, SUB, or DUB.</div>`
+          );
+        }
+      });
+
+    }else{
+      video.src = proxyUrl;
+      video.play().catch(()=>{});
+    }
+
+  }catch(error){
+    console.error("STREAM FAILED REAL ERROR:", error);
+    playerBox.innerHTML = `<div class="player-status">Stream failed for this episode. Try another server or SUB/DUB.</div>`;
+  }
+}
+
+function setupQualitySelector(){
+  if(!hlsInstance) return;
+
+  currentLevels = hlsInstance.levels || [];
+
+  qualitySelect.innerHTML = `<option value="auto">Auto Quality</option>`;
+
+  currentLevels.forEach((level, index) => {
+    const height = level.height || "HD";
+    qualitySelect.innerHTML += `<option value="${index}">${height}p</option>`;
+  });
+
+  qualitySelect.onchange = () => {
+    if(!hlsInstance) return;
+
+    if(qualitySelect.value === "auto"){
+      hlsInstance.currentLevel = -1;
+    }else{
+      hlsInstance.currentLevel = Number(qualitySelect.value);
+    }
+  };
+}
+
+function getSavedProgress(){
+  try{
+    return JSON.parse(localStorage.getItem("continueWatching_" + animeId));
+  }catch{
+    return null;
+  }
+}
+
+function setupProgressSave(video, episodeNumber){
+  video.addEventListener("timeupdate", () => {
+    if(!video.duration || video.currentTime < 5) return;
+
+    const continueData = {
+      id: animeId,
+      title: animeInfo.title || animeInfo.name || animeId,
+      episode: episodeNumber,
+      time: video.currentTime,
+      duration: video.duration,
+      image: animeInfo.poster || animeInfo.image || ""
+    };
+
+    localStorage.setItem("continueWatching_" + animeId, JSON.stringify(continueData));
+  });
+}
+
+function setupAutoNext(video){
+  video.addEventListener("ended", () => {
+    if(currentIndex < episodes.length - 1){
+      loadEpisode(currentIndex + 1);
+    }
+  });
+}
+
+function setupKeyboardShortcuts(video){
+  document.onkeydown = e => {
+    const tag = document.activeElement.tagName.toLowerCase();
+
+    if(tag === "input" || tag === "textarea") return;
+
+    if(e.code === "Space"){
+      e.preventDefault();
+      video.paused ? video.play() : video.pause();
+    }
+
+    if(e.code === "ArrowRight"){
+      video.currentTime += 10;
+    }
+
+    if(e.code === "ArrowLeft"){
+      video.currentTime -= 10;
+    }
+
+    if(e.key.toLowerCase() === "f"){
+      toggleFullscreen();
+    }
+
+    if(e.key.toLowerCase() === "t"){
+      toggleTheater();
+    }
+  };
+}
+
+watchEpisodeSearch.addEventListener("input", () => {
+  const q = watchEpisodeSearch.value.toLowerCase().trim();
+
+  const filtered = episodes.filter(ep =>
+    String(ep.num).includes(q) ||
+    String(ep.title || "").toLowerCase().includes(q)
+  );
+
+  renderEpisodes(filtered);
+});
+
+prevWatchBtn.onclick = () => {
+  if(currentIndex > 0) loadEpisode(currentIndex - 1);
+};
+
+nextWatchBtn.onclick = () => {
+  if(currentIndex < episodes.length - 1) loadEpisode(currentIndex + 1);
+};
+
+function skipIntro(){
+  const video = document.getElementById("videoPlayer");
+  if(video) video.currentTime += 90;
+}
+
+function toggleTheater(){
+  document.body.classList.toggle("theater-mode");
+}
+
+function toggleFullscreen(){
+  const video = document.getElementById("videoPlayer");
+  if(!video) return;
+
+  if(document.fullscreenElement){
+    document.exitFullscreen();
+  }else{
+    video.requestFullscreen();
+  }
+}
+
+async function togglePIP(){
+  const video = document.getElementById("videoPlayer");
+  if(!video) return;
+
+  try{
+    if(document.pictureInPictureElement){
+      await document.exitPictureInPicture();
+    }else if(document.pictureInPictureEnabled){
+      await video.requestPictureInPicture();
+    }
+  }catch(err){
+    console.log("PIP failed:", err);
+  }
+}
+
+function saveContinueWatching(showAlert = false){
+  const video = document.getElementById("videoPlayer");
+  if(!video) return;
+
+  const ep = episodes[currentIndex] || {};
+
+  const continueData = {
+    id: animeId,
+    title: animeInfo.title || animeInfo.name || animeId,
+    episode: ep.num || 1,
+    time: video.currentTime || 0,
+    duration: video.duration || 0,
+    image: animeInfo.poster || animeInfo.image || ""
+  };
+
+  localStorage.setItem("continueWatching_" + animeId, JSON.stringify(continueData));
+
+  if(showAlert) alert("Progress Saved");
+}
+
+function addWatchlist(){
+  const list = JSON.parse(localStorage.getItem("watchlist")) || [];
+  const ep = episodes[currentIndex] || {};
+
+  const item = {
+    id: animeId,
+    title: animeInfo.title || animeInfo.name || animeId,
+    image: animeInfo.poster || animeInfo.image || "",
+    episode: ep.num || 1,
+    link: `watch.html?id=${animeId}&ep=${ep.num || 1}`
+  };
+
+  const filtered = list.filter(x => x.id !== animeId);
+  filtered.unshift(item);
+
+  localStorage.setItem("watchlist", JSON.stringify(filtered.slice(0,30)));
+  alert("Added to Watchlist");
+}
+
+function goBackDetails(){
+  location.href = `anime-details.html?id=${animeId}`;
+}
+
+const menuBtn = document.getElementById("menuBtn");
+const menu = document.getElementById("menu");
+
+if(menuBtn && menu){
+  menuBtn.onclick = () => menu.classList.toggle("show");
+}
+
+loadWatchPage();
+</script>
+
+</body>
+</html>

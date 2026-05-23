@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shadow Admin - Community Manager</title>
+
+<link rel="stylesheet" href="admin.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:radial-gradient(circle at top,#08234a,#030712 55%,#01030a);
+  color:white;
+  font-family:Poppins,sans-serif;
+  display:flex;
+}
+
+.sidebar{
+  width:260px;
+  min-height:100vh;
+  background:rgba(3,10,24,.94);
+  border-right:1px solid rgba(0,200,255,.22);
+  box-shadow:0 0 35px rgba(0,200,255,.12);
+  position:fixed;
+  left:0;
+  top:0;
+  overflow:auto;
+}
+
+.sidebar h2{
+  text-align:center;
+  padding:30px 10px;
+  color:#00c8ff;
+  font-family:Orbitron,sans-serif;
+  letter-spacing:2px;
+  text-shadow:0 0 20px #00c8ff;
+}
+
+.sidebar a{
+  display:block;
+  margin:8px 14px;
+  padding:14px 16px;
+  border-radius:14px;
+  text-decoration:none;
+  color:#d7e7ff;
+  transition:.25s;
+  font-weight:600;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+  background:linear-gradient(135deg,#00c8ff,#ffffff);
+  color:#00111c;
+  font-weight:900;
+}
+
+.main{
+  margin-left:260px;
+  width:calc(100% - 260px);
+  padding:30px;
+}
+
+.community-hero{
+  padding:35px;
+  border-radius:30px;
+  background:linear-gradient(135deg,rgba(0,200,255,.16),rgba(138,44,255,.10));
+  border:1px solid rgba(0,200,255,.24);
+  box-shadow:0 0 45px rgba(0,200,255,.15);
+  margin-bottom:25px;
+}
+
+.community-hero h1{
+  margin:0;
+  font-size:42px;
+  font-family:Orbitron,sans-serif;
+  text-shadow:0 0 20px #00c8ff;
+}
+
+.community-hero p{
+  color:#9fb4c9;
+  margin-top:8px;
+}
+
+.top-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:22px;
+}
+
+.admin-btn{
+  border:none;
+  padding:13px 20px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#00c8ff,#ffffff);
+  color:#00111c;
+  font-weight:900;
+  cursor:pointer;
+  transition:.25s;
+  box-shadow:0 0 25px rgba(0,200,255,.35);
+}
+
+.admin-btn:hover{
+  transform:translateY(-3px);
+}
+
+.admin-btn.red{
+  background:linear-gradient(135deg,#ff3d6e,#ff7b9c);
+  color:white;
+}
+
+.admin-btn.dark{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(0,200,255,.2);
+  color:white;
+}
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:18px;
+  margin-bottom:25px;
+}
+
+.stat-card{
+  padding:22px;
+  border-radius:24px;
+  background:rgba(7,18,35,.82);
+  border:1px solid rgba(0,200,255,.18);
+  box-shadow:0 0 30px rgba(0,200,255,.10);
+}
+
+.stat-card h2{
+  margin:0;
+  font-size:36px;
+  color:#00c8ff;
+}
+
+.stat-card p{
+  color:#9fb4c9;
+  margin-top:8px;
+}
+
+.panel{
+  padding:25px;
+  border-radius:28px;
+  background:rgba(7,18,35,.82);
+  border:1px solid rgba(0,200,255,.18);
+  box-shadow:0 0 35px rgba(0,200,255,.10);
+  margin-bottom:25px;
+}
+
+.panel h2{
+  margin-top:0;
+  font-family:Orbitron,sans-serif;
+}
+
+.community-tools{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+
+.community-tools input,
+.community-tools select,
+textarea{
+  padding:14px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.06);
+  color:white;
+  outline:none;
+  min-width:220px;
+  font-family:Poppins,sans-serif;
+}
+
+.community-tools option{
+  color:black;
+}
+
+.community-post{
+  padding:18px;
+  border-radius:22px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  margin-bottom:15px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:18px;
+}
+
+.community-post.pinned{
+  border-color:rgba(255,211,105,.5);
+  box-shadow:0 0 25px rgba(255,211,105,.12);
+}
+
+.community-post.reported{
+  border-color:rgba(255,76,106,.45);
+  box-shadow:0 0 25px rgba(255,76,106,.12);
+}
+
+.post-left h3{
+  margin:0 0 10px;
+}
+
+.post-left p{
+  color:#c8d8ef;
+  line-height:1.7;
+  white-space:pre-wrap;
+}
+
+.post-meta{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+
+.meta-tag{
+  padding:6px 10px;
+  border-radius:20px;
+  background:rgba(0,200,255,.08);
+  border:1px solid rgba(0,200,255,.25);
+  color:#00c8ff;
+  font-size:11px;
+  font-weight:800;
+}
+
+.meta-tag.red{
+  color:#ff4c6a;
+  border-color:rgba(255,76,106,.3);
+  background:rgba(255,76,106,.08);
+}
+
+.meta-tag.yellow{
+  color:#ffd369;
+  border-color:rgba(255,211,105,.3);
+  background:rgba(255,211,105,.08);
+}
+
+.meta-tag.green{
+  color:#00ffb4;
+  border-color:rgba(0,255,180,.3);
+  background:rgba(0,255,180,.08);
+}
+
+.post-actions{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.small-btn{
+  border:none;
+  padding:10px 14px;
+  border-radius:14px;
+  cursor:pointer;
+  font-weight:800;
+  background:rgba(255,255,255,.08);
+  color:white;
+  border:1px solid rgba(0,200,255,.18);
+}
+
+.small-btn.delete{
+  background:rgba(255,76,106,.12);
+  border-color:rgba(255,76,106,.28);
+}
+
+.small-btn:hover{
+  border-color:#00c8ff;
+}
+
+.poll-card{
+  padding:18px;
+  border-radius:22px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  margin-bottom:15px;
+}
+
+.poll-option{
+  margin-top:10px;
+  padding:12px;
+  border-radius:14px;
+  background:rgba(0,200,255,.08);
+  display:flex;
+  justify-content:space-between;
+  color:#c8eaff;
+}
+
+.edit-box{
+  margin-top:14px;
+  display:none;
+  flex-direction:column;
+  gap:10px;
+}
+
+.edit-box.show{
+  display:flex;
+}
+
+.edit-box input,
+.edit-box textarea{
+  width:100%;
+  min-width:100%;
+}
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  padding:14px 18px;
+  border-radius:16px;
+  background:#07182c;
+  border:1px solid rgba(0,200,255,.3);
+  box-shadow:0 0 25px rgba(0,200,255,.25);
+  transform:translateY(90px);
+  opacity:0;
+  transition:.3s;
+  z-index:999;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+@media(max-width:1100px){
+  .stats-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .community-post{
+    grid-template-columns:1fr;
+  }
+
+  .post-actions{
+    flex-direction:row;
+    flex-wrap:wrap;
+  }
+}
+
+@media(max-width:800px){
+  body{
+    display:block;
+  }
+
+  .sidebar{
+    width:100%;
+    min-height:auto;
+    position:relative;
+  }
+
+  .main{
+    margin-left:0;
+    width:100%;
+    padding:18px;
+  }
+}
+
+@media(max-width:650px){
+  .stats-grid{
+    grid-template-columns:1fr;
+  }
+
+  .community-hero h1{
+    font-size:30px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+  <h2>SHADOW</h2>
+  <a href="admin-dashboard.html">Dashboard</a>
+  <a href="admin-anime.html">Anime Manager</a>
+  <a href="admin-movies.html">Movies</a>
+  <a href="admin-community.html" class="active">Community</a>
+  <a href="admin-settings.html">Settings</a>
+  <a href="index.html">Back To Website</a>
+</div>
+
+<div class="main">
+
+  <div class="community-hero">
+    <h1>Community Manager</h1>
+    <p>
+      Control posts, spoilers, polls, reactions, reports, pinned posts,
+      community moderation and backup tools.
+    </p>
+
+    <div class="top-actions">
+      <button class="admin-btn" onclick="exportCommunityData()">Export Community</button>
+      <button class="admin-btn dark" onclick="document.getElementById('importFile').click()">Import Backup</button>
+      <button class="admin-btn dark" onclick="window.location.href='community.html'">Open Community</button>
+      <button class="admin-btn red" onclick="clearCommunityPosts()">Clear All Posts</button>
+      <input type="file" id="importFile" accept="application/json" style="display:none">
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <h2 id="totalPosts">0</h2>
+      <p>Total Posts</p>
+    </div>
+
+    <div class="stat-card">
+      <h2 id="totalReviews">0</h2>
+      <p>Reviews</p>
+    </div>
+
+    <div class="stat-card">
+      <h2 id="totalRequests">0</h2>
+      <p>Requests</p>
+    </div>
+
+    <div class="stat-card">
+      <h2 id="totalPolls">0</h2>
+      <p>Polls</p>
+    </div>
+
+    <div class="stat-card">
+      <h2 id="totalReports">0</h2>
+      <p>Reports</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Community Posts</h2>
+
+    <div class="community-tools">
+      <input type="text" id="communitySearch" placeholder="Search community posts...">
+
+      <select id="communityFilter">
+        <option value="all">All Posts</option>
+        <option value="review">Reviews</option>
+        <option value="request">Requests</option>
+        <option value="spoiler">Spoilers</option>
+        <option value="pinned">Pinned</option>
+        <option value="reported">Reported</option>
+      </select>
+
+      <select id="communitySort">
+        <option value="latest">Latest</option>
+        <option value="oldest">Oldest</option>
+        <option value="reactions">Most Reactions</option>
+        <option value="replies">Most Replies</option>
+      </select>
+    </div>
+
+    <div id="adminCommunityList"></div>
+  </div>
+
+  <div class="panel">
+    <h2>Poll Manager</h2>
+    <div id="pollList"></div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast">Saved</div>
+
+<script>
+let communityPosts = JSON.parse(localStorage.getItem("communityPostsUltra")) || [];
+let communityPolls = JSON.parse(localStorage.getItem("communityPolls")) || [];
+let votedPolls = JSON.parse(localStorage.getItem("votedPolls")) || {};
+
+function showToast(text){
+  toast.innerText = text;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 1800);
+}
+
+function savePosts(){
+  localStorage.setItem("communityPostsUltra", JSON.stringify(communityPosts));
+}
+
+function savePolls(){
+  localStorage.setItem("communityPolls", JSON.stringify(communityPolls));
+  localStorage.setItem("votedPolls", JSON.stringify(votedPolls));
+}
+
+function totalReact(post){
+  return (post.likes || 0) + (post.fire || 0) + (post.shock || 0);
+}
+
+function escapeHTML(text){
+  return String(text || "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function renderCommunityPosts(){
+  const keyword = communitySearch.value.toLowerCase().trim();
+  const filter = communityFilter.value;
+  const sort = communitySort.value;
+
+  let filtered = communityPosts.filter(post => {
+    const text = `${post.title || ""} ${post.message || ""} ${post.type || ""} ${post.name || ""}`.toLowerCase();
+
+    const matchSearch = text.includes(keyword);
+
+    const matchFilter =
+      filter === "all" ||
+      (filter === "review" && (post.type || "").toLowerCase().includes("review")) ||
+      (filter === "request" && (post.type || "").toLowerCase().includes("request")) ||
+      (filter === "spoiler" && post.spoiler) ||
+      (filter === "pinned" && post.pinned) ||
+      (filter === "reported" && post.reported);
+
+    return matchSearch && matchFilter;
+  });
+
+  filtered.sort((a,b) => {
+    if(sort === "oldest") return (a.time || 0) - (b.time || 0);
+    if(sort === "reactions") return totalReact(b) - totalReact(a);
+    if(sort === "replies") return (b.replies || []).length - (a.replies || []).length;
+    return (b.time || 0) - (a.time || 0);
+  });
+
+  adminCommunityList.innerHTML = filtered.length ? filtered.map(post => {
+    const realIndex = communityPosts.indexOf(post);
+
+    return `
+      <div class="community-post ${post.pinned ? "pinned" : ""} ${post.reported ? "reported" : ""}">
+        <div class="post-left">
+          <h3>${escapeHTML(post.title || "Community Post")}</h3>
+          <p>${escapeHTML(post.message || "")}</p>
+
+          <div class="post-meta">
+            <span class="meta-tag">${escapeHTML(post.type || "Post")}</span>
+            <span class="meta-tag">👤 ${escapeHTML(post.name || "User")}</span>
+            <span class="meta-tag">❤️ ${post.likes || 0}</span>
+            <span class="meta-tag">🔥 ${post.fire || 0}</span>
+            <span class="meta-tag">😱 ${post.shock || 0}</span>
+            <span class="meta-tag">💬 ${(post.replies || []).length}</span>
+            ${post.pinned ? `<span class="meta-tag yellow">PINNED</span>` : ""}
+            ${post.spoiler ? `<span class="meta-tag red">SPOILER</span>` : ""}
+            ${post.reported ? `<span class="meta-tag red">REPORTED</span>` : ""}
+            ${post.verified ? `<span class="meta-tag green">VERIFIED</span>` : ""}
+          </div>
+
+          <div class="edit-box" id="editBox${post.id}">
+            <input id="editTitle${post.id}" value="${escapeHTML(post.title || "")}">
+            <textarea id="editMessage${post.id}">${escapeHTML(post.message || "")}</textarea>
+            <button class="admin-btn" onclick="saveEdit('${post.id}')">Save Edit</button>
+          </div>
+        </div>
+
+        <div class="post-actions">
+          <button class="small-btn" onclick="togglePin(${realIndex})">${post.pinned ? "Unpin" : "Pin"}</button>
+          <button class="small-btn" onclick="toggleSpoiler(${realIndex})">${post.spoiler ? "Remove Spoiler" : "Mark Spoiler"}</button>
+          <button class="small-btn" onclick="toggleReport(${realIndex})">${post.reported ? "Clear Report" : "Report"}</button>
+          <button class="small-btn" onclick="toggleVerified(${realIndex})">${post.verified ? "Unverify" : "Verify"}</button>
+          <button class="small-btn" onclick="toggleEdit('${post.id}')">Edit</button>
+          <button class="small-btn" onclick="resetReactions(${realIndex})">Reset Reactions</button>
+          <button class="small-btn delete" onclick="deletePost(${realIndex})">Delete</button>
+        </div>
+      </div>
+    `;
+  }).join("") : `<p style="color:#9fb4c9;">No community posts found.</p>`;
+
+  updateStats();
+}
+
+function renderPolls(){
+  pollList.innerHTML = communityPolls.length ? communityPolls.map((poll,index) => {
+    const totalVotes = (poll.options || []).reduce((sum,opt) => sum + (opt.votes || 0), 0);
+
+    return `
+      <div class="poll-card">
+        <h3>${escapeHTML(poll.question)}</h3>
+        <p style="color:#9fb4c9;">Total Votes: ${totalVotes}</p>
+
+        ${(poll.options || []).map(option => `
+          <div class="poll-option">
+            <span>${escapeHTML(option.name)}</span>
+            <b>${option.votes || 0} votes</b>
+          </div>
+        `).join("")}
+
+        <br>
+
+        <button class="small-btn" onclick="resetPollVotes(${index})">Reset Votes</button>
+        <button class="small-btn delete" onclick="deletePoll(${index})">Delete Poll</button>
+      </div>
+    `;
+  }).join("") : `<p style="color:#9fb4c9;">No polls found.</p>`;
+}
+
+function updateStats(){
+  totalPosts.innerText = communityPosts.length;
+
+  totalReviews.innerText = communityPosts.filter(post =>
+    (post.type || "").toLowerCase().includes("review")
+  ).length;
+
+  totalRequests.innerText = communityPosts.filter(post =>
+    (post.type || "").toLowerCase().includes("request")
+  ).length;
+
+  totalPolls.innerText = communityPolls.length;
+
+  totalReports.innerText = communityPosts.filter(post => post.reported).length;
+}
+
+function togglePin(index){
+  communityPosts[index].pinned = !communityPosts[index].pinned;
+  savePosts();
+  renderCommunityPosts();
+  showToast("Pin updated");
+}
+
+function toggleSpoiler(index){
+  communityPosts[index].spoiler = !communityPosts[index].spoiler;
+  savePosts();
+  renderCommunityPosts();
+  showToast("Spoiler updated");
+}
+
+function toggleReport(index){
+  communityPosts[index].reported = !communityPosts[index].reported;
+  savePosts();
+  renderCommunityPosts();
+  showToast("Report updated");
+}
+
+function toggleVerified(index){
+  communityPosts[index].verified = !communityPosts[index].verified;
+  savePosts();
+  renderCommunityPosts();
+  showToast("Verification updated");
+}
+
+function toggleEdit(id){
+  const box = document.getElementById("editBox" + id);
+  if(box) box.classList.toggle("show");
+}
+
+function saveEdit(id){
+  const index = communityPosts.findIndex(post => post.id === id);
+  if(index === -1) return;
+
+  const title = document.getElementById("editTitle" + id).value.trim();
+  const message = document.getElementById("editMessage" + id).value.trim();
+
+  if(!title || !message){
+    showToast("Title and message required");
+    return;
+  }
+
+  communityPosts[index].title = title;
+  communityPosts[index].message = message;
+  communityPosts[index].edited = true;
+
+  savePosts();
+  renderCommunityPosts();
+  showToast("Post edited");
+}
+
+function resetReactions(index){
+  if(confirm("Reset reactions?")){
+    communityPosts[index].likes = 0;
+    communityPosts[index].fire = 0;
+    communityPosts[index].shock = 0;
+    savePosts();
+    renderCommunityPosts();
+    showToast("Reactions reset");
+  }
+}
+
+function deletePost(index){
+  if(confirm("Delete post?")){
+    communityPosts.splice(index,1);
+    savePosts();
+    renderCommunityPosts();
+    showToast("Post deleted");
+  }
+}
+
+function deletePoll(index){
+  if(confirm("Delete poll?")){
+    communityPolls.splice(index,1);
+    savePolls();
+    renderPolls();
+    updateStats();
+    showToast("Poll deleted");
+  }
+}
+
+function resetPollVotes(index){
+  if(confirm("Reset all votes for this poll?")){
+    communityPolls[index].options = (communityPolls[index].options || []).map(opt => ({
+      ...opt,
+      votes:0
+    }));
+
+    votedPolls = {};
+
+    savePolls();
+    renderPolls();
+    showToast("Poll votes reset");
+  }
+}
+
+function clearCommunityPosts(){
+  if(confirm("Delete all community posts?")){
+    communityPosts = [];
+    savePosts();
+    renderCommunityPosts();
+    showToast("All posts deleted");
+  }
+}
+
+function exportCommunityData(){
+  const data = {
+    posts:communityPosts,
+    polls:communityPolls,
+    exportedAt:new Date().toLocaleString()
+  };
+
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:"application/json"});
+  const a = document.createElement("a");
+
+  a.href = URL.createObjectURL(blob);
+  a.download = "shadow-community-backup.json";
+  a.click();
+
+  URL.revokeObjectURL(a.href);
+  showToast("Community exported");
+}
+
+importFile.addEventListener("change", async e => {
+  const file = e.target.files[0];
+  if(!file) return;
+
+  try{
+    const text = await file.text();
+    const data = JSON.parse(text);
+
+    if(data.posts && Array.isArray(data.posts)){
+      communityPosts = data.posts;
+      savePosts();
+    }
+
+    if(data.polls && Array.isArray(data.polls)){
+      communityPolls = data.polls;
+      savePolls();
+    }
+
+    renderCommunityPosts();
+    renderPolls();
+    updateStats();
+    showToast("Backup imported");
+
+  }catch(err){
+    showToast("Invalid backup file");
+  }
+});
+
+communitySearch.addEventListener("input",renderCommunityPosts);
+communityFilter.addEventListener("change",renderCommunityPosts);
+communitySort.addEventListener("change",renderCommunityPosts);
+
+renderCommunityPosts();
+renderPolls();
+updateStats();
+</script>
+
+<script src="admin.js"></script>
+<script src="admin-protect.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Movie Manager - Shadow Admin</title>
+
+<link rel="stylesheet" href="admin.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:radial-gradient(circle at top,#08234a,#030712 55%,#01030a);
+  color:#fff;
+  font-family:Poppins,sans-serif;
+}
+
+.sidebar{
+  background:rgba(3,10,24,.94);
+  border-right:1px solid rgba(0,200,255,.25);
+  box-shadow:0 0 35px rgba(0,200,255,.12);
+}
+
+.sidebar h2{
+  font-family:Orbitron,sans-serif;
+  color:#00c8ff;
+  text-shadow:0 0 20px #00c8ff;
+}
+
+.sidebar a{
+  border-radius:14px;
+  margin:7px 12px;
+  transition:.25s;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+  background:linear-gradient(135deg,#00c8ff,#fff);
+  color:#00111c;
+  font-weight:900;
+}
+
+.main{
+  position:relative;
+}
+
+.admin-hero{
+  padding:28px;
+  border-radius:30px;
+  background:rgba(7,18,35,.78);
+  border:1px solid rgba(0,200,255,.25);
+  box-shadow:0 0 40px rgba(0,200,255,.13);
+  margin-bottom:25px;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.admin-hero h1{
+  font-family:Orbitron,sans-serif;
+  font-size:38px;
+  margin:0;
+}
+
+.admin-hero p{
+  color:#9fb4c9;
+  margin-top:6px;
+}
+
+.admin-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.admin-btn,
+.save-btn{
+  border:none;
+  padding:13px 18px;
+  border-radius:15px;
+  background:linear-gradient(135deg,#00c8ff,#fff);
+  color:#00111c;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 0 25px rgba(0,200,255,.35);
+}
+
+.admin-btn.dark{
+  background:rgba(255,255,255,.07);
+  color:#fff;
+  border:1px solid rgba(0,200,255,.25);
+}
+
+.admin-btn.red{
+  background:linear-gradient(135deg,#ff3d6e,#ff7b9c);
+  color:#fff;
+}
+
+.api-pill{
+  padding:10px 14px;
+  border-radius:30px;
+  background:rgba(0,255,180,.08);
+  border:1px solid rgba(0,255,180,.35);
+  color:#00ffb4;
+  font-size:13px;
+  font-weight:900;
+}
+
+.admin-stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  margin-bottom:25px;
+}
+
+.admin-stat-card{
+  padding:22px;
+  border-radius:24px;
+  background:rgba(7,18,35,.78);
+  border:1px solid rgba(0,200,255,.22);
+  box-shadow:0 0 35px rgba(0,200,255,.1);
+}
+
+.admin-stat-card h2{
+  color:#00c8ff;
+  font-size:34px;
+  margin:0;
+}
+
+.admin-stat-card p{
+  color:#9fb4c9;
+  margin:8px 0 0;
+}
+
+.panel{
+  padding:24px;
+  border-radius:28px;
+  background:rgba(7,18,35,.78);
+  border:1px solid rgba(0,200,255,.22);
+  box-shadow:0 0 35px rgba(0,200,255,.1);
+  margin-bottom:25px;
+}
+
+.panel h2{
+  font-family:Orbitron,sans-serif;
+  margin:0 0 18px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.form-grid textarea{
+  grid-column:1/-1;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  padding:14px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  outline:none;
+  font-family:Poppins,sans-serif;
+}
+
+textarea{
+  min-height:130px;
+  resize:vertical;
+}
+
+select option{
+  color:#000;
+}
+
+.preview-box{
+  margin-top:16px;
+  display:grid;
+  grid-template-columns:130px 1fr;
+  gap:16px;
+  padding:16px;
+  border-radius:22px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(0,200,255,.18);
+}
+
+.preview-box img{
+  width:130px;
+  height:180px;
+  object-fit:cover;
+  border-radius:16px;
+  border:1px solid rgba(0,200,255,.25);
+}
+
+.preview-box h3{
+  margin:0 0 8px;
+}
+
+.preview-box p{
+  color:#9fb4c9;
+  line-height:1.6;
+}
+
+.manager-tools{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+
+.manager-tools input,
+.manager-tools select{
+  max-width:260px;
+}
+
+.movie-list-card{
+  padding:16px;
+  border-radius:20px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.08);
+  margin-bottom:12px;
+  display:grid;
+  grid-template-columns:70px 1fr auto;
+  gap:15px;
+  align-items:center;
+}
+
+.movie-list-card img{
+  width:70px;
+  height:95px;
+  object-fit:cover;
+  border-radius:14px;
+  border:1px solid rgba(0,200,255,.22);
+}
+
+.movie-list-card h3{
+  margin:0 0 6px;
+}
+
+.movie-list-card p{
+  color:#9fb4c9;
+  font-size:13px;
+}
+
+.admin-badges{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:8px;
+}
+
+.admin-badge{
+  font-size:11px;
+  padding:5px 9px;
+  border-radius:20px;
+  color:#00c8ff;
+  background:rgba(0,200,255,.09);
+  border:1px solid rgba(0,200,255,.22);
+  font-weight:800;
+}
+
+.list-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.small-btn{
+  border:none;
+  padding:9px 11px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:800;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(0,200,255,.22);
+  color:#fff;
+}
+
+.small-btn.delete{
+  border-color:rgba(255,76,106,.35);
+  background:rgba(255,76,106,.13);
+}
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:999;
+  padding:14px 18px;
+  border-radius:16px;
+  background:#07182c;
+  border:1px solid rgba(0,200,255,.3);
+  box-shadow:0 0 25px rgba(0,200,255,.25);
+  transform:translateY(90px);
+  opacity:0;
+  transition:.3s;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+@media(max-width:1000px){
+  .admin-stats,
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .movie-list-card,
+  .preview-box{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+  <h2>SHADOW</h2>
+  <a href="admin-dashboard.html">Dashboard</a>
+  <a href="admin-anime.html">Anime Manager</a>
+  <a class="active" href="admin-movies.html">Movies</a>
+  <a href="admin-community.html">Community</a>
+  <a href="admin-settings.html">Settings</a>
+  <a href="index.html">Back To Website</a>
+</div>
+
+<div class="main">
+
+  <div class="admin-hero">
+    <div>
+      <h1>Movie Manager</h1>
+      <p>Manage anime movies, API movie results, posters, trailers, ratings, years and watch links.</p>
+    </div>
+
+    <div class="admin-actions">
+      <span class="api-pill" id="apiStatus">API READY</span>
+      <button class="admin-btn" onclick="document.getElementById('movieName').focus()">+ Add Movie</button>
+      <button class="admin-btn dark" onclick="loadMoviesFromAPI()">Load API Movies</button>
+      <button class="admin-btn dark" onclick="exportMoviesJSON()">Export JSON</button>
+      <button class="admin-btn red" onclick="clearAllMovies()">Clear All</button>
+    </div>
+  </div>
+
+  <div class="admin-stats">
+    <div class="admin-stat-card">
+      <h2 id="movieTotalStat">0</h2>
+      <p>Total Movies</p>
+    </div>
+
+    <div class="admin-stat-card">
+      <h2 id="movieHDStat">0</h2>
+      <p>HD Movies</p>
+    </div>
+
+    <div class="admin-stat-card">
+      <h2 id="movieYearStat">0</h2>
+      <p>With Year</p>
+    </div>
+
+    <div class="admin-stat-card">
+      <h2 id="movieRatingStat">0</h2>
+      <p>With Rating</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Add / Edit Movie</h2>
+
+    <div class="form-grid">
+      <input id="movieName" placeholder="Movie Name">
+      <input id="movieGenre" placeholder="Genre / Category">
+      <input id="movieImage" placeholder="Poster Image URL / Path">
+      <input id="movieBanner" placeholder="Banner Image URL / Path">
+      <input id="movieRating" placeholder="Rating">
+      <input id="movieYear" placeholder="Release Year">
+      <input id="movieTrailer" placeholder="Trailer URL">
+      <input id="movieWatch" placeholder="Watch URL / anime-details.html?id=...">
+      <textarea id="movieDesc" placeholder="Movie Description"></textarea>
+    </div>
+
+    <div class="preview-box">
+      <img id="moviePreviewImg" src="image/default.jpg" onerror="this.src='image/default.jpg'">
+      <div>
+        <h3 id="moviePreviewTitle">Movie Preview</h3>
+        <p id="moviePreviewMeta">Fill form to preview movie details.</p>
+        <p id="moviePreviewDesc">Description preview appears here.</p>
+      </div>
+    </div>
+
+    <br>
+
+    <button onclick="saveMoviePro()" class="save-btn" id="saveMovieBtn">Save Movie</button>
+    <button onclick="clearMovieForm()" class="admin-btn dark">Clear Form</button>
+  </div>
+
+  <div class="panel">
+    <h2>Movie Library</h2>
+
+    <div class="manager-tools">
+      <input id="movieAdminSearch" placeholder="Search movies...">
+
+      <select id="movieAdminFilter">
+        <option value="all">All Movies</option>
+        <option value="hd">HD</option>
+        <option value="rating">With Rating</option>
+        <option value="year">With Year</option>
+        <option value="api">API Loaded</option>
+        <option value="manual">Manual Added</option>
+      </select>
+
+      <select id="movieSort">
+        <option value="latest">Latest</option>
+        <option value="az">A - Z</option>
+        <option value="za">Z - A</option>
+        <option value="year">Year</option>
+      </select>
+    </div>
+
+    <div id="movieList"></div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast">Saved</div>
+
+<script>
+const API = "https://anikoto-api-nine.vercel.app";
+
+let movieLibrary = JSON.parse(localStorage.getItem("adminMovieLibrary")) || [];
+let editMovieIndex = null;
+
+function showToast(text){
+  toast.innerText = text;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 1800);
+}
+
+function val(id){
+  return document.getElementById(id).value.trim();
+}
+
+function safeText(text){
+  return String(text || "");
+}
+
+function normalizeMovie(item, source = "manual"){
+  return {
+    id:item.id || item.animeId || item.slug || "",
+    name:item.name || item.title || "Unknown Movie",
+    title:item.title || item.name || "Unknown Movie",
+    genre:item.genre || item.category || item.type || "Anime Movie",
+    category:item.category || item.genre || item.type || "Anime Movie",
+    image:item.image || item.poster || item.cover || "image/default.jpg",
+    banner:item.banner || item.image || item.poster || "image/default.jpg",
+    rating:item.rating || item.score || "",
+    year:item.year || item.releaseDate || item.released || "",
+    trailer:item.trailer || "",
+    watch:item.watch || item.link || (item.id ? `anime-details.html?id=${item.id}` : ""),
+    link:item.link || item.watch || (item.id ? `anime-details.html?id=${item.id}` : ""),
+    desc:item.desc || item.description || item.overview || "",
+    description:item.description || item.desc || item.overview || "",
+    quality:item.quality || "HD",
+    source:source,
+    addedAt:Date.now()
+  };
+}
+
+function saveMovieLibrary(){
+  localStorage.setItem("adminMovieLibrary", JSON.stringify(movieLibrary));
+  localStorage.setItem("totalMovies", movieLibrary.length);
+}
+
+async function apiGet(path){
+  const res = await fetch(API + path);
+  if(!res.ok) throw new Error(path + " failed");
+  return await res.json();
+}
+
+function getList(json){
+  if(Array.isArray(json)) return json;
+  return json.data || json.results || json.anime || json.items || [];
+}
+
+async function loadMoviesFromAPI(){
+  try{
+    apiStatus.innerText = "API LOADING...";
+    apiStatus.style.color = "#ffd369";
+
+    const [allJson, popularJson] = await Promise.all([
+      apiGet("/api/all-anime?page=1").catch(() => ({data:[]})),
+      apiGet("/api/popular").catch(() => ({data:[]}))
+    ]);
+
+    const allList = [...getList(allJson), ...getList(popularJson)];
+
+    const movieList = allList.filter(item => {
+      const text = `${item.type || ""} ${item.title || ""} ${item.name || ""}`.toLowerCase();
+      return text.includes("movie");
+    });
+
+    const normalized = movieList.map(item => normalizeMovie(item, "api"));
+
+    movieLibrary = Array.from(
+      new Map([...movieLibrary, ...normalized].map(movie => [movie.id || movie.title || movie.name, movie])).values()
+    );
+
+    saveMovieLibrary();
+    renderMovieList();
+    updateMovieStats();
+
+    apiStatus.innerText = "API LIVE";
+    apiStatus.style.color = "#00ffb4";
+    showToast(`${normalized.length} API movies loaded`);
+
+  }catch(error){
+    console.error(error);
+    apiStatus.innerText = "API ERROR";
+    apiStatus.style.color = "#ff6b6b";
+    showToast("API movie load failed");
+  }
+}
+
+function saveMoviePro(){
+  const movie = normalizeMovie({
+    name:val("movieName"),
+    title:val("movieName"),
+    genre:val("movieGenre"),
+    category:val("movieGenre"),
+    image:val("movieImage"),
+    banner:val("movieBanner"),
+    rating:val("movieRating"),
+    year:val("movieYear"),
+    trailer:val("movieTrailer"),
+    watch:val("movieWatch"),
+    link:val("movieWatch"),
+    desc:val("movieDesc"),
+    description:val("movieDesc"),
+    quality:"HD"
+  }, "manual");
+
+  if(!movie.name || !movie.image){
+    showToast("Movie name and poster required");
+    return;
+  }
+
+  if(editMovieIndex !== null){
+    movieLibrary[editMovieIndex] = movie;
+    editMovieIndex = null;
+    saveMovieBtn.innerText = "Save Movie";
+  }else{
+    movieLibrary.unshift(movie);
+  }
+
+  saveMovieLibrary();
+  clearMovieForm();
+  renderMovieList();
+  updateMovieStats();
+  showToast("Movie saved");
+}
+
+function clearMovieForm(){
+  [
+    movieName,movieGenre,movieImage,movieBanner,
+    movieRating,movieYear,movieTrailer,movieWatch,movieDesc
+  ].forEach(input => input.value = "");
+
+  editMovieIndex = null;
+  saveMovieBtn.innerText = "Save Movie";
+  updatePreview();
+}
+
+function editMovie(index){
+  const movie = movieLibrary[index];
+
+  movieName.value = movie.name || movie.title || "";
+  movieGenre.value = movie.genre || movie.category || "";
+  movieImage.value = movie.image || "";
+  movieBanner.value = movie.banner || "";
+  movieRating.value = movie.rating || "";
+  movieYear.value = movie.year || "";
+  movieTrailer.value = movie.trailer || "";
+  movieWatch.value = movie.watch || movie.link || "";
+  movieDesc.value = movie.desc || movie.description || "";
+
+  editMovieIndex = index;
+  saveMovieBtn.innerText = "Update Movie";
+
+  updatePreview();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function deleteMovie(index){
+  if(confirm("Delete this movie?")){
+    movieLibrary.splice(index,1);
+    saveMovieLibrary();
+    renderMovieList();
+    updateMovieStats();
+    showToast("Movie deleted");
+  }
+}
+
+function renderMovieList(){
+  const keyword = movieAdminSearch.value.toLowerCase().trim();
+  const filter = movieAdminFilter.value;
+  const sort = movieSort.value;
+
+  let list = movieLibrary.filter(movie => {
+    const text = `${movie.name} ${movie.genre} ${movie.year} ${movie.rating} ${movie.quality} ${movie.source}`.toLowerCase();
+
+    const matchSearch = text.includes(keyword);
+
+    const matchFilter =
+      filter === "all" ||
+      (filter === "hd" && text.includes("hd")) ||
+      (filter === "rating" && movie.rating) ||
+      (filter === "year" && movie.year) ||
+      (filter === "api" && movie.source === "api") ||
+      (filter === "manual" && movie.source === "manual");
+
+    return matchSearch && matchFilter;
+  });
+
+  list.sort((a,b) => {
+    if(sort === "az") return safeText(a.name).localeCompare(safeText(b.name));
+    if(sort === "za") return safeText(b.name).localeCompare(safeText(a.name));
+    if(sort === "year") return Number(b.year || 0) - Number(a.year || 0);
+    return Number(b.addedAt || 0) - Number(a.addedAt || 0);
+  });
+
+  movieList.innerHTML = list.length ? list.map(movie => {
+    const realIndex = movieLibrary.indexOf(movie);
+
+    return `
+      <div class="movie-list-card">
+        <img src="${movie.image}" onerror="this.src='image/default.jpg'">
+
+        <div>
+          <h3>${movie.name || movie.title}</h3>
+          <p>${movie.genre || "Movie"} · ${movie.year || "Year"} · ${movie.rating ? "⭐ " + movie.rating : "No Rating"}</p>
+
+          <div class="admin-badges">
+            <span class="admin-badge">${movie.source === "api" ? "API" : "Manual"}</span>
+            ${movie.quality ? `<span class="admin-badge">${movie.quality}</span>` : ""}
+            ${movie.year ? `<span class="admin-badge">${movie.year}</span>` : ""}
+            ${movie.rating ? `<span class="admin-badge">Rating ${movie.rating}</span>` : ""}
+          </div>
+        </div>
+
+        <div class="list-actions">
+          <button class="small-btn" onclick="window.open('${movie.link || movie.watch || "#"}','_blank')">Open</button>
+          <button class="small-btn" onclick="editMovie(${realIndex})">Edit</button>
+          <button class="small-btn delete" onclick="deleteMovie(${realIndex})">Delete</button>
+        </div>
+      </div>
+    `;
+  }).join("") : `<p style="color:#9fb4c9;">No movies found.</p>`;
+}
+
+function updateMovieStats(){
+  movieTotalStat.innerText = movieLibrary.length;
+  movieHDStat.innerText = movieLibrary.filter(m => `${m.quality} ${m.genre}`.toLowerCase().includes("hd")).length;
+  movieYearStat.innerText = movieLibrary.filter(m => m.year).length;
+  movieRatingStat.innerText = movieLibrary.filter(m => m.rating).length;
+}
+
+function updatePreview(){
+  moviePreviewImg.src = movieImage.value || "image/default.jpg";
+  moviePreviewTitle.innerText = movieName.value || "Movie Preview";
+  moviePreviewMeta.innerText = `${movieGenre.value || "Genre"} · ${movieYear.value || "Year"} · ${movieRating.value ? "⭐ " + movieRating.value : "Rating"}`;
+  moviePreviewDesc.innerText = movieDesc.value || "Description preview appears here.";
+}
+
+function exportMoviesJSON(){
+  const exportData = movieLibrary.map(movie => ({
+    id:movie.id,
+    title:movie.name || movie.title,
+    name:movie.name || movie.title,
+    genre:movie.genre,
+    category:movie.genre,
+    image:movie.image,
+    banner:movie.banner,
+    rating:movie.rating,
+    year:movie.year,
+    trailer:movie.trailer,
+    link:movie.watch || movie.link,
+    watch:movie.watch || movie.link,
+    description:movie.desc || movie.description,
+    quality:movie.quality || "HD",
+    source:movie.source
+  }));
+
+  const blob = new Blob([JSON.stringify(exportData,null,2)], {type:"application/json"});
+  const a = document.createElement("a");
+
+  a.href = URL.createObjectURL(blob);
+  a.download = "movies.json";
+  a.click();
+
+  URL.revokeObjectURL(a.href);
+  showToast("movies.json exported");
+}
+
+function clearAllMovies(){
+  if(confirm("Delete all saved movies from admin library?")){
+    movieLibrary = [];
+    saveMovieLibrary();
+    renderMovieList();
+    updateMovieStats();
+    showToast("All movies cleared");
+  }
+}
+
+[
+  movieName,movieGenre,movieImage,movieBanner,
+  movieRating,movieYear,movieTrailer,movieWatch,movieDesc
+].forEach(input => input.addEventListener("input", updatePreview));
+
+movieAdminSearch.addEventListener("input", renderMovieList);
+movieAdminFilter.addEventListener("change", renderMovieList);
+movieSort.addEventListener("change", renderMovieList);
+
+renderMovieList();
+updateMovieStats();
+updatePreview();
+</script>
+
+<script src="admin.js"></script>
+<script src="admin-protect.js"></script>
+
+</body>
+</html>   

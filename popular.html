@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Popular - Shadow Anime</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="mobile.css">
+
+<script src="site-control.js"></script>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+.popular-hero-pro{
+  min-height:480px;
+  padding:90px 5% 60px;
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:35px;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.popular-hero-pro::before{
+  content:"";
+  position:absolute;
+  width:380px;
+  height:380px;
+  background:#00c8ff;
+  border-radius:50%;
+  filter:blur(110px);
+  opacity:.22;
+  left:5%;
+  top:15%;
+}
+
+.popular-hero-pro::after{
+  content:"";
+  position:absolute;
+  width:330px;
+  height:330px;
+  background:#8a2cff;
+  border-radius:50%;
+  filter:blur(110px);
+  opacity:.18;
+  right:7%;
+  bottom:8%;
+}
+
+.popular-hero-content,
+.popular-spotlight{
+  position:relative;
+  z-index:2;
+}
+
+.popular-tag{
+  display:inline-block;
+  padding:9px 16px;
+  border-radius:30px;
+  border:1px solid rgba(0,200,255,.45);
+  color:#00c8ff;
+  background:rgba(0,200,255,.08);
+  font-weight:800;
+  font-size:12px;
+  letter-spacing:1px;
+}
+
+.popular-hero-content h1{
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(42px,7vw,88px);
+  line-height:1.05;
+  margin:18px 0;
+  text-transform:uppercase;
+}
+
+.popular-hero-content h1 span{
+  color:#00c8ff;
+  text-shadow:0 0 25px #00c8ff;
+}
+
+.popular-hero-content p{
+  color:#a9c1d8;
+  line-height:1.8;
+  max-width:760px;
+  font-size:17px;
+}
+
+.popular-actions{
+  display:flex;
+  gap:14px;
+  margin-top:25px;
+  flex-wrap:wrap;
+}
+
+.popular-spotlight{
+  padding:24px;
+  border-radius:30px;
+  background:rgba(7,18,35,.76);
+  border:1px solid rgba(0,200,255,.25);
+  backdrop-filter:blur(18px);
+  box-shadow:0 0 40px rgba(0,200,255,.16);
+}
+
+.popular-spotlight img{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+  border-radius:24px;
+  margin-bottom:18px;
+  border:1px solid rgba(0,200,255,.25);
+}
+
+.popular-spotlight h2{
+  font-family:Orbitron,sans-serif;
+  font-size:28px;
+  margin:10px 0;
+}
+
+.popular-spotlight p{
+  color:#a9c1d8;
+  margin-bottom:18px;
+}
+
+.popular-stats{
+  width:92%;
+  max-width:1450px;
+  margin:-25px auto 35px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  position:relative;
+  z-index:3;
+}
+
+.popular-stat{
+  padding:20px;
+  border-radius:24px;
+  background:rgba(7,18,35,.82);
+  border:1px solid rgba(0,200,255,.22);
+  backdrop-filter:blur(16px);
+  box-shadow:0 0 30px rgba(0,200,255,.1);
+}
+
+.popular-stat h2{
+  color:#00c8ff;
+  font-size:32px;
+}
+
+.popular-stat p{
+  color:#9fb4c9;
+}
+
+.popular-control{
+  width:92%;
+  max-width:1450px;
+  margin:0 auto 35px;
+  padding:22px;
+  border-radius:28px;
+  background:rgba(7,18,35,.78);
+  border:1px solid rgba(0,200,255,.22);
+  backdrop-filter:blur(16px);
+  box-shadow:0 0 35px rgba(0,200,255,.1);
+}
+
+.popular-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.section-subtitle{
+  color:#9fb4c9;
+  margin-top:6px;
+}
+
+.popular-tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.popular-tabs button{
+  padding:10px 15px;
+  border-radius:30px;
+  border:1px solid rgba(0,200,255,.25);
+  background:rgba(255,255,255,.05);
+  color:#cceeff;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.popular-tabs button.active,
+.popular-tabs button:hover{
+  background:#00c8ff;
+  color:#00111c;
+}
+
+.popular-section{
+  width:92%;
+  max-width:1450px;
+  margin:0 auto 55px;
+}
+
+.popular-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+  margin-bottom:20px;
+}
+
+.result-count{
+  color:#9fb4c9;
+  font-size:14px;
+}
+
+.popular-card{
+  position:relative;
+}
+
+.popular-badge{
+  position:absolute;
+  top:12px;
+  left:12px;
+  z-index:5;
+  padding:7px 11px;
+  border-radius:30px;
+  background:rgba(0,200,255,.92);
+  color:#00111c;
+  font-size:11px;
+  font-weight:900;
+  box-shadow:0 0 18px rgba(0,200,255,.45);
+}
+
+.rank-badge{
+  position:absolute;
+  top:12px;
+  right:12px;
+  z-index:5;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:rgba(0,0,0,.68);
+  border:1px solid rgba(255,255,255,.25);
+  color:#fff;
+  font-weight:900;
+  box-shadow:0 0 18px rgba(0,0,0,.45);
+}
+
+.empty-box{
+  display:none;
+  text-align:center;
+  padding:45px 20px;
+  color:#9fb4c9;
+  border:1px dashed rgba(0,200,255,.3);
+  border-radius:25px;
+  margin-top:20px;
+}
+
+.loading-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+}
+
+.skeleton{
+  height:280px;
+  border-radius:20px;
+  background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(0,200,255,.13),rgba(255,255,255,.05));
+  background-size:250% 100%;
+  animation:skeleton 1.4s infinite;
+}
+
+@keyframes skeleton{
+  to{background-position:-250% 0}
+}
+
+.to-top{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:100;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  border:none;
+  background:#00c8ff;
+  color:#00111c;
+  font-size:20px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 0 25px rgba(0,200,255,.5);
+  display:none;
+}
+
+@media(max-width:950px){
+  .popular-hero-pro{
+    grid-template-columns:1fr;
+  }
+
+  .popular-stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+  .popular-head,
+  .popular-top{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">SHADOW ANIME</div>
+
+  <ul id="menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="Anime.html">Anime</a></li>
+    <li><a href="movies.html">Movies</a></li>
+    <li><a class="active" href="popular.html">Popular</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="watchlist.html">Watchlist</a></li>
+    <li><a href="policy.html">Policy</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <input type="text" id="popularSearch" placeholder="Search popular..." class="search-box">
+    <div class="menu-btn" id="menuBtn">☰</div>
+  </div>
+</nav>
+
+<section class="popular-hero-pro">
+  <div class="popular-hero-content">
+    <span class="popular-tag">🔥 SHADOW TRENDING HUB</span>
+    <h1>Popular <span>Zone</span></h1>
+    <p>
+      Discover the most attractive anime and movies from your Shadow collection.
+      This page automatically picks trending anime, popular movies, spotlight content,
+      and premium ranked cards.
+    </p>
+
+    <div class="popular-actions">
+      <a href="#popularAnimeSection" class="hero-btn primary-btn">Popular Anime</a>
+      <a href="#popularMovieSection" class="hero-btn secondary-btn">Popular Movies</a>
+      <button class="hero-btn secondary-btn" onclick="refreshPopular()">Refresh</button>
+    </div>
+  </div>
+
+  <div class="popular-spotlight">
+    <img id="popularSpotlightImg" src="">
+    <span class="popular-tag">⭐ Auto Spotlight</span>
+    <h2 id="popularSpotlightTitle">Loading...</h2>
+    <p id="popularSpotlightInfo">Choosing trending title...</p>
+    <a id="popularSpotlightLink" href="#" target="_blank" class="hero-btn primary-btn">Watch Now</a>
+  </div>
+</section>
+
+<section class="popular-stats">
+  <div class="popular-stat"><h2 id="popularAnimeCount">0</h2><p>Anime Loaded</p></div>
+  <div class="popular-stat"><h2 id="popularMovieCount">0</h2><p>Movies Loaded</p></div>
+  <div class="popular-stat"><h2 id="popularShowingCount">0</h2><p>Showing Now</p></div>
+  <div class="popular-stat"><h2 id="popularTotalCount">0</h2><p>Total Library</p></div>
+</section>
+
+<section class="popular-control">
+  <div class="popular-top">
+    <div>
+      <h1 class="section-title">Smart Popular Explorer</h1>
+      <p class="section-subtitle">Search and switch between anime, movies, or all trending content.</p>
+    </div>
+  </div>
+
+  <div class="popular-tabs">
+    <button class="active" onclick="setPopularTab('all',this)">All Popular</button>
+    <button onclick="setPopularTab('anime',this)">Anime Only</button>
+    <button onclick="setPopularTab('movie',this)">Movies Only</button>
+    <button onclick="refreshPopular()">Random Refresh</button>
+  </div>
+</section>
+
+<section class="popular-section" id="popularAnimeSection">
+  <div class="popular-head">
+    <div>
+      <h1 class="section-title">Popular Anime</h1>
+      <p class="section-subtitle">Auto-picked anime from anime.json.</p>
+    </div>
+    <span class="result-count" id="animeResultCount">Loading...</span>
+  </div>
+
+  <div id="animeLoading" class="loading-grid">
+    <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+  </div>
+
+  <div class="anime-grid" id="popularAnimeGrid"></div>
+  <div class="empty-box" id="animeEmpty">No popular anime found.</div>
+</section>
+
+<section class="popular-section" id="popularMovieSection">
+  <div class="popular-head">
+    <div>
+      <h1 class="section-title">Popular Movies</h1>
+      <p class="section-subtitle">Auto-picked movies from movies.json.</p>
+    </div>
+    <span class="result-count" id="movieResultCount">Loading...</span>
+  </div>
+
+  <div id="movieLoading" class="loading-grid">
+    <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+  </div>
+
+  <div class="anime-grid" id="popularMovieGrid"></div>
+  <div class="empty-box" id="movieEmpty">No popular movies found.</div>
+</section>
+
+<div class="trailer-modal" id="trailerModal">
+  <div class="trailer-box">
+    <span class="close-trailer" onclick="closeTrailer()">×</span>
+    <iframe id="trailerFrame" src="" allowfullscreen></iframe>
+  </div>
+</div>
+
+<button class="to-top" id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  © 2026 Shadow Anime
+</footer>
+
+<script>
+const API = "https://anikoto-api-nine.vercel.app";
+const perSection = 12;
+
+let animeData = [];
+let movieData = [];
+let combinedData = [];
+let activePopularTab = "all";
+let searchTimer = null;
+
+function normalizeType(value){
+  return String(value || "").toLowerCase().trim();
+}
+
+function getName(item){
+  return item.title || item.name || "Unknown";
+}
+
+function getInfo(item,type){
+  return item.episode || item.episodes || item.quality || item.year || item.genre || item.category || type || "Shadow Anime";
+}
+
+function getText(item){
+  return `
+    ${item.title || ""}
+    ${item.name || ""}
+    ${item.id || ""}
+    ${item.episode || ""}
+    ${item.episodes || ""}
+    ${item.quality || ""}
+    ${item.year || ""}
+    ${item.genre || ""}
+    ${item.category || ""}
+    ${item.type || ""}
+  `.toLowerCase();
+}
+
+function isMovieItem(item){
+  const text = `${item.type || ""} ${item.category || ""} ${item.genre || ""} ${item.title || ""}`.toLowerCase();
+  return text.includes("movie") || text.includes("film");
+}
+
+function isAnimeItem(item){
+  return !isMovieItem(item);
+}
+
+function mapApiItem(item){
+  const id = item.id || item.slug || item.animeId || item.malId || getName(item).toLowerCase().replace(/\s+/g,"-");
+  const type = isMovieItem(item) ? "movie" : "anime";
+
+  return {
+    id,
+    title: item.title || item.name || "Unknown",
+    image: item.image || item.poster || item.cover || item.banner || "image/default.jpg",
+    banner: item.banner || item.cover || item.image || item.poster || "image/default.jpg",
+    episode: item.episodes || item.episode || item.sub || item.dub || "",
+    quality: item.quality || item.type || "HD",
+    year: item.year || item.releaseDate || "",
+    genre: item.genre || item.genres || item.category || item.type || "",
+    category: item.category || item.type || type,
+    type,
+    link: `anime-details.html?id=${encodeURIComponent(id)}`
+  };
+}
+
+async function apiGet(url){
+  const res = await fetch(url);
+  if(!res.ok) throw new Error("API Error: " + res.status);
+  return await res.json();
+}
+
+function extractApiArray(json){
+  if(Array.isArray(json)) return json;
+  if(Array.isArray(json.data)) return json.data;
+  if(Array.isArray(json.results)) return json.results;
+  if(Array.isArray(json.items)) return json.items;
+  if(Array.isArray(json.anime)) return json.anime;
+  if(Array.isArray(json.movies)) return json.movies;
+  if(Array.isArray(json.data?.results)) return json.data.results;
+  if(Array.isArray(json.data?.items)) return json.data.items;
+  return [];
+}
+
+function uniqueById(list){
+  return Array.from(
+    new Map(list.filter(Boolean).map(item => [item.id || item.title, item])).values()
+  );
+}
+
+function randomItems(data,count){
+  return [...data].sort(()=>Math.random() - 0.5).slice(0,count);
+}
+
+async function loadPopularPage(){
+  animeLoading.style.display = "grid";
+  movieLoading.style.display = "grid";
+  animeResultCount.innerText = "Loading from API...";
+  movieResultCount.innerText = "Loading from API...";
+
+  try{
+    const pages = [1,2,3,4,5];
+    const responses = await Promise.all(
+      pages.map(page =>
+        apiGet(`${API}/api/all-anime?page=${page}`).catch(() => ({data:[]}))
+      )
+    );
+
+    let raw = [];
+    responses.forEach(json => raw.push(...extractApiArray(json)));
+
+    combinedData = uniqueById(raw.map(mapApiItem));
+    animeData = combinedData.filter(isAnimeItem);
+    movieData = combinedData.filter(isMovieItem);
+
+    animeLoading.style.display = "none";
+    movieLoading.style.display = "none";
+
+    refreshPopular();
+  }catch(error){
+    console.log("POPULAR API LOAD ERROR:", error);
+    animeLoading.style.display = "none";
+    movieLoading.style.display = "none";
+    animeEmpty.style.display = "block";
+    movieEmpty.style.display = "block";
+    animeResultCount.innerText = "API failed";
+    movieResultCount.innerText = "API failed";
+  }
+}
+
+async function searchPopularFromAPI(keyword){
+  try{
+    animeLoading.style.display = "none";
+    movieLoading.style.display = "none";
+
+    const json = await apiGet(`${API}/api/search?keyword=${encodeURIComponent(keyword)}`);
+    console.log("POPULAR SEARCH RESPONSE:", json);
+
+    const mapped = extractApiArray(json).map(mapApiItem);
+    const unique = uniqueById(mapped);
+
+    const animeList = unique.filter(isAnimeItem);
+    const movieList = unique.filter(isMovieItem);
+
+    renderLists(animeList, movieList, false);
+
+  }catch(error){
+    console.log("POPULAR SEARCH ERROR:", error);
+    popularAnimeGrid.innerHTML = "";
+    popularMovieGrid.innerHTML = "";
+    animeEmpty.style.display = "block";
+    movieEmpty.style.display = "block";
+    animeResultCount.innerText = "Search failed";
+    movieResultCount.innerText = "Search failed";
+  }
+}
+
+function refreshPopular(){
+  renderSpotlight();
+  renderPopular();
+  updateStats();
+}
+
+function renderSpotlight(){
+  const list = combinedData.length ? combinedData : [...animeData, ...movieData];
+
+  if(!list.length){
+    popularSpotlightImg.src = "image/default.jpg";
+    popularSpotlightTitle.innerText = "No API Data";
+    popularSpotlightInfo.innerText = "Popular content could not be loaded.";
+    popularSpotlightLink.href = "#";
+    return;
+  }
+
+  const item = list[Math.floor(Math.random() * list.length)];
+
+  popularSpotlightImg.src = item.banner || item.image || "image/default.jpg";
+  popularSpotlightTitle.innerText = getName(item);
+  popularSpotlightInfo.innerText = getInfo(item,item.type === "movie" ? "Movie" : "Anime");
+  popularSpotlightLink.href = item.link || "#";
+}
+
+function renderPopular(){
+  const keyword = popularSearch.value.toLowerCase().trim();
+
+  let animeList = randomItems(animeData, perSection);
+  let movieList = randomItems(movieData, perSection);
+
+  if(keyword){
+    animeList = animeData.filter(a => getText(a).includes(keyword)).slice(0, perSection);
+    movieList = movieData.filter(m => getText(m).includes(keyword)).slice(0, perSection);
+  }
+
+  renderLists(animeList, movieList, true);
+}
+
+function renderLists(animeList, movieList, allowTab){
+  if(activePopularTab === "anime"){
+    movieList = [];
+  }
+
+  if(activePopularTab === "movie"){
+    animeList = [];
+  }
+
+  popularAnimeSection.style.display = activePopularTab === "movie" ? "none" : "block";
+  popularMovieSection.style.display = activePopularTab === "anime" ? "none" : "block";
+
+  popularAnimeGrid.innerHTML = animeList.map((anime,index)=>`
+    <div class="shadow-card popular-card" onclick="openPopular('${anime.link}')">
+      <span class="popular-badge">⭐ Popular</span>
+      <span class="rank-badge">#${index + 1}</span>
+      <img loading="lazy" src="${anime.image}" alt="${getName(anime)}">
+      <div class="shadow-info">
+        <h3>${getName(anime)}</h3>
+        <p>${getInfo(anime,"Anime")}</p>
+        <a href="${anime.link}" onclick="event.stopPropagation()">View Details</a>
+      </div>
+    </div>
+  `).join("");
+
+  popularMovieGrid.innerHTML = movieList.map((movie,index)=>`
+    <div class="shadow-card popular-card" onclick="openPopular('${movie.link}')">
+      <span class="popular-badge">🔥 Movie</span>
+      <span class="rank-badge">#${index + 1}</span>
+      <img loading="lazy" src="${movie.image}" alt="${getName(movie)}">
+      <div class="shadow-info">
+        <h3>${getName(movie)}</h3>
+        <p>${getInfo(movie,"Movie")}</p>
+        <a href="${movie.link}" onclick="event.stopPropagation()">View Details</a>
+      </div>
+    </div>
+  `).join("");
+
+  animeEmpty.style.display = animeList.length ? "none" : "block";
+  movieEmpty.style.display = movieList.length ? "none" : "block";
+
+  animeResultCount.innerText = `${animeList.length} anime showing`;
+  movieResultCount.innerText = `${movieList.length} movies showing`;
+  popularShowingCount.innerText = animeList.length + movieList.length;
+}
+
+function updateStats(){
+  popularAnimeCount.innerText = animeData.length;
+  popularMovieCount.innerText = movieData.length;
+  popularTotalCount.innerText = animeData.length + movieData.length;
+}
+
+function setPopularTab(tab,btn){
+  activePopularTab = tab;
+
+  document.querySelectorAll(".popular-tabs button").forEach(b=>b.classList.remove("active"));
+  if(btn) btn.classList.add("active");
+
+  const keyword = popularSearch.value.trim();
+  if(keyword.length >= 2){
+    searchPopularFromAPI(keyword);
+  }else{
+    renderPopular();
+  }
+}
+
+function openPopular(link){
+  if(link && link !== "#"){
+    window.location.href = link;
+  }
+}
+
+popularSearch.addEventListener("input",()=>{
+  clearTimeout(searchTimer);
+
+  searchTimer = setTimeout(()=>{
+    const q = popularSearch.value.trim();
+
+    if(q.length >= 2){
+      popularAnimeGrid.innerHTML = `<div style="color:#9fb4c9;padding:30px;">Searching API...</div>`;
+      popularMovieGrid.innerHTML = "";
+      searchPopularFromAPI(q);
+    }else{
+      renderPopular();
+    }
+  },450);
+});
+
+if(menuBtn){
+  menuBtn.addEventListener("click",()=>{
+    menu.classList.toggle("show");
+  });
+}
+
+window.addEventListener("scroll",()=>{
+  toTop.style.display = window.scrollY > 500 ? "block" : "none";
+});
+
+loadPopularPage();
+</script></script>
+
+<script src="script.js"></script>
+<script src="smart-search.js"></script>
+
+</body>
+</html>
