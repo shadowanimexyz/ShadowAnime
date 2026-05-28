@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Settings Core | Shadow Anime Admin</title>
+
+  <link rel="stylesheet" href="admin-settings.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="shadow-bg"></div>
+<div class="grid-overlay"></div>
+<div class="scanline"></div>
+
+<aside class="control-sidebar" id="sidebar">
+  <div class="brand-box">
+    <div class="brand-mark">S</div>
+    <div>
+      <h2>SHADOW</h2>
+      <span>SETTINGS CORE</span>
+    </div>
+  </div>
+
+  <nav class="control-nav">
+    <a href="admin-dashboard.html">Dashboard</a>
+    <a href="admin-anime.html">Anime Manager</a>
+    <a href="admin-movies.html">Movies Core</a>
+    <a href="admin-community.html">Community</a>
+    <a href="admin-settings.html" class="active">Settings</a>
+    <a href="index.html">View Website</a>
+  </nav>
+
+  <div class="sidebar-core">
+    <span>SYSTEM CONFIG</span>
+    <b id="settingsStatus">Ready</b>
+    <small>localStorage website settings</small>
+  </div>
+</aside>
+
+<main class="control-main">
+
+  <header class="top-command">
+    <button class="menu-toggle" id="menuToggle">☰</button>
+
+    <div>
+      <p class="mini-title">SHADOW ANIME ADMIN SYSTEM</p>
+      <h1>Settings Core</h1>
+      <span>Customize website branding, hero content, notices, SEO, ads and feature switches.</span>
+    </div>
+
+    <div class="top-actions">
+      <button class="neon-btn" id="saveAllBtn">Save Settings</button>
+      <button class="ghost-btn" id="exportBtn">Export JSON</button>
+    </div>
+  </header>
+
+  <section class="command-hero">
+    <div>
+      <span class="status-chip">LIVE CUSTOMIZATION MODE</span>
+      <h2>Website Control Settings</h2>
+      <p>
+        Control your Shadow Anime website identity, homepage hero, announcement bar,
+        ads placeholders, social links, maintenance mode and advanced feature toggles.
+      </p>
+    </div>
+
+    <div class="hero-mini">
+      <div><span>Theme</span><b id="themePreview">Neon Blue</b></div>
+      <div><span>Mode</span><b id="modePreview">Public</b></div>
+      <div><span>Ads</span><b id="adsPreview">Disabled</b></div>
+    </div>
+  </section>
+
+  <section class="settings-grid">
+
+    <div class="panel">
+      <div class="panel-head">
+        <div>
+          <h3>Brand Identity</h3>
+          <p>Main website name and logo settings.</p>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="field">
+          <label>Website Name</label>
+          <input id="siteName" type="text" placeholder="Shadow Anime" />
+        </div>
+
+        <div class="field">
+          <label>Short Name</label>
+          <input id="shortName" type="text" placeholder="SHADOW" />
+        </div>
+
+        <div class="field full">
+          <label>Logo Text</label>
+          <input id="logoText" type="text" placeholder="SHADOW ANIME" />
+        </div>
+
+        <div class="field full">
+          <label>Logo Image URL</label>
+          <input id="logoImage" type="url" placeholder="https://..." />
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div>
+          <h3>Theme Control</h3>
+          <p>Change visual theme and effect level.</p>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="field">
+          <label>Accent Theme</label>
+          <select id="accentTheme">
+            <option value="neon-blue">Neon Blue</option>
+            <option value="cyber-purple">Cyber Purple</option>
+            <option value="blood-red">Blood Red</option>
+            <option value="gold-core">Gold Core</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Animation Level</label>
+          <select id="animationLevel">
+            <option value="ultra">Ultra</option>
+            <option value="normal">Normal</option>
+            <option value="low">Low</option>
+            <option value="off">Off</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Default Page Mode</label>
+          <select id="pageMode">
+            <option value="public">Public</option>
+            <option value="maintenance">Maintenance</option>
+            <option value="coming-soon">Coming Soon</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Card Style</label>
+          <select id="cardStyle">
+            <option value="glass">Glass</option>
+            <option value="cinematic">Cinematic</option>
+            <option value="compact">Compact</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel wide">
+      <div class="panel-head">
+        <div>
+          <h3>Homepage Hero</h3>
+          <p>Control homepage title, subtitle and call-to-action buttons.</p>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="field full">
+          <label>Hero Title</label>
+          <input id="heroTitle" type="text" placeholder="Enter the Shadow Anime Universe" />
+        </div>
+
+        <div class="field full">
+          <label>Hero Subtitle</label>
+          <textarea id="heroSubtitle" rows="4" placeholder="Watch anime, movies and explore community..."></textarea>
+        </div>
+
+        <div class="field">
+          <label>Primary Button Text</label>
+          <input id="primaryBtnText" type="text" placeholder="Start Watching" />
+        </div>
+
+        <div class="field">
+          <label>Primary Button Link</label>
+          <input id="primaryBtnLink" type="text" placeholder="anime.html" />
+        </div>
+
+        <div class="field">
+          <label>Secondary Button Text</label>
+          <input id="secondaryBtnText" type="text" placeholder="Explore Movies" />
+        </div>
+
+        <div class="field">
+          <label>Secondary Button Link</label>
+          <input id="secondaryBtnLink" type="text" placeholder="movies.html" />
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div>
+          <h3>Announcement Bar</h3>
+          <p>Show update notice on website.</p>
+        </div>
+      </div>
+
+      <div class="flag-box">
+        <label><input type="checkbox" id="announcementEnabled" /> Enable Announcement</label>
+      </div>
+
+      <div class="form-grid single">
+        <div class="field full">
+          <label>Announcement Text</label>
+          <textarea id="announcementText" rows="4" placeholder="New episodes added daily..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div>
+          <h3>Feature Switches</h3>
+          <p>Turn website features on or off.</p>
+        </div>
+      </div>
+
+      <div class="switch-list">
+        <label><input type="checkbox" id="enableLogin" /> Login System</label>
+        <label><input type="checkbox" id="enableCommunity" /> Community Page</label>
+        <label><input type="checkbox" id="enableWatchlist" /> Watchlist</label>
+        <label><input type="checkbox" id="enableContinueWatching" /> Continue Watching</label>
+        <label><input type="checkbox" id="enableMovies" /> Movies Page</label>
+        <label><input type="checkbox" id="enableManga" /> Manga Page</label>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div>
+          <h3>Ads Control</h3>
+          <p>Prepare ad slots for future monetization.</p>
+        </div>
+      </div>
+
+      <div class="flag-box">
+        <label><input type="checkbox" id="adsEnabled" /> Enable Ads</label>
+      </div>
+
+      <div class="form-grid single">
+        <div class="field full">
+          <label>AdSense / Ad Script Placeholder</label>
+          <textarea id="adCode" rows="5" placeholder="Paste ad script later..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div>
+          <h3>SEO Settings</h3>
+          <p>Website title, description and keywords.</p>
+        </div>
+      </div>
+
+      <div class="form-grid single">
+        <div class="field full">
+          <label>Meta Title</label>
+          <input id="metaTitle" type="text" placeholder="Shadow Anime - Watch Anime Online" />
+        </div>
+
+        <div class="field full">
+          <label>Meta Description</label>
+          <textarea id="metaDescription" rows="4" placeholder="Premium anime streaming website..."></textarea>
+        </div>
+
+        <div class="field full">
+          <label>Keywords</label>
+          <input id="metaKeywords" type="text" placeholder="anime, anime movies, watch anime" />
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div>
+          <h3>Social Links</h3>
+          <p>Connect Shadow Anime socials.</p>
+        </div>
+      </div>
+
+      <div class="form-grid single">
+        <div class="field full">
+          <label>Instagram</label>
+          <input id="instagramLink" type="url" placeholder="https://instagram.com/..." />
+        </div>
+
+        <div class="field full">
+          <label>Discord</label>
+          <input id="discordLink" type="url" placeholder="https://discord.gg/..." />
+        </div>
+
+        <div class="field full">
+          <label>X / Twitter</label>
+          <input id="twitterLink" type="url" placeholder="https://x.com/..." />
+        </div>
+      </div>
+    </div>
+
+    <div class="panel wide preview-panel">
+      <div class="panel-head">
+        <div>
+          <h3>Live Settings Preview</h3>
+          <p>Preview how main branding settings will look.</p>
+        </div>
+      </div>
+
+      <div class="settings-preview">
+        <span id="previewShort">SHADOW</span>
+        <h2 id="previewHero">Enter the Shadow Anime Universe</h2>
+        <p id="previewSubtitle">Your homepage subtitle preview will appear here.</p>
+
+        <div class="preview-actions">
+          <a id="previewPrimary" href="#">Start Watching</a>
+          <a id="previewSecondary" href="#">Explore Movies</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<script src="admin-settings.js"></script>
+<script src="protect.js"></script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Anime Manager | Shadow Anime Admin</title>
+
+  <link rel="stylesheet" href="admin-anime.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="shadow-bg"></div>
+<div class="grid-overlay"></div>
+<div class="scanline"></div>
+
+<aside class="control-sidebar" id="sidebar">
+  <div class="brand-box">
+    <div class="brand-mark">S</div>
+    <div>
+      <h2>SHADOW</h2>
+      <span>ANIME CORE</span>
+    </div>
+  </div>
+
+  <nav class="control-nav">
+    <a href="admin-dashboard.html">Dashboard</a>
+    <a href="admin-anime.html" class="active">Anime Manager</a>
+    <a href="admin-movies.html">Movies Core</a>
+    <a href="admin-community.html">Community</a>
+    <a href="admin-settings.html">Settings</a>
+    <a href="index.html">View Website</a>
+  </nav>
+
+  <div class="sidebar-core">
+    <span>API CORE</span>
+    <b id="apiStatus">Checking...</b>
+    <small>anikoto-api-nine.vercel.app</small>
+  </div>
+</aside>
+
+<main class="control-main">
+
+  <header class="top-command">
+    <button class="menu-toggle" id="menuToggle">☰</button>
+
+    <div>
+      <p class="mini-title">SHADOW ANIME ADMIN SYSTEM</p>
+      <h1>Anime Manager</h1>
+      <span>Add, auto-fill, edit, preview, export and control your anime database.</span>
+    </div>
+
+    <div class="top-actions">
+      <button class="neon-btn" id="refreshApiBtn">Refresh API</button>
+      <button class="ghost-btn" id="exportBtn">Export JSON</button>
+    </div>
+  </header>
+
+  <section class="command-hero">
+    <div>
+      <span class="status-chip">LIVE ANIME CONTROL</span>
+      <h2>Anime Database Command Center</h2>
+      <p>
+        Search anime from your API, auto-fill title/image/details, add custom anime,
+        manage local admin records and prepare content for your Shadow Anime website.
+      </p>
+    </div>
+
+    <div class="hero-mini">
+      <div><span>API Items</span><b id="apiCount">0</b></div>
+      <div><span>Added Anime</span><b id="localCount">0</b></div>
+      <div><span>Mode</span><b>Admin OS</b></div>
+    </div>
+  </section>
+
+  <section class="manager-grid">
+
+    <div class="panel form-panel">
+      <div class="panel-head">
+        <div>
+          <h3>Add / Edit Anime</h3>
+          <p>Use auto-fill search or manually add anime details.</p>
+        </div>
+      </div>
+
+      <input type="hidden" id="editId" />
+
+      <div class="auto-fill-box">
+        <label>Auto Anime Title Filler</label>
+        <div class="search-row">
+          <input id="autoSearch" type="text" placeholder="Search anime title... example: Naruto" />
+          <button id="autoSearchBtn">Search</button>
+        </div>
+        <div id="autoResults" class="auto-results"></div>
+      </div>
+
+      <div class="form-grid">
+        <div class="field">
+          <label>Anime Title</label>
+          <input id="animeTitle" type="text" placeholder="Anime name" />
+        </div>
+
+        <div class="field">
+          <label>Anime ID / Slug</label>
+          <input id="animeId" type="text" placeholder="anime-id" />
+        </div>
+
+        <div class="field">
+          <label>Poster Image URL</label>
+          <input id="animeImage" type="url" placeholder="https://..." />
+        </div>
+
+        <div class="field">
+          <label>Banner Image URL</label>
+          <input id="animeBanner" type="url" placeholder="https://..." />
+        </div>
+
+        <div class="field">
+          <label>Type</label>
+          <select id="animeType">
+            <option value="Anime">Anime</option>
+            <option value="Movie">Movie</option>
+            <option value="Series">Series</option>
+            <option value="OVA">OVA</option>
+            <option value="Special">Special</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Episodes</label>
+          <input id="animeEpisodes" type="text" placeholder="12 / 24 / ?" />
+        </div>
+
+        <div class="field">
+          <label>Year</label>
+          <input id="animeYear" type="text" placeholder="2026" />
+        </div>
+
+        <div class="field">
+          <label>Rating</label>
+          <input id="animeRating" type="text" placeholder="8.8" />
+        </div>
+
+        <div class="field">
+          <label>Genre</label>
+          <input id="animeGenre" type="text" placeholder="Action, Fantasy, Adventure" />
+        </div>
+
+        <div class="field">
+          <label>Studio</label>
+          <input id="animeStudio" type="text" placeholder="Studio name" />
+        </div>
+
+        <div class="field full">
+          <label>Watch Page / External URL</label>
+          <input id="animeWatch" type="url" placeholder="anime-details.html?id=..." />
+        </div>
+
+        <div class="field full">
+          <label>Description</label>
+          <textarea id="animeDescription" rows="5" placeholder="Anime description..."></textarea>
+        </div>
+      </div>
+
+      <div class="flag-box">
+        <label><input type="checkbox" id="featuredFlag" /> Featured</label>
+        <label><input type="checkbox" id="trendingFlag" /> Trending</label>
+        <label><input type="checkbox" id="popularFlag" /> Popular</label>
+        <label><input type="checkbox" id="movieFlag" /> Movie Zone</label>
+      </div>
+
+      <div class="form-actions">
+        <button class="neon-btn" id="saveAnimeBtn">Save Anime</button>
+        <button class="ghost-btn" id="clearFormBtn">Clear</button>
+      </div>
+    </div>
+
+    <div class="panel preview-panel">
+      <div class="panel-head">
+        <div>
+          <h3>Live Preview</h3>
+          <p>Card preview before saving.</p>
+        </div>
+      </div>
+
+      <div class="anime-preview-card">
+        <img id="previewImage" src="" alt="" />
+        <div class="preview-fallback" id="previewFallback">SHADOW</div>
+
+        <div class="preview-info">
+          <span id="previewType">Anime</span>
+          <h3 id="previewTitle">Anime Title</h3>
+          <p id="previewDesc">Description preview will appear here.</p>
+
+          <div class="preview-meta">
+            <b id="previewEpisodes">EP ?</b>
+            <b id="previewRating">★ ?</b>
+            <b id="previewYear">Year</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="mini-tools">
+        <button id="fillDemoBtn">Fill Demo</button>
+        <button id="copyJsonBtn">Copy JSON</button>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="panel library-panel">
+    <div class="panel-head library-head">
+      <div>
+        <h3>Admin Anime Library</h3>
+        <p>Local added anime records saved in browser storage.</p>
+      </div>
+
+      <div class="library-tools">
+        <input id="librarySearch" type="text" placeholder="Search added anime..." />
+        <select id="filterType">
+          <option value="all">All</option>
+          <option value="featured">Featured</option>
+          <option value="trending">Trending</option>
+          <option value="popular">Popular</option>
+          <option value="movie">Movies</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="animeGrid" class="anime-grid">
+      <div class="empty-state">No anime added yet.</div>
+    </div>
+  </section>
+
+</main>
+
+<div class="modal" id="previewModal">
+  <div class="modal-box">
+    <button class="modal-close" id="closeModal">×</button>
+    <img id="modalImage" src="" alt="" />
+    <h2 id="modalTitle">Anime Title</h2>
+    <p id="modalDesc">Description</p>
+    <div id="modalMeta" class="modal-meta"></div>
+  </div>
+</div>
+
+<textarea id="hiddenExport" hidden></textarea>
+
+<script src="admin-anime.js"></script>
+<script src="protect.js"></script>
+</body>
+</html>

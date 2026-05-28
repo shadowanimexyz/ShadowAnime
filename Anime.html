@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Anime | Shadow Anime</title>
+
+  <link rel="stylesheet" href="anime.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="dimension-loader" id="loader">
+    <div class="loader-portal">
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+      <div class="ring r3"></div>
+      <div class="blade"></div>
+    </div>
+
+    <h1>SHADOW ANIME</h1>
+    <p id="loaderText">Opening anime dimension...</p>
+
+    <div class="load-bar">
+      <span></span>
+    </div>
+  </div>
+
+  <div class="world-bg">
+    <div class="moon"></div>
+    <div class="portal-bg"></div>
+    <div class="thunder t1"></div>
+    <div class="thunder t2"></div>
+    <div class="mountain"></div>
+    <div class="city city-a"></div>
+    <div class="city city-b"></div>
+    <div class="samurai"></div>
+    <div class="rain"></div>
+    <div class="sparks"></div>
+  </div>
+
+  <header class="nav">
+    <a href="index.html" class="logo">SHADOW <span>ANIME</span></a>
+
+    <nav id="navLinks">
+      <a href="index.html">Home</a>
+      <a class="active" href="Anime.html">Anime</a>
+      <a href="movies.html">Movies</a>
+      <a href="popular.html">Popular</a>
+      <a href="community.html">Community</a>
+      <a href="policy.html">Policy</a>
+    </nav>
+
+    <button id="menuBtn" class="nav-btn">☰</button>
+  </header>
+
+  <main class="page">
+
+    <section class="hero">
+
+      <aside class="live-feed">
+        <div class="panel-title">
+          <span>LIVE FEED</span>
+          <b>ONLINE</b>
+        </div>
+
+        <div id="miniList" class="mini-list"></div>
+      </aside>
+
+      <section class="spotlight">
+        <div id="spotBg" class="spot-bg"></div>
+
+        <div class="spot-info">
+          <span class="tag">AUTO ANIME SPOTLIGHT</span>
+
+          <h1 id="spotTitle">Loading Anime...</h1>
+
+          <p id="spotDesc">
+            Connecting with Shadow Anime database...
+          </p>
+
+          <div class="meta">
+            <span id="spotRating">★ N/A</span>
+            <span id="spotEp">EP N/A</span>
+            <span id="spotGenre">Anime</span>
+          </div>
+
+          <div class="actions">
+            <button id="spotWatch" class="primary">▶ Watch Now</button>
+            <button id="spotInfo" class="ghost">Details</button>
+            <button id="randomBtn" class="ghost">Random</button>
+          </div>
+        </div>
+
+        <div class="poster-box">
+          <img id="spotImg" src="" alt="Anime Poster">
+        </div>
+      </section>
+
+      <aside class="core">
+        <div class="core-card">
+          <small>DATABASE</small>
+          <h2 id="totalAnime">0</h2>
+          <p>Total anime loaded</p>
+        </div>
+
+        <div class="core-card">
+          <small>MODE</small>
+          <h2>DIMENSION</h2>
+          <p>Animated anime OS</p>
+        </div>
+
+        <div class="core-card">
+          <small>CONTINUE WATCHING</small>
+          <h2 id="continueTitle">None</h2>
+          <p id="continueText">No anime opened yet</p>
+        </div>
+      </aside>
+
+    </section>
+
+    <section class="search-area" id="searchArea">
+      <div class="search-wrap">
+        <div class="search-box">
+          <span>⌕</span>
+
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Search anime like Google..."
+            autocomplete="off"
+          />
+
+          <button id="clearSearch">×</button>
+          <button id="searchBtn">Search</button>
+        </div>
+
+        <div id="suggestBox" class="suggest-box"></div>
+      </div>
+
+      <select id="genreFilter">
+        <option value="all">All Genres</option>
+      </select>
+
+      <select id="sortFilter">
+        <option value="default">Default</option>
+        <option value="az">A - Z</option>
+        <option value="za">Z - A</option>
+        <option value="rating">Rating</option>
+        <option value="latest">Latest</option>
+      </select>
+
+      <button id="refreshBtn">Refresh</button>
+    </section>
+
+    <section class="rails">
+      <div class="rail-block">
+        <h2>🔥 Trending Rotation</h2>
+        <div id="trendingRail" class="rail"></div>
+      </div>
+
+      <div class="rail-block">
+        <h2>⚡ Random Discovery</h2>
+        <div id="randomRail" class="rail"></div>
+      </div>
+    </section>
+
+    <section class="result-head">
+      <h2>Anime Database</h2>
+      <p id="resultText">Loading...</p>
+    </section>
+
+    <section id="animeGrid" class="anime-grid"></section>
+
+    <div class="load-more-wrap">
+      <button id="loadMoreBtn" class="load-more-btn">Load More Anime</button>
+    </div>
+
+    <section id="emptyState" class="empty">
+      <h2>No anime found</h2>
+      <p>Try another search or refresh API.</p>
+    </section>
+
+  </main>
+
+  <div id="modal" class="modal">
+    <div id="modalOverlay" class="modal-overlay"></div>
+
+    <div class="modal-card">
+      <button id="modalClose" class="modal-close">×</button>
+
+      <img id="modalImg" src="" alt="Anime poster">
+
+      <div class="modal-info">
+        <span id="modalGenre">Anime</span>
+
+        <h2 id="modalTitle">Anime Title</h2>
+
+        <div class="modal-meta">
+          <b id="modalRating">★ N/A</b>
+          <b id="modalEp">EP N/A</b>
+          <b id="modalYear">Unknown</b>
+        </div>
+
+        <p id="modalDesc">No description available.</p>
+
+        <div class="actions">
+          <a id="modalWatch" class="primary" href="#">▶ Watch Now</a>
+          <button id="modalSave" class="ghost">＋ Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button id="backTop" class="back-top">↑</button>
+
+  <script src="anime.js"></script>
+</body>
+</html>

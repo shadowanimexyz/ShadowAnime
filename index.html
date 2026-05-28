@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shadow Anime | Cinematic OS</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="loader" id="loader">
+  <div class="katana-loader">
+    <div class="katana katana-a"><span class="blade"></span><span class="guard"></span><span class="handle"></span></div>
+    <div class="katana katana-b"><span class="blade"></span><span class="guard"></span><span class="handle"></span></div>
+    <div class="slash-ring"></div>
+  </div>
+
+  <h1>SHADOW <span>ANIME</span></h1>
+  <p id="loaderText">Awakening Shadow Anime...</p>
+  <div class="loader-bar"><span></span></div>
+</div>
+
+<canvas id="particleCanvas"></canvas>
+<div class="scan"></div>
+<div class="mouse-glow" id="mouseGlow"></div>
+
+<nav>
+  <a href="index.html" class="logo">SHADOW<span> ANIME</span></a>
+
+  <div class="menu" id="menu">
+    <a class="active" href="index.html">Home</a>
+    <a href="Anime.html">Anime</a>
+    <a href="popular.html">Popular</a>
+    <a href="movies.html">Movies</a>
+    <a href="manga.html">Manga</a>
+    <a href="community.html">Community</a>
+    <a href="policy.html">Policy</a>
+  </div>
+
+  <div class="nav-actions">
+    <button id="openSearch">Search</button>
+    <button id="randomBtn">Random</button>
+    <a href="Anime.html">Library</a>
+    <button id="menuBtn">☰</button>
+  </div>
+</nav>
+
+<div class="search-modal" id="searchModal">
+  <div class="search-box">
+    <button id="closeSearch">×</button>
+    <span>SHADOW SEARCH TERMINAL</span>
+    <h2>Find Anime</h2>
+    <input id="searchInput" type="text" placeholder="Search anime..." />
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<main>
+
+<section class="hero">
+  <div class="hero-bg">
+    <img id="bgImage" src="" alt="">
+  </div>
+
+  <div class="hero-left">
+    <span class="live-pill"><i></i> LIVE API CONNECTED</span>
+
+    <h1 class="brand-title">
+      SHADOW <span>ANIME</span>
+      <small id="animeSub">Live Anime Universe</small>
+    </h1>
+
+    <p id="heroText">
+      A cinematic anime operating system powered by your live API, animated spotlight,
+      floating anime screens, smart search and premium neon motion.
+    </p>
+
+    <div class="meta">
+      <span id="animeType">Type: Loading</span>
+      <span id="animeRank">Universe #001</span>
+    </div>
+
+    <div class="hero-buttons">
+      <a href="Anime.html" id="heroLink" class="btn primary">View Details</a>
+      <a href="Anime.html" class="btn">Explore Library</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b>12,000+</b><small>Total Anime</small></div>
+      <div class="stat"><b>50,000+</b><small>Total Episodes</small></div>
+      <div class="stat"><b>24/7</b><small>Shadow Streaming</small></div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="portal"></div>
+
+    <article class="poster">
+      <img id="posterImage" src="" alt="">
+      <div class="poster-info">
+        <span>NOW IN SHADOW</span>
+        <h2 id="posterTitle">Loading...</h2>
+      </div>
+    </article>
+
+    <div class="float f1" id="mini1"></div>
+    <div class="float f2" id="mini2"></div>
+    <div class="float f3" id="mini3"></div>
+
+    <div class="side-system">
+      <div class="panel-card">
+        <span>CONTROL CORE</span>
+        <p><small>Database</small><b id="dbStatus">Checking</b></p>
+        <p><small>Mode</small><b>Shadow OS</b></p>
+        <p><small>Motion</small><b>Ultra</b></p>
+      </div>
+
+      <div class="panel-card">
+        <span>CONTINUE WATCHING</span>
+        <h3 id="continueTitle">No anime opened yet</h3>
+        <a id="continueLink" href="Anime.html">Start Watching</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ticker">
+  <div>
+    <span>⚡ Live API Anime</span>
+    <span>🌀 Cinematic Spotlight</span>
+    <span>🎬 Details Ready</span>
+    <span>🌌 Neon OS</span>
+    <span>📱 Mobile Smooth</span>
+    <span>🔥 Shadow Anime</span>
+  </div>
+</section>
+
+<section class="section">
+  <div class="head">
+    <div>
+      <span class="tag">FEATURED</span>
+      <h2>Shadow Picks</h2>
+    </div>
+    <a href="Anime.html">View All →</a>
+  </div>
+
+  <div class="grid" id="featuredGrid"></div>
+</section>
+
+<section class="cinema">
+  <div>
+    <span class="tag">SHADOW EXPERIENCE</span>
+    <h2>Not just a website. A live anime control room.</h2>
+    <p>
+      Everything is automatic: API anime loading, dynamic background,
+      floating cards, search results, latest anime rail and cinematic transitions.
+    </p>
+  </div>
+
+  <div class="links">
+    <a href="Anime.html">Anime Library</a>
+    <a href="popular.html">Popular Realm</a>
+    <a href="community.html">Shadow Clan</a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="head">
+    <div>
+      <span class="tag">LATEST</span>
+      <h2>Recently Added</h2>
+    </div>
+    <a href="Anime.html">More →</a>
+  </div>
+
+  <div class="rail" id="latestRail"></div>
+</section>
+
+<section class="section">
+  <div class="head">
+    <div>
+      <span class="tag">EXPLORE</span>
+      <h2>Genre Zones</h2>
+    </div>
+  </div>
+
+  <div class="genre-zone">
+    <a href="Anime.html?search=action">Action</a>
+    <a href="Anime.html?search=romance">Romance</a>
+    <a href="Anime.html?search=fantasy">Fantasy</a>
+    <a href="Anime.html?search=comedy">Comedy</a>
+  </div>
+</section>
+
+<section class="final">
+  <h2>Enter Shadow Mode</h2>
+  <p>Your anime universe is ready.</p>
+  <a href="Anime.html" class="btn primary">Open Anime Library</a>
+</section>
+
+</main>
+
+<footer>
+  <h2>SHADOW ANIME</h2>
+  <p>Powered by your live anime API.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

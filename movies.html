@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Movies | Shadow Anime</title>
+
+  <link rel="stylesheet" href="movies.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="movie-loader" id="movieLoader">
+  <div class="cinema-reel">
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <h1>SHADOW CINEMA</h1>
+  <p id="loaderText">Loading movie universe...</p>
+</div>
+
+<div class="movie-bg">
+  <div class="cinema-moon"></div>
+  <div class="film-strip strip-one"></div>
+  <div class="film-strip strip-two"></div>
+  <div class="neon-smoke smoke-one"></div>
+  <div class="neon-smoke smoke-two"></div>
+  <div class="movie-particles"></div>
+</div>
+
+<header class="movie-nav">
+  <a href="index.html" class="logo">SHADOW <span>CINEMA</span></a>
+
+  <nav id="menu">
+    <a href="index.html">Home</a>
+    <a href="anime.html">Anime</a>
+    <a class="active" href="movies.html">Movies</a>
+    <a href="popular.html">Popular</a>
+    <a href="community.html">Community</a>
+    <a href="watchlist.html">Watchlist</a>
+    <a href="policy.html">Policy</a>
+  </nav>
+
+  <button id="menuBtn" class="menu-btn">☰</button>
+</header>
+
+<main class="movies-page">
+
+  <section class="movie-hero">
+    <div class="hero-content">
+      <span class="movie-tag">PREMIUM MOVIE ARCHIVE</span>
+      <h1>Shadow <span>Movie</span> Universe</h1>
+      <p>
+        Explore anime movies with cinematic spotlight, smart API search,
+        featured collections, latest drops, filters, preview modal and smooth pagination.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#allMoviesSection" class="primary-btn">Explore Movies</a>
+        <button id="randomMovieBtn" class="glass-btn">Random Movie</button>
+        <button id="shuffleMovieBtn" class="glass-btn">Shuffle</button>
+      </div>
+    </div>
+
+    <div class="spotlight-card" id="spotlightCard">
+      <img id="movieSpotlightImg" src="" alt="Movie spotlight">
+      <div class="spotlight-info">
+        <span>Auto Spotlight</span>
+        <h2 id="movieSpotlightTitle">Loading...</h2>
+        <p id="movieSpotlightInfo">Choosing movie from API...</p>
+        <a id="movieSpotlightLink" href="#">View Details</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="movie-stats">
+    <div class="stat-card">
+      <small>Total Movies</small>
+      <h2 id="totalMovieCount">0</h2>
+    </div>
+    <div class="stat-card">
+      <small>Showing Now</small>
+      <h2 id="currentMovieCount">0</h2>
+    </div>
+    <div class="stat-card">
+      <small>Total Pages</small>
+      <h2 id="moviePageCount">0</h2>
+    </div>
+    <div class="stat-card">
+      <small>Auto Tags</small>
+      <h2 id="movieTagCount">0</h2>
+    </div>
+  </section>
+
+  <section class="movie-control">
+    <div class="control-head">
+      <div>
+        <h2>Smart Movie Explorer</h2>
+        <p>Search, filter and sort movies from your API.</p>
+      </div>
+
+      <div class="control-actions">
+        <select id="movieFilter">
+          <option value="all">All Movies</option>
+          <option value="action">Action</option>
+          <option value="romance">Romance</option>
+          <option value="drama">Drama</option>
+          <option value="fantasy">Fantasy</option>
+          <option value="adventure">Adventure</option>
+          <option value="hd">HD</option>
+          <option value="dub">Dub</option>
+          <option value="sub">Sub</option>
+        </select>
+
+        <select id="movieSort">
+          <option value="default">Default</option>
+          <option value="az">A - Z</option>
+          <option value="za">Z - A</option>
+          <option value="year">Latest Year</option>
+          <option value="random">Random Order</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="movie-search-wrap">
+      <input id="movieSearch" type="text" placeholder="Search movie from API..." autocomplete="off">
+      <button id="movieSearchBtn">Search</button>
+      <div id="movieSuggestBox" class="movie-suggest-box"></div>
+    </div>
+
+    <div class="movie-chips" id="movieChips">
+      <button class="active" data-tag="">All</button>
+    </div>
+  </section>
+
+  <section class="movie-row" id="movieFeaturedRow">
+    <div class="row-head">
+      <div>
+        <h2>Featured Movies</h2>
+        <p>Random premium picks from the movie archive.</p>
+      </div>
+      <button id="refreshFeaturedBtn" class="glass-btn">Refresh</button>
+    </div>
+    <div class="mini-grid" id="movieFeaturedGrid"></div>
+  </section>
+
+  <section class="movie-row" id="movieLatestRow">
+    <div class="row-head">
+      <div>
+        <h2>Latest Movies</h2>
+        <p>Recently discovered movie entries.</p>
+      </div>
+      <a href="#allMoviesSection" class="glass-btn">View All</a>
+    </div>
+    <div class="mini-grid" id="movieLatestGrid"></div>
+  </section>
+
+  <section id="allMoviesSection" class="movie-database">
+    <div class="database-head">
+      <div>
+        <h2>All Movies</h2>
+        <p>30 movies per page with smooth pagination.</p>
+      </div>
+      <span id="movieResultCount">Loading...</span>
+    </div>
+
+    <div id="movieLoadingGrid" class="loading-grid">
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <div class="movie-grid" id="movieGrid"></div>
+
+    <div class="movie-pagination" id="moviePagination"></div>
+
+    <div class="empty-box" id="movieEmpty">
+      <h2>No Movies Found</h2>
+      <p>Try another keyword or refresh your API.</p>
+    </div>
+  </section>
+
+</main>
+
+<div class="movie-preview-modal" id="moviePreviewModal">
+  <div class="movie-preview-box">
+    <button id="closePreviewBtn" class="close-preview">×</button>
+
+    <img id="previewImg" src="" alt="Movie preview">
+
+    <div class="preview-content">
+      <span class="movie-tag">MOVIE PREVIEW</span>
+      <h2 id="previewTitle">Movie Title</h2>
+      <p id="previewInfo">Movie description</p>
+
+      <div class="preview-actions">
+        <a id="previewLink" href="#" class="primary-btn">View Details</a>
+        <button id="previewWatchBtn" class="glass-btn">Watch</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="to-top" id="toTop">↑</button>
+
+<footer class="movie-footer">
+  © 2026 Shadow Anime • Shadow Cinema Online
+</footer>
+
+<script src="movies.js"></script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Admin Dashboard | Shadow Anime Control Room</title>
+
+  <link rel="stylesheet" href="admin-dashboard.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="shadow-bg"></div>
+  <div class="grid-overlay"></div>
+  <div class="scanline"></div>
+
+  <aside class="control-sidebar" id="sidebar">
+    <div class="brand-box">
+      <div class="brand-mark">S</div>
+      <div>
+        <h2>SHADOW</h2>
+        <span>ADMIN CORE</span>
+      </div>
+    </div>
+
+    <nav class="control-nav">
+      <a href="admin-dashboard.html" class="active">Dashboard</a>
+      <a href="admin-anime.html">Anime Manager</a>
+      <a href="admin-movies.html">Movies Core</a>
+      <a href="admin-community.html">Community</a>
+      <a href="admin-settings.html">Settings</a>
+      <a href="index.html">View Website</a>
+    </nav>
+
+    <div class="sidebar-core">
+      <span>LIVE API</span>
+      <b id="apiStatus">Connecting...</b>
+      <small>anikoto-api-nine.vercel.app</small>
+    </div>
+  </aside>
+
+  <main class="control-main">
+
+    <header class="top-command">
+      <button class="menu-toggle" id="menuToggle">☰</button>
+
+      <div>
+        <p class="mini-title">SHADOW ANIME CONTROL ROOM</p>
+        <h1>Admin Dashboard</h1>
+        <span>Live API monitoring, content intelligence and website control system.</span>
+      </div>
+
+      <div class="top-actions">
+        <button id="refreshBtn" class="neon-btn">Refresh Core</button>
+        <a href="index.html" class="ghost-btn">Open Site</a>
+      </div>
+    </header>
+
+    <section class="command-hero">
+      <div class="hero-left">
+        <span class="status-chip">CONTROL MODE: LIVE</span>
+        <h2>Shadow OS Command Center</h2>
+        <p>
+          Manage your anime library, movie zone, latest episodes, popular feed,
+          community activity and website status from one futuristic admin core.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="admin-anime.html">Manage Anime</a>
+          <a href="admin-settings.html">Customize Website</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="core-orb">
+          <span></span>
+          <b>SHADOW</b>
+          <small>CORE ONLINE</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-grid">
+      <div class="stat-card">
+        <span>Total Anime</span>
+        <h3 id="totalAnime">0</h3>
+        <p>API library count</p>
+      </div>
+
+      <div class="stat-card">
+        <span>Total Movies</span>
+        <h3 id="totalMovies">0</h3>
+        <p>Movie detected content</p>
+      </div>
+
+      <div class="stat-card">
+        <span>Episodes</span>
+        <h3 id="totalEpisodes">0</h3>
+        <p>Latest episode feed</p>
+      </div>
+
+      <div class="stat-card">
+        <span>Users</span>
+        <h3 id="totalUsers">0</h3>
+        <p>Local Shadow users</p>
+      </div>
+    </section>
+
+    <section class="control-grid">
+
+      <div class="panel wide">
+        <div class="panel-head">
+          <div>
+            <h3>Latest Episodes Feed</h3>
+            <p>Connected to /api/latest-episodes</p>
+          </div>
+          <span class="panel-badge">LIVE</span>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Anime</th>
+                <th>Type</th>
+                <th>Episode</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="latestTable">
+              <tr><td colspan="5">Loading latest episodes...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h3>Core Health</h3>
+            <p>Real-time website system status</p>
+          </div>
+        </div>
+
+        <div class="health-list">
+          <div><span>Database</span><b id="dbHealth">Checking</b></div>
+          <div><span>API Endpoint</span><b id="endpointHealth">Checking</b></div>
+          <div><span>Frontend</span><b>Online</b></div>
+          <div><span>Admin Mode</span><b>Shadow OS</b></div>
+        </div>
+      </div>
+
+      <div class="panel wide">
+        <div class="panel-head">
+          <div>
+            <h3>Popular Anime Intelligence</h3>
+            <p>Connected to /api/popular</p>
+          </div>
+          <span class="panel-badge gold">TRENDING</span>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Anime</th>
+                <th>Type</th>
+                <th>Episodes</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="popularTable">
+              <tr><td colspan="5">Loading popular anime...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h3>Quick Controls</h3>
+            <p>Fast access to admin modules</p>
+          </div>
+        </div>
+
+        <div class="quick-controls">
+          <a href="admin-anime.html">Anime Manager</a>
+          <a href="admin-movies.html">Movie Control</a>
+          <a href="admin-community.html">Community Hub</a>
+          <a href="admin-settings.html">Site Settings</a>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="admin-dashboard.js"></script>
+  <script src="protect.js"></script>
+</body>
+</html>

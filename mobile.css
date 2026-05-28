@@ -1,0 +1,373 @@
+/* SHADOW ANIME - COMPACT MOBILE DESKTOP STYLE */
+
+@media(max-width:768px){
+
+  body{
+    overflow-x:hidden;
+    font-size:11px;
+  }
+
+  nav{
+    padding:8px 8px !important;
+    gap:6px;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+
+  .logo{
+    font-size:13px !important;
+    min-width:max-content;
+  }
+
+  #menu{
+    display:flex !important;
+    position:static !important;
+    flex-direction:row !important;
+    gap:8px !important;
+    background:transparent !important;
+    padding:0 !important;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+
+  #menu li{
+    list-style:none;
+    flex:0 0 auto;
+  }
+
+  #menu a{
+    font-size:10px !important;
+    padding:6px 4px !important;
+  }
+
+  .menu-btn{
+    display:none !important;
+  }
+
+  .nav-right{
+    gap:5px !important;
+  }
+
+  .search-box{
+    width:95px !important;
+    height:30px;
+    padding:6px 8px !important;
+    font-size:10px !important;
+  }
+
+  .voice-btn{
+    width:30px !important;
+    height:30px !important;
+    font-size:12px !important;
+  }
+
+  .hero,
+  .movie-pro-hero,
+  .manga-hero-pro,
+  .popular-hero-pro,
+  .policy-hero-pro,
+  .profile-hero,
+  .watch-hero,
+  .movie-ultra-hero,
+  .manga-hero-pro{
+    grid-template-columns:1fr 1fr !important;
+    padding:55px 10px 30px !important;
+    gap:12px !important;
+    min-height:auto !important;
+  }
+
+  .hero h1,
+  .movie-hero-content h1,
+  .manga-hero-content h1,
+  .popular-hero-content h1,
+  .policy-hero-content h1,
+  .profile-hero h1,
+  .watch-hero h1{
+    font-size:24px !important;
+    line-height:1.05 !important;
+  }
+
+  .hero p,
+  .movie-hero-content p,
+  .manga-hero-content p,
+  .popular-hero-content p,
+  .policy-hero-content p,
+  .profile-hero p,
+  .watch-hero p{
+    font-size:10px !important;
+    line-height:1.5 !important;
+  }
+
+  .hero-btn,
+  .btn,
+  .primary-btn,
+  .secondary-btn{
+    padding:8px 10px !important;
+    font-size:10px !important;
+    border-radius:10px !important;
+  }
+
+  .hero-buttons,
+  .hero-actions,
+  .movie-hero-buttons,
+  .manga-hero-buttons,
+  .popular-actions,
+  .watch-actions,
+  .profile-actions{
+    gap:6px !important;
+    flex-wrap:wrap !important;
+  }
+
+  .anime-grid,
+  .home-auto-grid,
+  #animeGrid,
+  #movieGrid,
+  #mangaGrid,
+  #popularAnimeGrid,
+  #popularMovieGrid,
+  #watchlistGrid,
+  #continueWatchingGrid{
+    display:grid !important;
+    grid-template-columns:repeat(5,1fr) !important;
+    gap:6px !important;
+    width:100% !important;
+  }
+
+  .shadow-card{
+    width:100% !important;
+    min-width:0 !important;
+    border-radius:10px !important;
+    overflow:hidden !important;
+  }
+
+  .shadow-card img{
+    height:105px !important;
+    border-radius:10px 10px 0 0 !important;
+  }
+
+  .shadow-info{
+    padding:6px !important;
+  }
+
+  .shadow-info h3{
+    font-size:8.5px !important;
+    line-height:1.2 !important;
+    height:20px;
+    overflow:hidden;
+  }
+
+  .shadow-info p{
+    font-size:7.5px !important;
+    margin:3px 0 !important;
+  }
+
+  .shadow-info a{
+    font-size:7px !important;
+    padding:5px 6px !important;
+    border-radius:7px !important;
+  }
+
+  .section-title,
+  .shadow-title,
+  .title{
+    font-size:20px !important;
+    margin-bottom:12px !important;
+  }
+
+  section,
+  .shadow-section,
+  .movie-section-box,
+  .manga-section-box,
+  .popular-section,
+  .watch-section{
+    padding:20px 10px !important;
+    width:100% !important;
+  }
+
+  .stats,
+  .movie-stats,
+  .manga-stats,
+  .popular-stats,
+  .watch-stats,
+  .profile-stats{
+    grid-template-columns:repeat(4,1fr) !important;
+    gap:6px !important;
+  }
+
+  .stat,
+  .movie-stat,
+  .manga-stat,
+  .popular-stat,
+  .watch-stat,
+  .profile-stat{
+    padding:8px !important;
+    border-radius:12px !important;
+  }
+
+  .stat h2,
+  .movie-stat h2,
+  .manga-stat h2,
+  .popular-stat h2,
+  .watch-stat h3,
+  .profile-stat h1{
+    font-size:16px !important;
+  }
+
+  .stat p,
+  .movie-stat p,
+  .manga-stat p,
+  .popular-stat p,
+  .watch-stat p,
+  .profile-stat p{
+    font-size:8px !important;
+  }
+
+  .movie-control-panel,
+  .manga-control-panel,
+  .popular-control,
+  .watch-control,
+  .policy-card-pro,
+  .panel{
+    padding:12px !important;
+    border-radius:16px !important;
+  }
+
+  input,
+  textarea,
+  select{
+    padding:8px 9px !important;
+    font-size:10px !important;
+    border-radius:10px !important;
+  }
+
+  .filters,
+  .movie-controls,
+  .manga-controls,
+  .watch-controls{
+    flex-direction:row !important;
+    gap:6px !important;
+    flex-wrap:wrap !important;
+  }
+
+  .layout{
+    grid-template-columns:190px 1fr 170px !important;
+    gap:8px !important;
+    width:100% !important;
+    padding:0 8px !important;
+  }
+
+  .side{
+    position:static !important;
+  }
+
+  .post-card{
+    border-radius:14px !important;
+  }
+
+  .post-body{
+    padding:10px !important;
+  }
+
+  .post-body h2{
+    font-size:14px !important;
+  }
+
+  .msg{
+    font-size:10px !important;
+  }
+
+  .actions{
+    padding:8px !important;
+  }
+
+  .icon{
+    padding:6px 7px !important;
+    font-size:9px !important;
+  }
+
+  footer{
+    font-size:10px !important;
+    padding:16px !important;
+  }
+}
+
+@media(max-width:480px){
+
+  body{
+    font-size:10px;
+  }
+
+  nav{
+    padding:7px 6px !important;
+  }
+
+  #menu{
+    gap:6px !important;
+  }
+
+  #menu a{
+    font-size:9px !important;
+  }
+
+  .search-box{
+    width:75px !important;
+  }
+
+  .anime-grid,
+  .home-auto-grid,
+  #animeGrid,
+  #movieGrid,
+  #mangaGrid,
+  #popularAnimeGrid,
+  #popularMovieGrid,
+  #watchlistGrid,
+  #continueWatchingGrid{
+    grid-template-columns:repeat(5,1fr) !important;
+    gap:4px !important;
+  }
+
+  .shadow-card img{
+    height:82px !important;
+  }
+
+  .shadow-info{
+    padding:4px !important;
+  }
+
+  .shadow-info h3{
+    font-size:7px !important;
+    height:18px;
+  }
+
+  .shadow-info p{
+    font-size:6.5px !important;
+  }
+
+  .shadow-info a{
+    font-size:6px !important;
+    padding:4px !important;
+  }
+
+  .hero,
+  .movie-pro-hero,
+  .manga-hero-pro,
+  .popular-hero-pro,
+  .policy-hero-pro,
+  .profile-hero,
+  .watch-hero{
+    grid-template-columns:1fr 1fr !important;
+    padding:45px 8px 24px !important;
+  }
+
+  .hero h1,
+  .movie-hero-content h1,
+  .manga-hero-content h1,
+  .popular-hero-content h1,
+  .policy-hero-content h1{
+    font-size:20px !important;
+  }
+
+  .layout{
+    grid-template-columns:1fr !important;
+  }
+}

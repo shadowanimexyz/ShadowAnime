@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Community Core | Shadow Anime Admin</title>
+
+  <link rel="stylesheet" href="admin-community.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="shadow-bg"></div>
+<div class="grid-overlay"></div>
+<div class="scanline"></div>
+
+<aside class="control-sidebar" id="sidebar">
+  <div class="brand-box">
+    <div class="brand-mark">S</div>
+    <div>
+      <h2>SHADOW</h2>
+      <span>COMMUNITY CORE</span>
+    </div>
+  </div>
+
+  <nav class="control-nav">
+    <a href="admin-dashboard.html">Dashboard</a>
+    <a href="admin-anime.html">Anime Manager</a>
+    <a href="admin-movies.html">Movies Core</a>
+    <a href="admin-community.html" class="active">Community</a>
+    <a href="admin-settings.html">Settings</a>
+    <a href="index.html">View Website</a>
+  </nav>
+
+  <div class="sidebar-core">
+    <span>COMMUNITY DB</span>
+    <b id="communityStatus">Local Active</b>
+    <small>localStorage moderation</small>
+  </div>
+</aside>
+
+<main class="control-main">
+
+  <header class="top-command">
+    <button class="menu-toggle" id="menuToggle">☰</button>
+
+    <div>
+      <p class="mini-title">SHADOW ANIME ADMIN SYSTEM</p>
+      <h1>Community Core</h1>
+      <span>Moderate posts, reviews, polls, fan theories and community activity.</span>
+    </div>
+
+    <div class="top-actions">
+      <button class="neon-btn" id="refreshBtn">Refresh Posts</button>
+      <button class="ghost-btn" id="exportBtn">Export JSON</button>
+    </div>
+  </header>
+
+  <section class="command-hero">
+    <div>
+      <span class="status-chip">LIVE MODERATION MODE</span>
+      <h2>Community Control Room</h2>
+      <p>
+        Manage Shadow Anime community posts, approve content, pin important posts,
+        mark spoilers, remove spam and monitor fan engagement from one admin core.
+      </p>
+    </div>
+
+    <div class="hero-mini">
+      <div><span>Total Posts</span><b id="totalPosts">0</b></div>
+      <div><span>Pinned</span><b id="pinnedPosts">0</b></div>
+      <div><span>Spoilers</span><b id="spoilerPosts">0</b></div>
+    </div>
+  </section>
+
+  <section class="community-grid">
+
+    <div class="panel create-panel">
+      <div class="panel-head">
+        <div>
+          <h3>Create Admin Post</h3>
+          <p>Post announcements directly into your community database.</p>
+        </div>
+      </div>
+
+      <input type="hidden" id="editPostId" />
+
+      <div class="form-grid">
+        <div class="field">
+          <label>Author Name</label>
+          <input id="postAuthor" type="text" placeholder="Shadow Admin" />
+        </div>
+
+        <div class="field">
+          <label>Category</label>
+          <select id="postCategory">
+            <option value="announcement">Announcement</option>
+            <option value="review">Review</option>
+            <option value="request">Anime Request</option>
+            <option value="theory">Fan Theory</option>
+            <option value="discussion">Discussion</option>
+          </select>
+        </div>
+
+        <div class="field full">
+          <label>Post Title</label>
+          <input id="postTitle" type="text" placeholder="Post title..." />
+        </div>
+
+        <div class="field full">
+          <label>Post Content</label>
+          <textarea id="postContent" rows="5" placeholder="Write community post..."></textarea>
+        </div>
+      </div>
+
+      <div class="flag-box">
+        <label><input type="checkbox" id="pinFlag" /> Pin Post</label>
+        <label><input type="checkbox" id="spoilerFlag" /> Spoiler</label>
+        <label><input type="checkbox" id="approvedFlag" checked /> Approved</label>
+        <label><input type="checkbox" id="adminFlag" checked /> Admin Badge</label>
+      </div>
+
+      <div class="form-actions">
+        <button class="neon-btn" id="savePostBtn">Save Post</button>
+        <button class="ghost-btn" id="clearPostBtn">Clear</button>
+      </div>
+    </div>
+
+    <div class="panel tools-panel">
+      <div class="panel-head">
+        <div>
+          <h3>Moderation Tools</h3>
+          <p>Search, filter and control community posts.</p>
+        </div>
+      </div>
+
+      <div class="tool-stack">
+        <input id="postSearch" type="text" placeholder="Search posts..." />
+
+        <select id="categoryFilter">
+          <option value="all">All Categories</option>
+          <option value="announcement">Announcement</option>
+          <option value="review">Review</option>
+          <option value="request">Anime Request</option>
+          <option value="theory">Fan Theory</option>
+          <option value="discussion">Discussion</option>
+        </select>
+
+        <select id="statusFilter">
+          <option value="all">All Status</option>
+          <option value="pinned">Pinned</option>
+          <option value="spoiler">Spoiler</option>
+          <option value="approved">Approved</option>
+          <option value="pending">Pending</option>
+        </select>
+
+        <button id="demoPostsBtn">Add Demo Posts</button>
+        <button id="clearAllBtn" class="danger-btn">Clear All Posts</button>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="panel posts-panel">
+    <div class="panel-head library-head">
+      <div>
+        <h3>Community Posts</h3>
+        <p>Posts loaded from <b>communityPostsUltra</b> localStorage key.</p>
+      </div>
+    </div>
+
+    <div id="postsList" class="posts-list">
+      <div class="empty-state">No community posts found.</div>
+    </div>
+  </section>
+
+</main>
+
+<div class="modal" id="postModal">
+  <div class="modal-box">
+    <button class="modal-close" id="closeModal">×</button>
+    <span id="modalCategory" class="modal-chip">Category</span>
+    <h2 id="modalTitle">Post Title</h2>
+    <p id="modalContent">Post content</p>
+    <div id="modalMeta" class="modal-meta"></div>
+  </div>
+</div>
+
+<script src="admin-community.js"></script>
+<script src="protect.js"></script>
+</body>
+</html>

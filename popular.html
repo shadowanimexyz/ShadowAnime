@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Popular | Shadow Anime</title>
+
+  <link rel="stylesheet" href="popular.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="popular-loader" id="popularLoader">
+  <div class="rank-loader">
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+  </div>
+  <h1>POPULAR CORE</h1>
+  <p id="loaderText">Ranking anime power levels...</p>
+</div>
+
+<div class="popular-bg">
+  <div class="rank-orb"></div>
+  <div class="rank-grid"></div>
+  <div class="rank-smoke smoke-a"></div>
+  <div class="rank-smoke smoke-b"></div>
+  <div class="rank-particles"></div>
+</div>
+
+<header class="popular-nav">
+  <a href="index.html" class="logo">SHADOW <span>RANK</span></a>
+
+  <nav id="menu">
+    <a href="index.html">Home</a>
+    <a href="anime.html">Anime</a>
+    <a href="movies.html">Movies</a>
+    <a class="active" href="popular.html">Popular</a>
+    <a href="community.html">Community</a>
+    <a href="policy.html">Policy</a>
+    <a href="watchlist.html">Watchlist</a>
+  </nav>
+
+  <button id="menuBtn" class="menu-btn">☰</button>
+</header>
+
+<main class="popular-page">
+
+  <section class="popular-hero">
+    <div class="hero-content">
+      <span class="rank-tag">SHADOW POWER RANKING</span>
+      <h1>Most Popular <span>Anime</span></h1>
+      <p>
+        Discover the highest-ranked anime from Shadow Anime API with power ranking,
+        podium spotlight, smart search, filters, and cinematic ranking cards.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#popularDatabase" class="primary-btn">View Rankings</a>
+        <button id="randomRankBtn" class="glass-btn">Random Rank</button>
+        <button id="refreshPopularBtn" class="glass-btn">Refresh</button>
+      </div>
+    </div>
+
+    <div class="podium" id="podium">
+      <div class="podium-card rank-2" id="rankTwo">
+        <span>#2</span>
+        <img src="" alt="">
+        <h3>Loading...</h3>
+      </div>
+
+      <div class="podium-card rank-1" id="rankOne">
+        <span>#1</span>
+        <img src="" alt="">
+        <h3>Loading...</h3>
+      </div>
+
+      <div class="podium-card rank-3" id="rankThree">
+        <span>#3</span>
+        <img src="" alt="">
+        <h3>Loading...</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="rank-stats">
+    <div class="stat-card">
+      <small>Total Ranked</small>
+      <h2 id="totalPopularCount">0</h2>
+    </div>
+
+    <div class="stat-card">
+      <small>Showing</small>
+      <h2 id="currentPopularCount">0</h2>
+    </div>
+
+    <div class="stat-card">
+      <small>Pages</small>
+      <h2 id="popularPageCount">0</h2>
+    </div>
+
+    <div class="stat-card">
+      <small>Mode</small>
+      <h2>RANK</h2>
+    </div>
+  </section>
+
+  <section class="rank-control">
+    <div class="control-head">
+      <div>
+        <h2>Popular Explorer</h2>
+        <p>Search, filter and sort popular anime rankings.</p>
+      </div>
+
+      <div class="control-actions">
+        <select id="rankFilter">
+          <option value="all">All</option>
+          <option value="tv">TV</option>
+          <option value="movie">Movie</option>
+          <option value="sub">Sub</option>
+          <option value="dub">Dub</option>
+          <option value="action">Action</option>
+          <option value="fantasy">Fantasy</option>
+        </select>
+
+        <select id="rankSort">
+          <option value="rank">Rank Order</option>
+          <option value="az">A - Z</option>
+          <option value="za">Z - A</option>
+          <option value="random">Random</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="rank-search-wrap">
+      <input id="rankSearch" type="text" placeholder="Search popular anime..." autocomplete="off">
+      <button id="rankSearchBtn">Search</button>
+      <div id="rankSuggestBox" class="rank-suggest-box"></div>
+    </div>
+  </section>
+
+  <section class="top-row">
+    <div class="row-head">
+      <div>
+        <h2>Top Rotation</h2>
+        <p>Auto-picked popular titles from the ranking core.</p>
+      </div>
+      <button id="shuffleTopBtn" class="glass-btn">Shuffle</button>
+    </div>
+
+    <div class="top-rail" id="topRail"></div>
+  </section>
+
+  <section id="popularDatabase" class="popular-database">
+    <div class="database-head">
+      <div>
+        <h2>All Popular Anime</h2>
+        <p>Ranked anime cards with details and watch links.</p>
+      </div>
+      <span id="popularResultCount">Loading...</span>
+    </div>
+
+    <div id="popularLoadingGrid" class="loading-grid">
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+
+    <div class="rank-grid-list" id="popularGrid"></div>
+
+    <div class="rank-pagination" id="popularPagination"></div>
+
+    <div class="empty-box" id="popularEmpty">
+      <h2>No Popular Anime Found</h2>
+      <p>Try another keyword or refresh API.</p>
+    </div>
+  </section>
+
+</main>
+
+<button class="to-top" id="toTop">↑</button>
+
+<footer class="popular-footer">
+  © 2026 Shadow Anime • Popular Core Online
+</footer>
+
+<script src="popular.js"></script>
+</body>
+</html>

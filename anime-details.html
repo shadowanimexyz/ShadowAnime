@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Anime Details | Shadow Anime</title>
+
+  <link rel="stylesheet" href="anime-details.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="details-loader" id="detailsLoader">
+    <div class="opening-stage">
+  <div class="curtain left-curtain"></div>
+  <div class="curtain right-curtain"></div>
+  <div class="spotlight-beam"></div>
+  <div class="hero"></div>
+  <div class="energy-ring"></div>
+</div>
+    <h1>SHADOW ANIME</h1>
+    <p id="loaderText">Opening anime file...</p>
+  </div>
+
+  <div class="details-bg">
+    <div class="moon"></div>
+    <div class="portal"></div>
+    <div class="rain"></div>
+    <div class="sparks"></div>
+  </div>
+
+  <header class="nav">
+    <a href="index.html" class="logo">SHADOW <span>ANIME</span></a>
+
+    <nav id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="anime.html">Anime</a>
+      <a href="movies.html">Movies</a>
+      <a href="popular.html">Popular</a>
+      <a href="community.html">Community</a>
+      <a href="policy.html">Policy</a>
+    </nav>
+
+    <button id="menuBtn" class="nav-btn">☰</button>
+  </header>
+
+  <main class="details-page">
+
+    <section class="details-hero">
+      <div id="heroBg" class="hero-bg"></div>
+
+      <div class="poster-panel">
+        <img id="animePoster" src="" alt="Anime Poster">
+        <div class="poster-badge" id="posterBadge">SHADOW FILE</div>
+      </div>
+
+      <div class="info-panel">
+        <span class="tag">ANIME DATABASE FILE</span>
+
+        <h1 id="animeTitle">Loading...</h1>
+
+        <div class="meta-row">
+          <span id="animeRating">★ N/A</span>
+          <span id="animeEpisodes">EP N/A</span>
+          <span id="animeYear">Unknown</span>
+          <span id="animeType">Anime</span>
+        </div>
+
+        <p id="animeDesc">Loading anime details from Shadow Anime database...</p>
+
+        <div class="hero-actions">
+          <a id="watchBtn" class="primary-btn" href="#">▶ Watch Now</a>
+          <a id="continueBtn" class="primary-btn alt" href="#">⏯ Continue</a>
+          <button id="saveBtn" class="glass-btn">＋ Save</button>
+          <button id="shareBtn" class="glass-btn">Share</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="system-grid">
+      <div class="system-card">
+        <small>STATUS</small>
+        <h2 id="statusText">Online</h2>
+        <p>Anime source status</p>
+      </div>
+
+      <div class="system-card">
+        <small>GENRE</small>
+        <h2 id="genreText">Anime</h2>
+        <p>Detected category</p>
+      </div>
+
+      <div class="system-card">
+        <small>PROGRESS</small>
+        <h2 id="progressText">0%</h2>
+        <p id="lastWatchText">No episode watched</p>
+      </div>
+
+      <div class="system-card">
+        <small>MODE</small>
+        <h2>SHADOW FILE</h2>
+        <p>Cinematic details system</p>
+      </div>
+    </section>
+
+    <section class="command-center">
+      <div class="section-head">
+        <div>
+          <h2>Episode Command Center</h2>
+          <p id="episodeCountText">Loading episode data...</p>
+        </div>
+
+        <div class="episode-tools">
+          <input id="episodeSearch" type="text" placeholder="Search episode or title...">
+          <select id="episodeSort">
+            <option value="asc">Episode 1 → Last</option>
+            <option value="desc">Last → Episode 1</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="episodeGrid" class="episode-grid"></div>
+    </section>
+
+    <section class="related-section">
+      <div class="section-head">
+        <div>
+          <h2>Related Anime</h2>
+          <p>More anime from Shadow Database</p>
+        </div>
+      </div>
+
+      <div id="relatedGrid" class="related-grid"></div>
+    </section>
+
+  </main>
+
+  <button id="backTop" class="back-top">↑</button>
+
+  <script src="anime-details.js"></script>
+</body>
+</html>

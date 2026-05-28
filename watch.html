@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Watch | Shadow Anime</title>
+
+  <link rel="stylesheet" href="watch.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+
+<body>
+
+  <div class="stream-loader" id="watchLoader">
+    <div class="stream-gate">
+      <div class="gate-ring"></div>
+      <div class="gate-core"></div>
+      <div class="gate-line"></div>
+    </div>
+    <h1>SHADOW STREAM</h1>
+    <p id="loaderText">Preparing player system...</p>
+  </div>
+
+  <div class="stream-bg">
+    <div class="bg-orb"></div>
+    <div class="bg-grid"></div>
+    <div class="bg-smoke smoke-one"></div>
+    <div class="bg-smoke smoke-two"></div>
+    <div class="bg-particles"></div>
+  </div>
+
+  <header class="stream-nav">
+    <a href="index.html" class="logo">SHADOW <span>ANIME</span></a>
+
+    <nav id="menu">
+      <a href="index.html">Home</a>
+      <a href="anime.html">Anime</a>
+      <a href="movies.html">Movies</a>
+      <a href="popular.html">Popular</a>
+      <a href="community.html">Community</a>
+      <a href="watchlist.html">Watchlist</a>
+      <a href="policy.html">Policy</a>
+    </nav>
+    <div class="nav-anime-search">
+  <input id="globalAnimeSearch" placeholder="Search anime..." autocomplete="off">
+  <div id="globalAnimeSuggest" class="episode-suggest-box nav-suggest"></div>
+</div>
+
+    <button id="menuBtn" class="menu-btn">☰</button>
+  </header>
+
+  <main class="watch-page">
+
+    <section class="watch-top">
+      <div>
+        <span class="page-tag">NOW WATCHING</span>
+        <h1 id="watchTitle">Loading Anime...</h1>
+        <p id="watchMeta">Loading episode...</p>
+      </div>
+
+      <div class="top-buttons">
+        <button onclick="goBackDetails()">Details</button>
+        <button onclick="toggleTheater()">Cinema</button>
+      </div>
+    </section>
+
+    <section class="watch-layout-v2">
+
+      <section class="main-player-area">
+
+        <div class="player-frame">
+
+          <div class="player-head">
+            <div>
+              <span>STREAM CORE</span>
+              <b id="playerState">Connecting...</b>
+            </div>
+
+            <strong id="animeStatus">READY</strong>
+          </div>
+
+          <div class="video-stage" id="playerBox">
+            <div class="player-status">
+              <div class="loading-orb"></div>
+              <h2>Loading Player...</h2>
+              <p>Connecting to stream endpoint...</p>
+            </div>
+          </div>
+
+          <div class="server-row" id="serverRow"></div>
+
+          <div class="player-settings">
+            <div class="setting-group">
+              <label>
+                Quality
+                <select id="qualitySelect">
+                  <option value="auto">Auto Quality</option>
+                </select>
+              </label>
+
+              <label>
+                Speed
+                <select id="speedControl">
+                  <option value="0.5">0.5x</option>
+                  <option value="1" selected>1x</option>
+                  <option value="1.25">1.25x</option>
+                  <option value="1.5">1.5x</option>
+                  <option value="2">2x</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="mini-controls">
+              <button onclick="toggleFullscreen()">Fullscreen</button>
+              <button onclick="togglePIP()">Mini Player</button>
+              <button onclick="saveContinueWatching(true)">Save</button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="episode-command-bar">
+          <button id="prevWatchBtn" class="big-control">← Previous</button>
+          <button onclick="skipIntro()">Skip Intro</button>
+          <button onclick="toggleTheater()">Theater</button>
+          <button onclick="addWatchlist()">Watchlist</button>
+          <button id="nextWatchBtn" class="big-control">Next →</button>
+        </div>
+
+        <section class="anime-info-box">
+          <div class="info-box-head">
+            <span>ANIME DESCRIPTION</span>
+            <b id="infoMode">STREAM DATA</b>
+          </div>
+
+          <p id="animeDescription">Loading anime description...</p>
+        </section>
+
+      </section>
+
+      <aside class="episode-panel">
+
+        <div class="episode-panel-head">
+          <div>
+            <span>EPISODE SELECTOR</span>
+            <h2>Episodes</h2>
+          </div>
+          <b id="episodeTotal">0</b>
+        </div>
+
+        <div class="watch-search-wrap">
+  <input id="watchEpisodeSearch" class="episode-search" placeholder="Search episode or title..." />
+  <div id="episodeSuggestBox" class="episode-suggest-box"></div>
+</div>
+
+        <div class="episode-sort-row">
+          <button id="episodeAsc">1 → Last</button>
+          <button id="episodeDesc">Last → 1</button>
+        </div>
+
+        <div id="watchEpisodeList" class="episode-list"></div>
+
+      </aside>
+
+    </section>
+
+  </main>
+
+  <footer class="watch-footer">
+    © 2026 Shadow Anime • Player System Online
+  </footer>
+
+  <script src="watch.js"></script>
+</body>
+</html>

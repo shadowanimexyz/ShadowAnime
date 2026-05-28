@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movies Core | Shadow Anime Admin</title>
+
+  <link rel="stylesheet" href="admin-movies.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="shadow-bg"></div>
+<div class="grid-overlay"></div>
+<div class="scanline"></div>
+
+<aside class="control-sidebar" id="sidebar">
+  <div class="brand-box">
+    <div class="brand-mark">S</div>
+    <div>
+      <h2>SHADOW</h2>
+      <span>MOVIE CORE</span>
+    </div>
+  </div>
+
+  <nav class="control-nav">
+    <a href="admin-dashboard.html">Dashboard</a>
+    <a href="admin-anime.html">Anime Manager</a>
+    <a href="admin-movies.html" class="active">Movies Core</a>
+    <a href="admin-community.html">Community</a>
+    <a href="admin-settings.html">Settings</a>
+    <a href="index.html">View Website</a>
+  </nav>
+
+  <div class="sidebar-core">
+    <span>API CORE</span>
+    <b id="apiStatus">Checking...</b>
+    <small>anikoto-api-nine.vercel.app</small>
+  </div>
+</aside>
+
+<main class="control-main">
+
+  <header class="top-command">
+    <button class="menu-toggle" id="menuToggle">☰</button>
+
+    <div>
+      <p class="mini-title">SHADOW ANIME ADMIN SYSTEM</p>
+      <h1>Movies Core</h1>
+      <span>Add, auto-fill, edit, preview, hide and export anime movies.</span>
+    </div>
+
+    <div class="top-actions">
+      <button class="neon-btn" id="refreshApiBtn">Refresh API</button>
+      <button class="ghost-btn" id="exportBtn">Export JSON</button>
+    </div>
+  </header>
+
+  <section class="command-hero">
+    <div>
+      <span class="status-chip">LIVE MOVIE CONTROL</span>
+      <h2>Movie Database Command Center</h2>
+      <p>
+        Search movie content from your API, auto-fill posters/details, add custom movies,
+        manage local movie records, and control Shadow Anime movie zone.
+      </p>
+    </div>
+
+    <div class="hero-mini">
+      <div><span>API Movies</span><b id="apiCount">0</b></div>
+      <div><span>Added Movies</span><b id="localCount">0</b></div>
+      <div><span>Mode</span><b>Movie OS</b></div>
+    </div>
+  </section>
+
+  <section class="manager-grid">
+
+    <div class="panel form-panel">
+      <div class="panel-head">
+        <div>
+          <h3>Add / Edit Movie</h3>
+          <p>Use API movie search or manually add movie details.</p>
+        </div>
+      </div>
+
+      <input type="hidden" id="editId" />
+
+      <div class="auto-fill-box">
+        <label>Auto Movie Filler</label>
+        <div class="search-row">
+          <input id="autoSearch" type="text" placeholder="Search movie... example: one piece movie" />
+          <button id="autoSearchBtn">Search</button>
+        </div>
+        <div id="autoResults" class="auto-results"></div>
+      </div>
+
+      <div class="form-grid">
+        <div class="field">
+          <label>Movie Title</label>
+          <input id="movieTitle" type="text" placeholder="Movie name" />
+        </div>
+
+        <div class="field">
+          <label>Movie ID / Slug</label>
+          <input id="movieId" type="text" placeholder="movie-id" />
+        </div>
+
+        <div class="field">
+          <label>Poster Image URL</label>
+          <input id="movieImage" type="url" placeholder="https://..." />
+        </div>
+
+        <div class="field">
+          <label>Banner Image URL</label>
+          <input id="movieBanner" type="url" placeholder="https://..." />
+        </div>
+
+        <div class="field">
+          <label>Type</label>
+          <select id="movieType">
+            <option value="Movie">Movie</option>
+            <option value="Anime Movie">Anime Movie</option>
+            <option value="Special">Special</option>
+            <option value="OVA">OVA</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Quality</label>
+          <input id="movieQuality" type="text" placeholder="HD / FHD / 1080p" />
+        </div>
+
+        <div class="field">
+          <label>Year</label>
+          <input id="movieYear" type="text" placeholder="2026" />
+        </div>
+
+        <div class="field">
+          <label>Rating</label>
+          <input id="movieRating" type="text" placeholder="8.8" />
+        </div>
+
+        <div class="field">
+          <label>Genre</label>
+          <input id="movieGenre" type="text" placeholder="Action, Fantasy, Adventure" />
+        </div>
+
+        <div class="field">
+          <label>Studio</label>
+          <input id="movieStudio" type="text" placeholder="Studio name" />
+        </div>
+
+        <div class="field full">
+          <label>Watch Page / External URL</label>
+          <input id="movieWatch" type="url" placeholder="anime-details.html?id=..." />
+        </div>
+
+        <div class="field full">
+          <label>Description</label>
+          <textarea id="movieDescription" rows="5" placeholder="Movie description..."></textarea>
+        </div>
+      </div>
+
+      <div class="flag-box">
+        <label><input type="checkbox" id="featuredFlag" /> Featured</label>
+        <label><input type="checkbox" id="trendingFlag" /> Trending</label>
+        <label><input type="checkbox" id="popularFlag" /> Popular</label>
+        <label><input type="checkbox" id="premiumFlag" /> Premium</label>
+      </div>
+
+      <div class="form-actions">
+        <button class="neon-btn" id="saveMovieBtn">Save Movie</button>
+        <button class="ghost-btn" id="clearFormBtn">Clear</button>
+      </div>
+    </div>
+
+    <div class="panel preview-panel">
+      <div class="panel-head">
+        <div>
+          <h3>Live Movie Preview</h3>
+          <p>Poster preview before saving.</p>
+        </div>
+      </div>
+
+      <div class="movie-preview-card">
+        <img id="previewImage" src="" alt="" />
+        <div class="preview-fallback" id="previewFallback">MOVIE</div>
+
+        <div class="preview-info">
+          <span id="previewType">Movie</span>
+          <h3 id="previewTitle">Movie Title</h3>
+          <p id="previewDesc">Description preview will appear here.</p>
+
+          <div class="preview-meta">
+            <b id="previewQuality">HD</b>
+            <b id="previewRating">★ ?</b>
+            <b id="previewYear">Year</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="mini-tools">
+        <button id="fillDemoBtn">Fill Demo</button>
+        <button id="copyJsonBtn">Copy JSON</button>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="panel library-panel">
+    <div class="panel-head library-head">
+      <div>
+        <h3>Movie Library</h3>
+        <p>Search API movies or manage local added movies.</p>
+      </div>
+
+      <div class="library-tools">
+        <input id="librarySearch" type="text" placeholder="Search API movie and press Enter..." />
+        <select id="filterType">
+          <option value="all">All</option>
+          <option value="featured">Featured</option>
+          <option value="trending">Trending</option>
+          <option value="popular">Popular</option>
+          <option value="premium">Premium</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="movieGrid" class="movie-grid">
+      <div class="empty-state">Loading movies...</div>
+    </div>
+  </section>
+
+</main>
+
+<div class="modal" id="previewModal">
+  <div class="modal-box">
+    <button class="modal-close" id="closeModal">×</button>
+    <img id="modalImage" src="" alt="" />
+    <h2 id="modalTitle">Movie Title</h2>
+    <p id="modalDesc">Description</p>
+    <div id="modalMeta" class="modal-meta"></div>
+  </div>
+</div>
+
+<script src="admin-movies.js"></script>
+<script src="protect.js"></script>
+</body>
+</html>

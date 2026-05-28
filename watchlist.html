@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Watchlist | Shadow Anime</title>
+
+  <link rel="stylesheet" href="watchlist.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="vault-loader" id="vaultLoader">
+  <div class="vault-core"></div>
+  <h1>WATCHLIST VAULT</h1>
+  <p>Opening saved anime archive...</p>
+</div>
+
+<div class="vault-bg">
+  <div class="vault-moon"></div>
+  <div class="vault-grid"></div>
+  <div class="vault-particles"></div>
+</div>
+
+<header class="vault-nav">
+  <a href="index.html" class="logo">SHADOW <span>VAULT</span></a>
+
+  <nav id="menu">
+    <a href="index.html">Home</a>
+    <a href="anime.html">Anime</a>
+    <a href="movies.html">Movies</a>
+    <a href="popular.html">Popular</a>
+    <a href="community.html">Community</a>
+    <a class="active" href="watchlist.html">Watchlist</a>
+    <a href="policy.html">Policy</a>
+  </nav>
+
+  <button id="menuBtn" class="menu-btn">☰</button>
+</header>
+
+<main class="watchlist-page">
+
+  <section class="vault-hero">
+    <div>
+      <span class="vault-tag">PERSONAL ANIME VAULT</span>
+      <h1>Your <span>Watchlist</span></h1>
+      <p>Saved anime, continue watching progress, favorites and personal anime collection in one premium vault.</p>
+    </div>
+
+    <div class="vault-stats">
+      <div><h2 id="totalSaved">0</h2><p>Saved</p></div>
+      <div><h2 id="continueCount">0</h2><p>Continue</p></div>
+      <div><h2 id="favoriteCount">0</h2><p>Favorites</p></div>
+    </div>
+  </section>
+
+  <section class="vault-control">
+    <input id="watchlistSearch" placeholder="Search saved anime...">
+
+    <select id="watchlistFilter">
+      <option value="all">All Saved</option>
+      <option value="continue">Continue Watching</option>
+      <option value="favorite">Favorites</option>
+      <option value="watched">Watched</option>
+    </select>
+
+    <button id="clearAllBtn">Clear All</button>
+  </section>
+
+  <section class="continue-section">
+    <div class="section-head">
+      <div>
+        <h2>Continue Watching</h2>
+        <p>Resume from your saved progress.</p>
+      </div>
+    </div>
+
+    <div id="continueGrid" class="continue-grid"></div>
+  </section>
+
+  <section class="vault-section">
+    <div class="section-head">
+      <div>
+        <h2>Saved Anime</h2>
+        <p>Your complete local watchlist collection.</p>
+      </div>
+      <span id="resultText">Loading...</span>
+    </div>
+
+    <div id="watchlistGrid" class="watchlist-grid"></div>
+
+    <div id="emptyState" class="empty-state">
+      <h2>Your watchlist is empty</h2>
+      <p>Add anime from details/watch pages to see them here.</p>
+      <a href="anime.html">Explore Anime</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="vault-footer">
+  © 2026 Shadow Anime • Watchlist Vault
+</footer>
+
+<script src="watchlist.js"></script>
+</body>
+</html>

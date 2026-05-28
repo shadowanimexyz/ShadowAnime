@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Community | Shadow Anime</title>
+
+  <link rel="stylesheet" href="community.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="community-loader" id="communityLoader">
+  <div class="social-orb"></div>
+  <h1>SHADOW COMMUNITY</h1>
+  <p>Opening anime social hub...</p>
+</div>
+
+<div class="community-bg">
+  <div class="community-moon"></div>
+  <div class="chat-particles"></div>
+  <div class="social-grid"></div>
+</div>
+
+<header class="community-nav">
+  <a href="index.html" class="logo">SHADOW <span>COMMUNITY</span></a>
+
+  <nav id="menu">
+    <a href="index.html">Home</a>
+    <a href="anime.html">Anime</a>
+    <a href="movies.html">Movies</a>
+    <a href="popular.html">Popular</a>
+    <a class="active" href="community.html">Community</a>
+    <a href="watchlist.html">Watchlist</a>
+  </nav>
+
+  <button id="menuBtn" class="menu-btn">☰</button>
+</header>
+
+<main class="community-page">
+
+  <section class="community-hero">
+    <div>
+      <span class="community-tag">ANIME SOCIAL HUB</span>
+      <h1>Join The <span>Shadow</span> Discussion</h1>
+      <p>Create posts, share reviews, request anime, write fan theories, vote in polls and talk with anime fans.</p>
+    </div>
+
+    <div class="community-stats">
+      <div><h2 id="totalPosts">0</h2><p>Posts</p></div>
+      <div><h2 id="totalLikes">0</h2><p>Likes</p></div>
+      <div><h2 id="totalReplies">0</h2><p>Replies</p></div>
+    </div>
+  </section>
+
+  <section class="community-layout">
+
+    <section class="feed-main">
+
+      <div class="post-creator">
+        <div class="creator-head">
+          <h2>Create Post</h2>
+          <span>Local community mode</span>
+        </div>
+
+        <input id="postName" placeholder="Your name..." value="Shadow Fan">
+
+        <select id="postCategory">
+          <option value="review">Review</option>
+          <option value="request">Anime Request</option>
+          <option value="theory">Fan Theory</option>
+          <option value="spoiler">Spoiler</option>
+          <option value="general">General</option>
+        </select>
+
+        <textarea id="postText" placeholder="Write something about anime..."></textarea>
+
+        <button id="createPostBtn">Post To Community</button>
+      </div>
+
+      <div class="feed-tools">
+        <input id="feedSearch" placeholder="Search community posts...">
+
+        <select id="feedFilter">
+          <option value="all">All Posts</option>
+          <option value="review">Reviews</option>
+          <option value="request">Requests</option>
+          <option value="theory">Fan Theories</option>
+          <option value="spoiler">Spoilers</option>
+          <option value="general">General</option>
+        </select>
+      </div>
+
+      <div id="postFeed" class="post-feed"></div>
+
+    </section>
+
+    <aside class="community-side">
+
+      <div class="poll-card">
+        <h2>Quick Poll</h2>
+        <p>Which anime type do you like most?</p>
+
+        <button class="poll-option" data-poll="Action">Action</button>
+        <button class="poll-option" data-poll="Romance">Romance</button>
+        <button class="poll-option" data-poll="Isekai">Isekai</button>
+        <button class="poll-option" data-poll="Dark Fantasy">Dark Fantasy</button>
+
+        <div id="pollResult" class="poll-result"></div>
+      </div>
+
+      <div class="rules-card">
+        <h2>Community Rules</h2>
+        <ul>
+          <li>Respect anime fans.</li>
+          <li>Mark spoilers clearly.</li>
+          <li>No spam or hate.</li>
+          <li>Keep discussions anime-related.</li>
+        </ul>
+      </div>
+
+      <div class="trend-card">
+        <h2>Hot Topics</h2>
+        <span>#SoloLeveling</span>
+        <span>#OnePiece</span>
+        <span>#Naruto</span>
+        <span>#AnimeMovies</span>
+      </div>
+
+    </aside>
+
+  </section>
+
+</main>
+
+<footer class="community-footer">
+  © 2026 Shadow Anime • Community Hub
+</footer>
+
+<script src="community.js"></script>
+</body>
+</html>
